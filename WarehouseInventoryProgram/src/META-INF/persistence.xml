@@ -11,10 +11,10 @@
     <class>Entity.Invoice</class>
     <class>Entity.Password</class>
     <properties>
-      <property name="eclipselink.jdbc.url" value="jdbc:derby://localhost:1527/CECS343"/>
-      <property name="eclipselink.jdbc.user" value=""/>
-      <property name="eclipselink.jdbc.password" value=""/>
-      <property name="eclipselink.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
+      <property name="javax.persistence.jdbc.url" value=""/>
+      <property name="javax.persistence.jdbc.user" value=""/>
+      <property name="javax.persistence.jdbc.driver" value=""/>
+      <property name="javax.persistence.jdbc.password" value=""/>
     </properties>
   </persistence-unit>
 </persistence>
