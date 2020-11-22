@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/Users/ryancavanagh/OneDrive%20-%20csulb/College/Y3%20S1/CECS%20343/cecs343/WarehouseInventoryProgram/src/boundary/EditSalesperson.java</file>
+            <file>file:/Users/ryancavanagh/OneDrive%20-%20csulb/College/Y3%20S1/CECS%20343/cecs343/WarehouseInventoryProgram/src/Entity/OrderitemPK.java</file>
+            <file>file:/Users/ryancavanagh/OneDrive%20-%20csulb/College/Y3%20S1/CECS%20343/cecs343/WarehouseInventoryProgram/src/boundary/MainMenu.java</file>
+            <file>file:/Users/ryancavanagh/OneDrive%20-%20csulb/College/Y3%20S1/CECS%20343/cecs343/WarehouseInventoryProgram/src/Entity/Password.java</file>
+            <file>file:/Users/ryancavanagh/OneDrive%20-%20csulb/College/Y3%20S1/CECS%20343/cecs343/WarehouseInventoryProgram/src/Entity/Salesperson.java</file>
+            <file>file:/Users/ryancavanagh/OneDrive%20-%20csulb/College/Y3%20S1/CECS%20343/cecs343/WarehouseInventoryProgram/src/boundary/OpenInvoices.java</file>
+            <file>file:/Users/ryancavanagh/OneDrive%20-%20csulb/College/Y3%20S1/CECS%20343/cecs343/WarehouseInventoryProgram/src/Entity/Customer.java</file>
+            <file>file:/Users/ryancavanagh/OneDrive%20-%20csulb/College/Y3%20S1/CECS%20343/cecs343/WarehouseInventoryProgram/src/boundary/ClosedInvoices.java</file>
+            <file>file:/Users/ryancavanagh/OneDrive%20-%20csulb/College/Y3%20S1/CECS%20343/cecs343/WarehouseInventoryProgram/src/boundary/AddWarehouse.java</file>
+            <file>file:/Users/ryancavanagh/OneDrive%20-%20csulb/College/Y3%20S1/CECS%20343/cecs343/WarehouseInventoryProgram/src/Entity/Invoice.java</file>
+            <file>file:/Users/ryancavanagh/OneDrive%20-%20csulb/College/Y3%20S1/CECS%20343/cecs343/WarehouseInventoryProgram/src/boundary/ViewSalesperson.java</file>
+            <file>file:/Users/ryancavanagh/OneDrive%20-%20csulb/College/Y3%20S1/CECS%20343/cecs343/WarehouseInventoryProgram/src/boundary/EditCustomer.java</file>
+            <file>file:/Users/ryancavanagh/OneDrive%20-%20csulb/College/Y3%20S1/CECS%20343/cecs343/WarehouseInventoryProgram/src/boundary/AddCustomer.java</file>
+            <file>file:/Users/ryancavanagh/OneDrive%20-%20csulb/College/Y3%20S1/CECS%20343/cecs343/WarehouseInventoryProgram/src/Entity/Orderitem.java</file>
+            <file>file:/Users/ryancavanagh/OneDrive%20-%20csulb/College/Y3%20S1/CECS%20343/cecs343/WarehouseInventoryProgram/src/Entity/Warehouse.java</file>
+            <file>file:/Users/ryancavanagh/OneDrive%20-%20csulb/College/Y3%20S1/CECS%20343/cecs343/WarehouseInventoryProgram/src/boundary/Login.java</file>
+            <file>file:/Users/ryancavanagh/OneDrive%20-%20csulb/College/Y3%20S1/CECS%20343/cecs343/WarehouseInventoryProgram/src/Main.java</file>
+            <file>file:/Users/ryancavanagh/OneDrive%20-%20csulb/College/Y3%20S1/CECS%20343/cecs343/WarehouseInventoryProgram/src/boundary/Manage.java</file>
+            <file>file:/Users/ryancavanagh/OneDrive%20-%20csulb/College/Y3%20S1/CECS%20343/cecs343/WarehouseInventoryProgram/src/Entity/Product.java</file>
+            <file>file:/Users/ryancavanagh/OneDrive%20-%20csulb/College/Y3%20S1/CECS%20343/cecs343/WarehouseInventoryProgram/src/boundary/AddSalesperson.java</file>
+            <file>file:/Users/ryancavanagh/OneDrive%20-%20csulb/College/Y3%20S1/CECS%20343/cecs343/WarehouseInventoryProgram/src/DBLayer/DBConnect.java</file>
+            <file>file:/Users/ryancavanagh/OneDrive%20-%20csulb/College/Y3%20S1/CECS%20343/cecs343/WarehouseInventoryProgram/src/Entity/ProductPK.java</file>
+            <file>file:/Users/ryancavanagh/OneDrive%20-%20csulb/College/Y3%20S1/CECS%20343/cecs343/WarehouseInventoryProgram/src/META-INF/persistence.xml</file>
+        </group>
+    </open-files>
+</project-private>
