@@ -21,12 +21,6 @@ public class Main {
     public static void main(String[] args) {
         new Login().setVisible(true);
         
-//<<<<<<< HEAD
-//        Entity.Product test = new Entity.Product(new Entity.ProductPK("p1", "warehouse"), 32);
-//        
-//        InvoiceControl invoiceTest = new InvoiceControl();
-//        invoiceTest.addInvoice();
-//=======
         EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("WarehouseInventoryProgramPU");
       
         EntityManager entitymanager = emfactory.createEntityManager();
