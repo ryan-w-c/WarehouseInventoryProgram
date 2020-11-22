@@ -11,12 +11,16 @@ import boundary.Login;
  *
  * @author ryancavanagh
  */
+
 public class Main {
     
     public static void main(String[] args) {
-        new Login().setVisible(true);
+//        new Login().setVisible(true);
         
         Entity.Product test = new Entity.Product(new Entity.ProductPK("p1", "warehouse"), 32);
+        
+        InvoiceControl invoiceTest = new InvoiceControl();
+        invoiceTest.addInvoice();
     }
     
 }
