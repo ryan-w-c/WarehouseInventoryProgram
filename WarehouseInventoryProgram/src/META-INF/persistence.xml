@@ -12,8 +12,8 @@
     <class>Entity.Password</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/WarehouseInventory"/>
-      <property name="javax.persistence.jdbc.user" value="username"/>
       <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
+      <property name="javax.persistence.jdbc.user" value="username"/>
       <property name="javax.persistence.jdbc.password" value="password"/>
     </properties>
   </persistence-unit>
