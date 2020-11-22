@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 public class DBConnect {
     static String DBNAME;
     static final String JDBC_DRIVER = "org.apache.derby.jdbc.ClientDriver";
-    static String DB_URL = "jdbc:derby://localhost:1527/cecs323jdbc";
+    static String DB_URL = "jdbc:derby://localhost:1527/cecs343";
     static Connection conn;
     
     public void openConnection(){
