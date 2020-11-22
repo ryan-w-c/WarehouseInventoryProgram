@@ -2,16 +2,7 @@
 <persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
   <persistence-unit name="WarehouseInventoryProgramPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-<<<<<<< HEAD
-    <class>entity.Customer</class>
-    <class>entity.Warehouse</class>
-    <class>entity.Orderitem</class>
-    <class>entity.Salesperson</class>
-    <class>entity.Product</class>
-    <class>entity.Producttitle</class>
-    <class>entity.Invoice</class>
-    <class>entity.Password</class>
-=======
+
     <class>Entity.Customer</class>
     <class>Entity.Product</class>
     <class>Entity.Salesperson</class>
@@ -20,7 +11,6 @@
     <class>Entity.Warehouse</class>
     <class>Entity.Invoice</class>
     <class>Entity.Password</class>
->>>>>>> bfa98256e0b27f14fa07d387a5887e4b48b86765
     <properties>
       <property name="eclipselink.jdbc.url" value="jdbc:derby://localhost:1527/CECS343"/>
       <property name="eclipselink.jdbc.user" value=""/>
