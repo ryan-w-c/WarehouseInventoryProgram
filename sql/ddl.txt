@@ -1,0 +1,87 @@
+create table Salesperson ( 
+    FristName varchar(50) not null, 
+    LastName varchar(50) not null, 
+    Phone varchar(10) not null,
+    Email varchar(100) not null,
+    Address varchar(200) not null,
+    City varchar(50) not null,
+    State varchar(50) not null,
+    Zip integer not null,
+    CommissionRate float not null,
+    TotalSales float,
+    TotalCommission float,
+    SalespersonID integer not null,
+    constraint Salesperson_PK primary key (SalespersonID)
+); 
+
+CREATE TABLE Product (
+    ProductName varchar(50) not null,
+    WarehouseName varchar(100) not null,
+    Quantity integer not null,
+    constraint OrderItem_FK foreign key (ProductName) references ProductTitle (ProductName),
+    constraint Warehouse_FK foreign key (WarehouseName) references Warehouse (WarehouseName),
+    constraint Product_PK primary key (ProductName, WarehouseName)
+);
+
+CREATE TABLE OrderItem (
+    InvoiceID integer not null,
+    ProductName varchar(50) not null,
+    WarehouseName varchar(100) not null,
+    Quantity integer not null,
+    constraint Invoice_FK foreign key (InvoiceID) references Invoice (InvoiceID),
+    constraint OrderItem_Warehouse_FK foreign key (ProductName, WarehouseName) references Product (ProductName, WarehouseName),
+    constraint OrderItem_PK primary key (InvoiceID, ProductName, WarehouseName)
+);
+
+create table Customer ( 
+    FirstName varchar(50) not null, 
+    LastName varchar(50) not null, 
+    Phone varchar(10) not null,
+    Email varchar(100) not null,
+    Address varchar(200) not null,
+    City varchar(50) not null,
+    State varchar(50) not null,
+    Zip integer not null,
+    CustomerID integer not null,
+    constraint Customer_PK primary key (CustomerID)
+); 
+
+create Table Warehouse(
+    WarehouseName varchar(100) not null,
+    Phone varchar(20) not null,
+    Address varchar(100) not null,
+    City varchar(50) not null,
+    State varchar(100) not null,
+    Zipcode integer not null,
+    constraint Warehouse_PK primary key (WarehouseName)
+);
+
+create table ProductTitle ( 
+    ProductName varchar(50) not null,
+    SellingPrice float not null,
+    CostPrice int not null, 
+    constraint ProductTitle_PK primary key (ProductName)
+); 
+
+
+create Table Invoice(
+    SalespersonID integer not null,
+    CustomerID integer not null,
+    InvoiceID integer not null,
+    Subtotal float not null,
+    Tax float not null,
+    Commission float not null,
+    DeliverFee float not null,
+    Total float not null,
+    BalanceRemaining float not null,
+    OpenClose boolean not null,
+    DateTime varchar(50) not null,
+    constraint Invoice_PK primary key(InvoiceID),
+    constraint Invoice_fk_SalespersonID foreign key(SalespersonID) references Salesperson (SalespersonID),
+    constraint Invoice_fk_CustomerID foreign key(CustomerID) references Customer (CustomerID)
+);
+
+create Table Password(
+    Password varchar(50),
+    constraint User_PK primary key(Password)
+);

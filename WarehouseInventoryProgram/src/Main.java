@@ -21,10 +21,10 @@ public class Main {
         new Login().setVisible(true);
         
         EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("WarehouseInventoryProgramPU");
-      
         EntityManager entitymanager = emfactory.createEntityManager();
+        
         entitymanager.getTransaction().begin();
-        Salesperson employee = new Salesperson( ); 
+        Salesperson employee = new Salesperson(); 
         employee.setFristname("Ryan");
         employee.setLastname( "C" );
         employee.setAddress("12345 street");
@@ -33,13 +33,11 @@ public class Main {
         employee.setState("CA");
         employee.setCommissionrate(.5);
         employee.setPhone("phone");
-        employee.setSalespersonid(1);
+        employee.setSalespersonid(122);
         employee.setZip(90000);
         employee.setTotalsales(0.0);
         employee.setTotalcommission(0.0);
         
-//        employee.setDeg( "Technical Manager" );
-
         entitymanager.persist(employee);
         entitymanager.getTransaction().commit();
 
