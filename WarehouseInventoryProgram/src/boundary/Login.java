@@ -88,7 +88,7 @@ public class Login extends javax.swing.JFrame {
             new MainMenu().setVisible(true);
             this.setVisible(false);
 //        }
-//        else {
+//        else {6
 //            success.setText("Login failed - incorrect password");
 //        }
     }//GEN-LAST:event_LoginActionPerformed
