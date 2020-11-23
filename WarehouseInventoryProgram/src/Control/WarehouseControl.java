@@ -17,16 +17,31 @@ public class WarehouseControl {
     
     public WarehouseControl (){}
     
-    private void addWarehouse (){
+    public void addWarehouse (String wName, String address, String city, String state, Integer zip, String phone){
         
         WarehouseInventory.em.getTransaction().begin();
         Warehouse w1 = new Warehouse(); 
-        w1.setWarehousename("WarehouseName");
-
+        
+        w1.setWarehousename(wName);
+        w1.setAddress(address);
+        w1.setCity(city);
+        w1.setState(state);
+        w1.setZipcode(zip);
+        w1.setPhone(phone);
         
         WarehouseInventory.em.persist(w1);
         WarehouseInventory.em.getTransaction().commit();
 
-    }    
+    }
+    
+//    public editWarehouse(){
+//        w1.setWarehousename("WarehouseName");
+//        w1.setAddress(address);
+//        w1.setCity(city);
+//        w1.setState(state);
+//        w1.setZipcode(zip);
+//        w1.setPhone(phone);
+//        
+//    }
 
 }

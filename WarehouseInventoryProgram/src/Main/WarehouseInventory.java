@@ -1,7 +1,6 @@
 package Main;
 
 
-import Entity.Salesperson;
 import boundary.Login;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

@@ -5,6 +5,8 @@
  */
 package boundary;
 
+import Control.WarehouseControl;
+
 /**
  *
  * @author ryancavanagh
@@ -41,7 +43,7 @@ public class AddWarehouse extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        firstName = new javax.swing.JTextField();
+        WareHouseName = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -118,7 +120,7 @@ public class AddWarehouse extends javax.swing.JFrame {
                                                 .addGap(18, 18, 18)))
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(streetAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(firstName, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addComponent(WareHouseName, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(0, 40, Short.MAX_VALUE)))
                         .addGap(18, 18, 18)
                         .addComponent(city, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -135,7 +137,7 @@ public class AddWarehouse extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(firstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(WareHouseName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -164,9 +166,12 @@ public class AddWarehouse extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addWarehouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addWarehouseActionPerformed
-        // TODO add your handling code here:
+        WarehouseControl wc = new WarehouseControl();
+        wc.addWarehouse(WareHouseName.getText(), streetAddress.getText(), city.getText(), state.getText(), Integer.parseInt(zipCode.getText()), phoneNumber.getText());
+        //TODO error handling PK already exists
         this.setVisible(false);
         new Manage().setVisible(true);
+        
     }//GEN-LAST:event_addWarehouseActionPerformed
 
     private void canelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_canelButtonActionPerformed
@@ -211,10 +216,10 @@ public class AddWarehouse extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField WareHouseName;
     private javax.swing.JButton addWarehouse;
     private javax.swing.JButton canelButton;
     private javax.swing.JTextField city;
-    private javax.swing.JTextField firstName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
