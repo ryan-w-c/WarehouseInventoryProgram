@@ -20,7 +20,6 @@ public class Main {
     
     public static void main(String[] args) {
         new Login().setVisible(true);
-        
         EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("WarehouseInventoryProgramPU");
         EntityManager entitymanager = emfactory.createEntityManager();
         
@@ -44,11 +43,6 @@ public class Main {
 
         entitymanager.close();
         emfactory.close();
-<<<<<<< HEAD
-        
-=======
-
->>>>>>> 5c5149a2b9ca0fe805edfe77d6ffb7d99d2be68a
     }
     
 }

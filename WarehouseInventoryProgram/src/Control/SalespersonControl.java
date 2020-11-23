@@ -15,10 +15,9 @@ import javax.persistence.EntityManagerFactory;
  */
 public class SalespersonControl {
     EntityManager entitymanager;
-    EntityManagerFactory emfactory;
-    public SalespersonControl (EntityManager em, EntityManagerFactory ef){
+
+    public SalespersonControl (EntityManager em){
         entitymanager = em;
-        emfactory = ef;
     }
     
     
@@ -43,7 +42,7 @@ public class SalespersonControl {
         entitymanager.getTransaction().commit();
 
         entitymanager.close();
-        emfactory.close();
+//        emfactory.close();
     }
     
 }

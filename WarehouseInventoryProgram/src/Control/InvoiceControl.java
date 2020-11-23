@@ -18,13 +18,12 @@ import javax.persistence.Persistence;
 import Entity.Invoice;
 import Entity.Salesperson;
 
+
 public class InvoiceControl {
     
     public void addInvoice(Salesperson sp,Customer c1){
-      EntityManagerFactory emfactory = Persistence.createEntityManagerFactory( "Eclipselink_JPA" );
-      EntityManager entitymanager = emfactory.createEntityManager();
-      
-      entitymanager.getTransaction( ).begin( );
+        
+      WarehouseInventory.em.getTransaction( ).begin( );
 
       Invoice inv1 = new Invoice(); 
       inv1.setInvoiceid( 1 );

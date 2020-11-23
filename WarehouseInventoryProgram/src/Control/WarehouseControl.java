@@ -11,6 +11,8 @@ package Control;
  */
 public class WarehouseControl {
     
-    public 
+    private void addWarehouse (){
+        
+    }
     
 }
