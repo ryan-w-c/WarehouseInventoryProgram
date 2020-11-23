@@ -1,28 +1,28 @@
-
-import Entity.Salesperson;
-import boundary.Login;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package Control;
+
+import Entity.Salesperson;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
 /**
  *
- * @author ryancavanagh
+ * @author zubin
  */
-
-public class Main {
+public class SalespersonControl {
+    EntityManager entitymanager;
+    EntityManagerFactory emfactory;
+    public SalespersonControl (EntityManager em, EntityManagerFactory ef){
+        entitymanager = em;
+        emfactory = ef;
+    }
     
-    public static void main(String[] args) {
-        new Login().setVisible(true);
-        
-        EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("WarehouseInventoryProgramPU");
-        EntityManager entitymanager = emfactory.createEntityManager();
+    
+    public void addSalesperson (){
         
         entitymanager.getTransaction().begin();
         Salesperson employee = new Salesperson(); 
@@ -44,11 +44,6 @@ public class Main {
 
         entitymanager.close();
         emfactory.close();
-<<<<<<< HEAD
-        
-=======
-
->>>>>>> 5c5149a2b9ca0fe805edfe77d6ffb7d99d2be68a
     }
     
 }
