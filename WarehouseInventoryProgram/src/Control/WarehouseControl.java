@@ -33,15 +33,5 @@ public class WarehouseControl {
         WarehouseInventory.em.getTransaction().commit();
 
     }
-    
-//    public editWarehouse(){
-//        w1.setWarehousename("WarehouseName");
-//        w1.setAddress(address);
-//        w1.setCity(city);
-//        w1.setState(state);
-//        w1.setZipcode(zip);
-//        w1.setPhone(phone);
-//        
-//    }
 
 }
