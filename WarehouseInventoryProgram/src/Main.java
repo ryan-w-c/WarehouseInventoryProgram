@@ -45,8 +45,6 @@ public class Main {
         entitymanager.close();
         emfactory.close();
         
-//        Entity.Product test = new Entity.Product(new Entity.ProductPK("p1", "warehouse"), 32);
-//>>>>>>> 32f06113043aba300aa4c98a822dda8797b396cf
     }
     
 }
