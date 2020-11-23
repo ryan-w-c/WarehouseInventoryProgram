@@ -12,38 +12,38 @@ package Control;
  */
 
 import Entity.Customer;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import Entity.Invoice;
+import Entity.Orderitem;
 import Entity.Salesperson;
-
+import Main.WarehouseInventory;
+import java.util.Collection;
 
 public class InvoiceControl {
     
-    public void addInvoice(Salesperson sp,Customer c1){
+    public void addInvoice(Salesperson sp,Customer customer, Integer id, double subTotal,
+            double tax, double comm, double deliveryfee,double total, double balance, 
+            boolean openClose, String time,Collection<Orderitem> items){
         
       WarehouseInventory.em.getTransaction( ).begin( );
 
       Invoice inv1 = new Invoice(); 
-      inv1.setInvoiceid( 1 );
-      inv1.setSubtotal( 12.5 );
-      inv1.setTax( 4.7 );
-      inv1.setCommission( 45 );
-      inv1.setDeliverfee(4.86);
-      inv1.setTotal(34.6);
-      inv1.setBalanceremaining(2.6);
-      inv1.setOpenclose(true);
-      inv1.setDatetime("12/3/2021");
-//      setOrderitemCollection();
-      inv1.setCustomerid(c1);  
+      inv1.setInvoiceid( id );
+      inv1.setSubtotal( subTotal);
+      inv1.setTax( tax );
+      inv1.setCommission( comm );
+      inv1.setDeliverfee(deliveryfee);
+      inv1.setTotal(total);
+      inv1.setBalanceremaining(balance);
+      inv1.setOpenclose(openClose);
+      inv1.setDatetime(time);
+      inv1.setOrderitemCollection(items);
+      inv1.setCustomerid(customer);  
       inv1.setSalespersonid(sp);
       
-      entitymanager.persist( inv1 );
-      entitymanager.getTransaction( ).commit( );
+      WarehouseInventory.em.persist( inv1 );
+      WarehouseInventory.em.getTransaction( ).commit( );
 
-      entitymanager.close( );
-      emfactory.close( );
+      WarehouseInventory.em.close( );
     }
     
     
