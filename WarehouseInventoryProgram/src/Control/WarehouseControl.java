@@ -5,12 +5,28 @@
  */
 package Control;
 
+import Main.WarehouseInventory;
+import Entity.Warehouse;
+
 /**
  *
  * @author ryancavanagh
  */
 public class WarehouseControl {
     
-    public 
     
+    public WarehouseControl (){}
+    
+    private void addWarehouse (){
+        
+        WarehouseInventory.em.getTransaction().begin();
+        Warehouse w1 = new Warehouse(); 
+        w1.setWarehousename("WarehouseName");
+
+        
+        WarehouseInventory.em.persist(w1);
+        WarehouseInventory.em.getTransaction().commit();
+
+    }    
+
 }
