@@ -6,24 +6,31 @@
 package Control;
 
 import Entity.Salesperson;
-import javax.persistence.EntityManager;
+import Main.WarehouseInventory;
+import static Main.WarehouseInventory.emfactory;
+import static Main.WarehouseInventory.em;
+import java.util.List;
+//import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+
+
 
 /**
  *
  * @author zubin
  */
 public class SalespersonControl {
-    EntityManager entitymanager;
 
-    public SalespersonControl (EntityManager em){
-        entitymanager = em;
+    public SalespersonControl (){
+        
     }
     
     
     public void addSalesperson (){
         
-        entitymanager.getTransaction().begin();
+        WarehouseInventory.em.getTransaction().begin();
         Salesperson employee = new Salesperson(); 
         employee.setFristname("Ryan");
         employee.setLastname( "C" );
@@ -38,11 +45,26 @@ public class SalespersonControl {
         employee.setTotalsales(0.0);
         employee.setTotalcommission(0.0);
         
-        entitymanager.persist(employee);
-        entitymanager.getTransaction().commit();
+        WarehouseInventory.em.persist(employee);
+        WarehouseInventory.em.getTransaction().commit();
 
-        entitymanager.close();
-//        emfactory.close();
+        WarehouseInventory.em.close();
+        
     }
+
+    public List<Salesperson> getSalespersonResultSet(){
+  
+        emfactory = Persistence.createEntityManagerFactory("WarehouseInventoryProgramPU");
+        em = emfactory.createEntityManager();
+
+//        EntityManager em = WarehouseInventory.em;
+
+        em.getTransaction().begin();
+       
+        Query qu1 = em.createNativeQuery("select SALESPERSONID, FRISTNAME, LASTNAME, PHONE from SALESPERSON", Salesperson.class);
+        List<Salesperson> lst = qu1.getResultList();
+        em.getTransaction().commit();
+        return lst;
+      }
     
 }
