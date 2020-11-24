@@ -4,6 +4,12 @@
  * and open the template in the editor.
  */
 package boundary;
+import Control.SalespersonControl;
+import Entity.Salesperson;
+import static Main.WarehouseInventory.controlfactory;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -16,6 +22,36 @@ public class SelectSalesperson extends javax.swing.JFrame {
      */
     public SelectSalesperson() {
         initComponents();
+        Update_table();
+        selectSalespersonInTable();
+    }
+    private void Update_table (){
+        SalespersonControl sp = controlfactory.getSalesperson();
+        List <Salesperson> list = sp.getSalespersonResultSet(); 
+        
+        DefaultTableModel model = (DefaultTableModel) SalespersonTable.getModel();
+//        List<Salesperson> list = lst;
+        Object rowData[] = new Object[4];
+        for(int i = 0; i < list.size(); i++)
+        {
+            rowData[0] = list.get(i).getSalespersonid();
+            rowData[1] = list.get(i).getFristname();
+            rowData[2] = list.get(i).getLastname();
+            rowData[3] = list.get(i).getPhone();
+            model.addRow(rowData);
+        }
+//        java.sql.ResultSet rs1 = (java.sql.ResultSet) rs;
+//        SalespersonTable.setModel(DbUtils.resultSetToTableModel(rs));
+       
+    }
+    
+    private Object selectSalespersonInTable(){
+        SalespersonTable.setRowSelectionInterval(0, SalespersonTable.getRowCount()-1);
+        int column = 0;
+        int row = SalespersonTable.getSelectedRow();
+        Object sp = SalespersonTable.getValueAt(row,column);
+    
+        return sp;
     }
 
     /**
@@ -29,7 +65,7 @@ public class SelectSalesperson extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        SalespersonTable = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
@@ -37,18 +73,15 @@ public class SelectSalesperson extends javax.swing.JFrame {
 
         jLabel1.setText("Select Salesperson");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        SalespersonTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "First Name", "Last Name", "Phone"
+                "SpID", "First Name", "Last Name", "Phone"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(SalespersonTable);
 
         jButton1.setText("Cancel");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -139,18 +172,16 @@ public class SelectSalesperson extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SelectSalesperson().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new SelectSalesperson().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable SalespersonTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 }

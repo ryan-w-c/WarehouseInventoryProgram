@@ -6,44 +6,68 @@
 package Control;
 
 import Entity.Salesperson;
-import javax.persistence.EntityManager;
+import Main.WarehouseInventory;
+import static Main.WarehouseInventory.emfactory;
+import static Main.WarehouseInventory.em;
+import java.util.List;
+//import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+import Main.WarehouseInventory;
+import Main.WarehouseInventory;
+
 
 /**
  *
  * @author zubin
  */
 public class SalespersonControl {
-    EntityManager entitymanager;
-    EntityManagerFactory emfactory;
-    public SalespersonControl (EntityManager em, EntityManagerFactory ef){
-        entitymanager = em;
-        emfactory = ef;
+
+    public SalespersonControl (){
+        
     }
     
     
-    public void addSalesperson (){
+    public void addSalesperson (String fname,String lname, String address, 
+            String city, String email, String state , double Crate, String phone,
+            int id, int zip, double sales, double commission  ){
         
-        entitymanager.getTransaction().begin();
+        WarehouseInventory.em.getTransaction().begin();
         Salesperson employee = new Salesperson(); 
-        employee.setFristname("Ryan");
-        employee.setLastname( "C" );
-        employee.setAddress("12345 street");
-        employee.setCity("city");
-        employee.setEmail("myemail");
-        employee.setState("CA");
-        employee.setCommissionrate(.5);
-        employee.setPhone("phone");
-        employee.setSalespersonid(122);
+        employee.setFristname(fname);
+        employee.setLastname( lname );
+        employee.setAddress(address);
+        employee.setCity(city);
+        employee.setEmail(email);
+        employee.setState(state);
+        employee.setCommissionrate(Crate);
+        employee.setPhone(phone);
+        employee.setSalespersonid(id);
         employee.setZip(90000);
         employee.setTotalsales(0.0);
         employee.setTotalcommission(0.0);
         
-        entitymanager.persist(employee);
-        entitymanager.getTransaction().commit();
+        WarehouseInventory.em.persist(employee);
+        WarehouseInventory.em.getTransaction().commit();
 
-        entitymanager.close();
-        emfactory.close();
+        WarehouseInventory.em.close();
+        
     }
+
+    public List<Salesperson> getSalespersonResultSet(){
+  
+//        emfactory = Persistence.createEntityManagerFactory("WarehouseInventoryProgramPU");
+//        em = emfactory.createEntityManager();
+//        
+//        EntityManager em = WarehouseInventory.em;
+
+        WarehouseInventory.em.getTransaction().begin();
+       
+        Query qu1 = WarehouseInventory.em.createNativeQuery("select SALESPERSONID, FRISTNAME, LASTNAME, PHONE from SALESPERSON", Salesperson.class);
+        List<Salesperson> lst = qu1.getResultList();
+        WarehouseInventory.em.getTransaction().commit();
+        return lst;
+      }
     
 }

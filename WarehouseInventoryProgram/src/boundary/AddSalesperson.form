@@ -49,7 +49,7 @@
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="phoneNumber" min="-2" pref="108" max="-2" attributes="0"/>
+                                      <Component id="SpPhone" min="-2" pref="108" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
@@ -58,11 +58,11 @@
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
                                       <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
-                                      <Component id="state" min="-2" pref="48" max="-2" attributes="0"/>
+                                      <Component id="SpState" min="-2" pref="48" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="zipCode" min="-2" pref="80" max="-2" attributes="0"/>
+                                      <Component id="SpZipCode" min="-2" pref="80" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Group type="103" groupAlignment="1" attributes="0">
@@ -76,8 +76,8 @@
                                           </Group>
                                       </Group>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="firstName" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
-                                          <Component id="streetAddress" alignment="0" min="-2" pref="305" max="-2" attributes="0"/>
+                                          <Component id="SpFname" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                                          <Component id="SpAddress" alignment="0" min="-2" pref="305" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -88,15 +88,15 @@
                               <EmptySpace min="-2" pref="260" max="-2" attributes="0"/>
                               <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="rate" min="-2" pref="78" max="-2" attributes="0"/>
+                              <Component id="SpRate" min="-2" pref="78" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="email" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
-                          <Component id="city" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
-                          <Component id="lastName" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                          <Component id="SpEmail" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                          <Component id="SpCity" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                          <Component id="SpLname" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                   </Group>
@@ -116,35 +116,35 @@
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="firstName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="SpFname" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lastName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="SpLname" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="streetAddress" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="SpAddress" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="city" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="SpCity" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="state" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="SpState" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="zipCode" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="email" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="SpZipCode" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="SpEmail" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="rate" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="SpRate" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="phoneNumber" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="SpPhone" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -215,30 +215,30 @@
         <Property name="text" type="java.lang.String" value="Add Salesperson"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="firstName">
+    <Component class="javax.swing.JTextField" name="SpFname">
     </Component>
-    <Component class="javax.swing.JTextField" name="lastName">
+    <Component class="javax.swing.JTextField" name="SpLname">
     </Component>
-    <Component class="javax.swing.JTextField" name="streetAddress">
+    <Component class="javax.swing.JTextField" name="SpAddress">
     </Component>
-    <Component class="javax.swing.JTextField" name="city">
+    <Component class="javax.swing.JTextField" name="SpCity">
     </Component>
-    <Component class="javax.swing.JTextField" name="state">
+    <Component class="javax.swing.JTextField" name="SpState">
     </Component>
-    <Component class="javax.swing.JTextField" name="zipCode">
+    <Component class="javax.swing.JTextField" name="SpZipCode">
     </Component>
-    <Component class="javax.swing.JTextField" name="phoneNumber">
+    <Component class="javax.swing.JTextField" name="SpPhone">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel9">
       <Properties>
         <Property name="text" type="java.lang.String" value="Phone Number"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="email">
+    <Component class="javax.swing.JTextField" name="SpEmail">
     </Component>
-    <Component class="javax.swing.JTextField" name="rate">
+    <Component class="javax.swing.JTextField" name="SpRate">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rateActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SpRateActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel10">

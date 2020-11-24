@@ -5,10 +5,25 @@
  */
 package Control;
 
+import Entity.Password;
+import Main.WarehouseInventory;
+
 /**
  *
  * @author minkyaw
  */
 public class LoginControl {
+    public LoginControl() {
+        
+    }
     
+    public void setPwd(String password) {
+        WarehouseInventory.em.getTransaction().begin();
+        Password pwd = new Password();
+        pwd.setPassword(password);
+        
+        WarehouseInventory.em.persist(pwd);
+        WarehouseInventory.em.getTransaction().commit();
+        
+    }
 }

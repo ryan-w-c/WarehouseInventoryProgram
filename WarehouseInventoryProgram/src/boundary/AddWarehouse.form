@@ -74,7 +74,7 @@
                                       </Group>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="streetAddress" min="-2" pref="305" max="-2" attributes="0"/>
-                                          <Component id="firstName" min="-2" pref="229" max="-2" attributes="0"/>
+                                          <Component id="WareHouseName" min="-2" pref="229" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -101,7 +101,7 @@
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="firstName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="WareHouseName" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -195,7 +195,7 @@
         <Property name="text" type="java.lang.String" value="Add Warehouse"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="firstName">
+    <Component class="javax.swing.JTextField" name="WareHouseName">
     </Component>
   </SubComponents>
 </Form>
