@@ -14,7 +14,8 @@ import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-
+import Main.WarehouseInventory;
+import Main.WarehouseInventory;
 
 
 /**
@@ -56,16 +57,16 @@ public class SalespersonControl {
 
     public List<Salesperson> getSalespersonResultSet(){
   
-        emfactory = Persistence.createEntityManagerFactory("WarehouseInventoryProgramPU");
-        em = emfactory.createEntityManager();
-        
+//        emfactory = Persistence.createEntityManagerFactory("WarehouseInventoryProgramPU");
+//        em = emfactory.createEntityManager();
+//        
 //        EntityManager em = WarehouseInventory.em;
 
-        em.getTransaction().begin();
+        WarehouseInventory.em.getTransaction().begin();
        
-        Query qu1 = em.createNativeQuery("select SALESPERSONID, FRISTNAME, LASTNAME, PHONE from SALESPERSON", Salesperson.class);
+        Query qu1 = WarehouseInventory.em.createNativeQuery("select SALESPERSONID, FRISTNAME, LASTNAME, PHONE from SALESPERSON", Salesperson.class);
         List<Salesperson> lst = qu1.getResultList();
-        em.getTransaction().commit();
+        WarehouseInventory.em.getTransaction().commit();
         return lst;
       }
     

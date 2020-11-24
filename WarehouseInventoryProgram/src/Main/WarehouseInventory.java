@@ -35,8 +35,8 @@ public class WarehouseInventory {
         
         
 
-        em.close();
-        emfactory.close();
+//        em.close();
+//        emfactory.close();
 
     }
     
