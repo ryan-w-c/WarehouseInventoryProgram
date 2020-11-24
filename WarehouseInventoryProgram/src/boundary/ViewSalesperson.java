@@ -6,6 +6,8 @@
 package boundary;
 
 import Control.SalespersonControl;
+import Entity.Salesperson;
+import Main.WarehouseInventory;
 import static Main.WarehouseInventory.controlfactory;
 
 /**
@@ -99,7 +101,9 @@ public class ViewSalesperson extends javax.swing.JFrame {
         // TODO add your handling code here:
         SalespersonControl sp = controlfactory.getSalesperson();
         this.setVisible(false);
-        new EditSalesperson().setVisible(true);
+        //TODO pass salesperson object in
+        Salesperson s1 = WarehouseInventory.em.find(Salesperson.class, 3);
+        new EditSalesperson(s1).setVisible(true);
     }//GEN-LAST:event_editSalespersonBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed

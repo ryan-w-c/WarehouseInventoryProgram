@@ -5,7 +5,6 @@
  */
 package boundary;
 //import Control.ControlFactory;
-import static Main.WarehouseInventory.controlfactory;
 import Control.SalespersonControl;
 import static Main.WarehouseInventory.controlfactory;
 
@@ -213,13 +212,11 @@ public class AddSalesperson extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setVisible(false);
         new Manage().setVisible(true);
-       SalespersonControl sp = controlfactory.getSalesperson();
+        SalespersonControl sp = controlfactory.getSalesperson();
        
- //FIXME
-       sp.addSalesperson(SpFname.getText(), SpLname.getText(), SpAddress.getText(), 
-               SpCity.getText(), SpEmail.getText(), SpState.getText(), Double.parseDouble(SpRate.getText()) ,
-               SpPhone.getText(), 434, Integer.parseInt(SpZipCode.getText()), //FIXME Add salesperson ID
-               0.0, 0.0);
+        sp.addSalesperson(SpFname.getText(), SpLname.getText(), SpAddress.getText(), 
+               SpCity.getText(), SpEmail.getText(), SpState.getText(), Double.parseDouble(SpRate.getText()),  SpPhone.getText(), 
+               Integer.parseInt(SpZipCode.getText()), 0.0, 0.0);
         
         
     }//GEN-LAST:event_addSalespersonActionPerformed

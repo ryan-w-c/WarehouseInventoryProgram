@@ -6,26 +6,27 @@
 package Entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author zubin
+ * @author ryancavanagh
  */
 @Entity
 @Table(name = "SALESPERSON")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Salesperson.findAll", query = "SELECT s FROM Salesperson s"),
-    @NamedQuery(name = "Salesperson.findByFristname", query = "SELECT s FROM Salesperson s WHERE s.fristname = :fristname"),
+    @NamedQuery(name = "Salesperson.findByFirstname", query = "SELECT s FROM Salesperson s WHERE s.firstname = :firstname"),
     @NamedQuery(name = "Salesperson.findByLastname", query = "SELECT s FROM Salesperson s WHERE s.lastname = :lastname"),
     @NamedQuery(name = "Salesperson.findByPhone", query = "SELECT s FROM Salesperson s WHERE s.phone = :phone"),
     @NamedQuery(name = "Salesperson.findByEmail", query = "SELECT s FROM Salesperson s WHERE s.email = :email"),
@@ -41,30 +42,48 @@ public class Salesperson implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
-    @Column(name = "FRISTNAME")
-    private String fristname;
+    @NotNull
+    @Size(min = 1, max = 50)
+    @Column(name = "FIRSTNAME")
+    private String firstname;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 50)
     @Column(name = "LASTNAME")
     private String lastname;
+    // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 10)
     @Column(name = "PHONE")
     private String phone;
+    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 100)
     @Column(name = "EMAIL")
     private String email;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 200)
     @Column(name = "ADDRESS")
     private String address;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 50)
     @Column(name = "CITY")
     private String city;
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 50)
     @Column(name = "STATE")
     private String state;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "ZIP")
     private int zip;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "COMMISSIONRATE")
     private double commissionrate;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -74,10 +93,9 @@ public class Salesperson implements Serializable {
     private Double totalcommission;
     @Id
     @Basic(optional = false)
+    @NotNull
     @Column(name = "SALESPERSONID")
     private Integer salespersonid;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "salespersonid")
-    private Collection<Invoice> invoiceCollection;
 
     public Salesperson() {
     }
@@ -86,9 +104,9 @@ public class Salesperson implements Serializable {
         this.salespersonid = salespersonid;
     }
 
-    public Salesperson(Integer salespersonid, String fristname, String lastname, String phone, String email, String address, String city, String state, int zip, double commissionrate) {
+    public Salesperson(Integer salespersonid, String firstname, String lastname, String phone, String email, String address, String city, String state, int zip, double commissionrate) {
         this.salespersonid = salespersonid;
-        this.fristname = fristname;
+        this.firstname = firstname;
         this.lastname = lastname;
         this.phone = phone;
         this.email = email;
@@ -99,12 +117,12 @@ public class Salesperson implements Serializable {
         this.commissionrate = commissionrate;
     }
 
-    public String getFristname() {
-        return fristname;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFristname(String fristname) {
-        this.fristname = fristname;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
     public String getLastname() {
@@ -193,14 +211,6 @@ public class Salesperson implements Serializable {
 
     public void setSalespersonid(Integer salespersonid) {
         this.salespersonid = salespersonid;
-    }
-
-    public Collection<Invoice> getInvoiceCollection() {
-        return invoiceCollection;
-    }
-
-    public void setInvoiceCollection(Collection<Invoice> invoiceCollection) {
-        this.invoiceCollection = invoiceCollection;
     }
 
     @Override
