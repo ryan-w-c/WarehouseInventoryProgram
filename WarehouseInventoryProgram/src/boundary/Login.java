@@ -5,7 +5,7 @@
  */
 package boundary;
 
-//import entity.User;
+import Entity.Password;
 
 /**
  *
@@ -80,17 +80,17 @@ public class Login extends javax.swing.JFrame {
 
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
         // TODO add your handling code here:
-//        User user = new User("warehouse");
-//        String pwd = password.getText();
+        Password user = new Password("warehouse");
+        String pwd = password.getText();
         
-//        if (user.getPassword().equals(pwd)) {
-//            success.setText("Login Successful");
+        if (user.getPassword().equals(pwd)) {
+            success.setText("Login Successful");
             new MainMenu().setVisible(true);
             this.setVisible(false);
-//        }
-//        else {6
-//            success.setText("Login failed - incorrect password");
-//        }
+        }
+        else {
+            success.setText("Login failed - incorrect password");
+        }
     }//GEN-LAST:event_LoginActionPerformed
 
     /**

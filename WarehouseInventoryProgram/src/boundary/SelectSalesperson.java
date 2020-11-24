@@ -6,6 +6,7 @@
 package boundary;
 import Control.SalespersonControl;
 import Entity.Salesperson;
+import static Main.WarehouseInventory.controlfactory;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -25,7 +26,7 @@ public class SelectSalesperson extends javax.swing.JFrame {
         selectSalespersonInTable();
     }
     private void Update_table (){
-        SalespersonControl sp = new SalespersonControl();
+        SalespersonControl sp = controlfactory.getSalesperson();
         List <Salesperson> list = sp.getSalespersonResultSet(); 
         
         DefaultTableModel model = (DefaultTableModel) SalespersonTable.getModel();

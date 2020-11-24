@@ -28,19 +28,21 @@ public class SalespersonControl {
     }
     
     
-    public void addSalesperson (){
+    public void addSalesperson (String fname,String lname, String address, 
+            String city, String email, String state , double Crate, String phone,
+            int id, int zip, double sales, double commission  ){
         
         WarehouseInventory.em.getTransaction().begin();
         Salesperson employee = new Salesperson(); 
-        employee.setFristname("Ryan");
-        employee.setLastname( "C" );
-        employee.setAddress("12345 street");
-        employee.setCity("city");
-        employee.setEmail("myemail");
-        employee.setState("CA");
-        employee.setCommissionrate(.5);
-        employee.setPhone("phone");
-        employee.setSalespersonid(122);
+        employee.setFristname(fname);
+        employee.setLastname( lname );
+        employee.setAddress(address);
+        employee.setCity(city);
+        employee.setEmail(email);
+        employee.setState(state);
+        employee.setCommissionrate(Crate);
+        employee.setPhone(phone);
+        employee.setSalespersonid(id);
         employee.setZip(90000);
         employee.setTotalsales(0.0);
         employee.setTotalcommission(0.0);
@@ -56,7 +58,7 @@ public class SalespersonControl {
   
         emfactory = Persistence.createEntityManagerFactory("WarehouseInventoryProgramPU");
         em = emfactory.createEntityManager();
-
+        
 //        EntityManager em = WarehouseInventory.em;
 
         em.getTransaction().begin();
