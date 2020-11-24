@@ -29,7 +29,8 @@ public class ProductControl {
         
         Warehouse warehouse = productManager.find(Warehouse.class, warehouseName);
         
+        product.setWarehouse(warehouse);
         
-        
+        productManager.getTransaction().commit();
     }
 }
