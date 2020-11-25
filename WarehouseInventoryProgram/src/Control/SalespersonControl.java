@@ -67,10 +67,10 @@ public class SalespersonControl {
         return lst;
       }
 
-    public void saveCustomer(Salesperson s) {
-        WarehouseInventory.em.getTransaction().begin();
-        WarehouseInventory.em.persist(s);
-        WarehouseInventory.em.getTransaction().commit();
+    public void saveSalesperson(Salesperson s) {
+        Main.em.getTransaction().begin();
+        Main.em.persist(s);
+        Main.em.getTransaction().commit();
     }
     
 }

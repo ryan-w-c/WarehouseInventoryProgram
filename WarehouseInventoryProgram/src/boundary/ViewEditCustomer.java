@@ -7,8 +7,6 @@ package boundary;
 
 import Control.CustomerControl;
 import Entity.Customer;
-import Main.WarehouseInventory;
-import static Main.WarehouseInventory.controlfactory;
 
 /**
  *
@@ -99,10 +97,10 @@ public class ViewEditCustomer extends javax.swing.JFrame {
     private void editSalespersonBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editSalespersonBtnActionPerformed
 
         // TODO add your handling code here:
-        CustomerControl c = controlfactory.getCustomer();
+        CustomerControl c = Main.Main.controlfactory.getCustomer();
         this.setVisible(false);
         //TODO pass salesperson object in
-        Customer c1 = WarehouseInventory.em.find(Customer.class, 3);
+        Customer c1 = Main.Main.em.find(Customer.class, 3);
         new EditCustomer(c1).setVisible(true);
     }//GEN-LAST:event_editSalespersonBtnActionPerformed
 

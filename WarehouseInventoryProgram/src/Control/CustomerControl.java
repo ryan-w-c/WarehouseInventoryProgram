@@ -51,4 +51,10 @@ public class CustomerControl {
         Main.em.getTransaction().commit();
     }
     
+    public void saveCustomer(Customer c) {
+        Main.em.getTransaction().begin();
+        Main.em.persist(c);
+        Main.em.getTransaction().commit();
+    }
+    
 }

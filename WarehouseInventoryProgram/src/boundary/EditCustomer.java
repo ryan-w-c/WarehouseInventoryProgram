@@ -7,7 +7,6 @@ package boundary;
 
 import Control.CustomerControl;
 import Entity.Customer;
-import Main.WarehouseInventory;
 
 /**
  *
@@ -203,7 +202,7 @@ public class EditCustomer extends javax.swing.JFrame {
         this.setVisible(false);
         new ViewEditSalesperson().setVisible(true);
         //todo check to make sure not empty
-        CustomerControl cp = WarehouseInventory.controlfactory.getCustomer();
+        CustomerControl cp = Main.Main.controlfactory.getCustomer();
         c.setFirstname(firstName.getText());
         c.setLastname(lastName.getText());
         c.setPhone(phoneNumber.getText());

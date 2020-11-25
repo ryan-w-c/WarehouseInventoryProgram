@@ -7,7 +7,6 @@ package boundary;
 
 import Control.SalespersonControl;
 import Entity.Salesperson;
-import Main.WarehouseInventory;
 
 /**
  *
@@ -226,7 +225,7 @@ public class EditSalesperson extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setVisible(false);
         new ViewEditSalesperson().setVisible(true);
-        SalespersonControl sp = WarehouseInventory.controlfactory.getSalesperson();
+        SalespersonControl sp = Main.Main.controlfactory.getSalesperson();
         s.setFirstname(firstName.getText());
         s.setLastname(lastName.getText());
         s.setPhone(phoneNumber.getText());
@@ -235,7 +234,7 @@ public class EditSalesperson extends javax.swing.JFrame {
         s.setCity(city.getText());
         s.setState(state.getText());
         s.setZip(Integer.parseInt(zipCode.getText()));
-        sp.saveCustomer(s);
+        sp.saveSalesperson(s);
     }//GEN-LAST:event_saveSalespersonActionPerformed
 
     private void canelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_canelButtonActionPerformed
