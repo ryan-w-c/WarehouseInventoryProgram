@@ -26,4 +26,5 @@ public class LoginControl {
         WarehouseInventory.em.getTransaction().commit();
         
     }
+    
 }
