@@ -9,6 +9,9 @@ import Control.SalespersonControl;
 import static Main.Main.controlfactory;
 import Main.*;
 import Entity.Salesperson;
+import static Main.Main.controlfactory;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,6 +24,39 @@ public class ViewEditSalesperson extends javax.swing.JFrame {
      */
     public ViewEditSalesperson() {
         initComponents();
+        updateTable();
+    }
+    
+    private void updateTable (){
+        SalespersonControl sp = controlfactory.getSalesperson();
+        List <Salesperson> list = sp.getSalespersonResultSet(); 
+        
+        DefaultTableModel model = (DefaultTableModel) salespersonTable.getModel();
+//        List<Salesperson> list = lst;
+        Object rowData[] = new Object[4];
+        for(int i = 0; i < list.size(); i++)
+        {
+            rowData[0] = list.get(i).getSalespersonid();
+            rowData[1] = list.get(i).getFirstname() + " " + list.get(i).getLastname();
+            rowData[2] = list.get(i).getTotalsales();
+            rowData[3] = list.get(i).getTotalcommission();
+            model.addRow(rowData);
+        }
+//        java.sql.ResultSet rs1 = (java.sql.ResultSet) rs;
+//        SalespersonTable.setModel(DbUtils.resultSetToTableModel(rs));
+       
+    }
+    
+    private Object selectSalespersonInTable(){
+        if (salespersonTable.getRowCount() == 0){
+            return 0;
+        } else {
+            salespersonTable.setRowSelectionInterval(0, salespersonTable.getRowCount()-1);
+            int row = salespersonTable.getSelectedRow();
+            Object sp = salespersonTable.getValueAt(row, 0);
+
+            return sp;
+        }
     }
 
     /**
@@ -41,13 +77,10 @@ public class ViewEditSalesperson extends javax.swing.JFrame {
 
         salespersonTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "Salesperson Name", "Total Sales", "Total Commission"
+                "ID Number", "Salesperson Name", "Total Sales", "Total Commission"
             }
         ));
         jScrollPane1.setViewportView(salespersonTable);
@@ -71,15 +104,15 @@ public class ViewEditSalesperson extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(65, 65, 65)
                 .addComponent(editSalespersonBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
                 .addComponent(backBtn)
                 .addGap(65, 65, 65))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,10 +132,11 @@ public class ViewEditSalesperson extends javax.swing.JFrame {
     private void editSalespersonBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editSalespersonBtnActionPerformed
 
         // TODO add your handling code here:
-        SalespersonControl sp = controlfactory.getSalesperson();
         this.setVisible(false);
         //TODO pass salesperson object in
-        Salesperson s1 = Main.em.find(Salesperson.class, 3);
+        System.out.println("Person: " + selectSalespersonInTable());
+        Salesperson s1 = Main.em.find(Salesperson.class, selectSalespersonInTable());
+        System.out.println(s1.toString());
         new EditSalesperson(s1).setVisible(true);
     }//GEN-LAST:event_editSalespersonBtnActionPerformed
 
