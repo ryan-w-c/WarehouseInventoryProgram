@@ -85,6 +85,7 @@ public class Login extends javax.swing.JFrame {
 //        pwd.setPwd("warehouse");
 //        String p = pwd.toString();
 //        String passwrd = password.getText();
+<<<<<<< HEAD
 //        
 //        if (passwrd.equals(p)) {
 //            new MainMenu().setVisible(true);
@@ -95,18 +96,33 @@ public class Login extends javax.swing.JFrame {
 //        }
 //        Password user = new Password("warehouse");
 //        String pwd = password.getText();
+=======
+>>>>>>> 4dc7df672cff1a08ef9db39cbb0d05d2ef1ecdf0
 //        
-//        if (user.getPassword().equals(pwd)) {
-//            success.setText("Login Successful");
+//        if (passwrd.equals(p)) {
 //            new MainMenu().setVisible(true);
 //            this.setVisible(false);
 //        }
 //        else {
 //            success.setText("Login failed - incorrect password");
 //        }
+<<<<<<< HEAD
         
         new MainMenu().setVisible(true);
             this.setVisible(false);
+=======
+        Password user = new Password("warehouse");
+        String pwd = password.getText();
+        
+        if (user.getPassword().equals(pwd)) {
+            success.setText("Login Successful");
+            new MainMenu().setVisible(true);
+            this.setVisible(false);
+        }
+        else {
+            success.setText("Login failed - incorrect password");
+        }
+>>>>>>> 4dc7df672cff1a08ef9db39cbb0d05d2ef1ecdf0
     }//GEN-LAST:event_LoginActionPerformed
 
     /**

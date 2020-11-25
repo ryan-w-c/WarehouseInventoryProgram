@@ -5,6 +5,12 @@
  */
 package boundary;
 
+import Control.CustomerControl;
+import Entity.Customer;
+import static Main.Main.controlfactory;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author zubin
@@ -16,6 +22,39 @@ public class SelectCustomer extends javax.swing.JFrame {
      */
     public SelectCustomer() {
         initComponents();
+        Update_table();
+    }
+    
+    
+    
+        private void Update_table (){
+        CustomerControl c1 = controlfactory.getCustomer();
+        List <Customer> list = c1.getCustomerResultSet(); 
+        
+        DefaultTableModel model = (DefaultTableModel) customerTable.getModel();
+//        List<Salesperson> list = lst;
+        Object rowData[] = new Object[4];
+        for(int i = 0; i < list.size(); i++)
+        {
+//            rowData[0] = list.get(i).getSalespersonid();
+            rowData[1] = list.get(i).getFirstname();
+            rowData[2] = list.get(i).getLastname();
+            rowData[3] = list.get(i).getPhone();
+            model.addRow(rowData);
+        }
+    }
+    
+    
+        private Object selectSalespersonInTable(){
+        if (customerTable.getRowCount() == 0){
+            return null;
+        }else{
+        customerTable.setRowSelectionInterval(0, customerTable.getRowCount()-1);
+        int row = customerTable.getSelectedRow();
+        Object sp = customerTable.getValueAt(row,0);
+    
+        return sp;
+        }
     }
 
     /**
@@ -33,7 +72,7 @@ public class SelectCustomer extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        customerTable = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -62,7 +101,7 @@ public class SelectCustomer extends javax.swing.JFrame {
 
         jLabel1.setText("Select Customer");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        customerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -73,7 +112,7 @@ public class SelectCustomer extends javax.swing.JFrame {
                 "First Name", "Last Name", "Phone"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(customerTable);
 
         jButton2.setText("Done");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -166,6 +205,7 @@ public class SelectCustomer extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable customerTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -173,6 +213,5 @@ public class SelectCustomer extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 }

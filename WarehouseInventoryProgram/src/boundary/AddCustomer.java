@@ -192,12 +192,15 @@ public class AddCustomer extends javax.swing.JFrame {
 
     private void addCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCustomerActionPerformed
         // TODO add your handling code here:
+<<<<<<< HEAD
         this.setVisible(false);
         new Manage().setVisible(true);
         CustomerControl cs = controlfactory.getCustomer();
         cs.addCustomer(firstName.getText(), lastName.getText(), phoneNumber.getText(), 
                 email.getText(), streetAddress.getText(), city.getText(), state.getText(),
                Integer.parseInt(zipCode.getText()));
+=======
+>>>>>>> 4dc7df672cff1a08ef9db39cbb0d05d2ef1ecdf0
     }//GEN-LAST:event_addCustomerActionPerformed
 
     /**
