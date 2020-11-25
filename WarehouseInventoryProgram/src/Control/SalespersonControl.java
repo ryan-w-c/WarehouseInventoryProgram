@@ -15,15 +15,18 @@ import Main.Main;
  *
  * @author zubin
  */
-public class SalespersonControl {
+public final class SalespersonControl {
+    
+    private int idNum;
+    
     public SalespersonControl (){
-        
+        idNum = getNewID();
     }
     
     
     public void addSalesperson (String fname, String lname, String address, 
             String city, String email, String state , double Crate, String phone,
-            Integer spid, int zip, double sales, double commission){
+            int zip, double sales, double commission){
         
         Main.em.getTransaction().begin();
         Salesperson employee = new Salesperson(); 
@@ -35,15 +38,13 @@ public class SalespersonControl {
         employee.setState(state);
         employee.setCommissionrate(Crate);
         employee.setPhone(phone);
-        //FIXME ID NUMBERS
-        employee.setSalespersonid(spid);
+        employee.setSalespersonid(idNum++);
         employee.setZip(90000);
         employee.setTotalsales(0.0);
         employee.setTotalcommission(0.0);
         
         Main.em.persist(employee);
         Main.em.getTransaction().commit();
-//        Main.em.close();
     }
 
     public List<Salesperson> getSalespersonResultSet(){
@@ -69,11 +70,12 @@ public class SalespersonControl {
         List lst  = qu1.getResultList();
         Main.em.getTransaction().commit();
         Integer ans;
-        if (lst.get(0) == null){
+        if (lst.get(0) == null) {
             ans = 1;
-        }else {
+        } else {
         ans = Integer.parseInt(lst.get(0).toString()) +1;
-   } 
+        } 
         return ans;
-}
+    }
+   
 }

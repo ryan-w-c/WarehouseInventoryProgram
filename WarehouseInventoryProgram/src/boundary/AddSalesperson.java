@@ -216,7 +216,7 @@ public class AddSalesperson extends javax.swing.JFrame {
        SalespersonControl sp = controlfactory.getSalesperson();
        sp.addSalesperson(SpFname.getText(), SpLname.getText(), SpAddress.getText(), 
                SpCity.getText(), SpEmail.getText(), SpState.getText(), Double.parseDouble(SpRate.getText()) ,
-               SpPhone.getText(),sp.getNewID(), Integer.parseInt(SpZipCode.getText()), 
+               SpPhone.getText(), Integer.parseInt(SpZipCode.getText()), 
                0.0, 0.0);
         
         
