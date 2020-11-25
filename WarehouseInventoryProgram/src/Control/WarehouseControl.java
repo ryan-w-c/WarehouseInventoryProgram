@@ -5,7 +5,7 @@
  */
 package Control;
 
-import Main.WarehouseInventory;
+import Main.Main;
 import Entity.Warehouse;
 
 /**
@@ -20,7 +20,7 @@ public class WarehouseControl {
     
     public void addWarehouse (String wName, String address, String city, String state, Integer zip, String phone){
         
-        WarehouseInventory.em.getTransaction().begin();
+        Main.em.getTransaction().begin();
         Warehouse w1 = new Warehouse(); 
         
         w1.setWarehousename(wName);
@@ -30,8 +30,8 @@ public class WarehouseControl {
         w1.setZipcode(zip);
         w1.setPhone(phone);
         
-        WarehouseInventory.em.persist(w1);
-        WarehouseInventory.em.getTransaction().commit();
+        Main.em.persist(w1);
+        Main.em.getTransaction().commit();
 
     }
 

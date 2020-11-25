@@ -6,7 +6,7 @@
 package boundary;
 import Control.SalespersonControl;
 import Entity.Salesperson;
-import static Main.WarehouseInventory.controlfactory;
+import static Main.Main.controlfactory;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -46,12 +46,16 @@ public class SelectSalesperson extends javax.swing.JFrame {
     }
     
     private Object selectSalespersonInTable(){
+        if (SalespersonTable.getRowCount() == 0){
+            return null;
+        }else{
         SalespersonTable.setRowSelectionInterval(0, SalespersonTable.getRowCount()-1);
         int column = 0;
         int row = SalespersonTable.getSelectedRow();
         Object sp = SalespersonTable.getValueAt(row,column);
     
         return sp;
+        }
     }
 
     /**

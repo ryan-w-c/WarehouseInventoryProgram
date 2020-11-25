@@ -5,6 +5,9 @@
  */
 package boundary;
 
+import Control.SalespersonControl;
+import Entity.Salesperson;
+
 /**
  *
  * @author ryancavanagh
@@ -14,8 +17,21 @@ public class EditSalesperson extends javax.swing.JFrame {
     /**
      * Creates new form EditSalesperson
      */
-    public EditSalesperson() {
+    
+    private Salesperson s;
+    
+    public EditSalesperson(Salesperson s1) {
         initComponents();
+        s = s1;
+        firstName.setText(s.getFirstname());
+        lastName.setText(s.getLastname());
+        streetAddress.setText(s.getAddress());
+        city.setText(s.getCity());
+        email.setText(s.getEmail());
+        state.setText(s.getState());
+        rate.setText(Double.toString(s.getCommissionrate()));
+        phoneNumber.setText(s.getPhone());
+        zipCode.setText(Integer.toString(s.getZip()));
     }
 
     /**
@@ -208,49 +224,59 @@ public class EditSalesperson extends javax.swing.JFrame {
     private void saveSalespersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveSalespersonActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new ViewSalesperson().setVisible(true);
+        new ViewEditSalesperson().setVisible(true);
+        SalespersonControl sp = Main.Main.controlfactory.getSalesperson();
+        s.setFirstname(firstName.getText());
+        s.setLastname(lastName.getText());
+        s.setPhone(phoneNumber.getText());
+        s.setEmail(email.getText());
+        s.setAddress(streetAddress.getText());
+        s.setCity(city.getText());
+        s.setState(state.getText());
+        s.setZip(Integer.parseInt(zipCode.getText()));
+        sp.saveSalesperson(s);
     }//GEN-LAST:event_saveSalespersonActionPerformed
 
     private void canelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_canelButtonActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new ViewSalesperson().setVisible(true);
+        new ViewEditSalesperson().setVisible(true);
     }//GEN-LAST:event_canelButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EditSalesperson.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EditSalesperson.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EditSalesperson.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EditSalesperson.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new EditSalesperson().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(EditSalesperson.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(EditSalesperson.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(EditSalesperson.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(EditSalesperson.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new EditSalesperson().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton canelButton;
