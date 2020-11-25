@@ -6,7 +6,7 @@
 package boundary;
 import Control.SalespersonControl;
 import Entity.Salesperson;
-import static Main.WarehouseInventory.controlfactory;
+import static Main.Main.controlfactory;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 

@@ -19,7 +19,7 @@ import Control.ControlFactory;
  */
 
 
-public class WarehouseInventory {
+public class Main {
     
     public static EntityManager em;
     public static EntityManagerFactory emfactory;
