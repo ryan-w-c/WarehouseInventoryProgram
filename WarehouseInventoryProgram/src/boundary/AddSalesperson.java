@@ -5,9 +5,9 @@
  */
 package boundary;
 //import Control.ControlFactory;
-import static Main.WarehouseInventory.controlfactory;
+
 import Control.SalespersonControl;
-import static Main.WarehouseInventory.controlfactory;
+import static Main.Main.controlfactory;
 
 /**
  *
@@ -214,11 +214,9 @@ public class AddSalesperson extends javax.swing.JFrame {
         this.setVisible(false);
         new Manage().setVisible(true);
        SalespersonControl sp = controlfactory.getSalesperson();
-       
- //FIXME
        sp.addSalesperson(SpFname.getText(), SpLname.getText(), SpAddress.getText(), 
                SpCity.getText(), SpEmail.getText(), SpState.getText(), Double.parseDouble(SpRate.getText()) ,
-               SpPhone.getText(), 434, Integer.parseInt(SpZipCode.getText()), //FIXME Add salesperson ID
+               SpPhone.getText(),sp.getNewID(), Integer.parseInt(SpZipCode.getText()), 
                0.0, 0.0);
         
         

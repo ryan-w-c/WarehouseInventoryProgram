@@ -5,8 +5,10 @@
  */
 package Control;
 
-import Main.WarehouseInventory;
+import Main.Main;
 import Entity.Customer;
+import java.util.List;
+import javax.persistence.Query;
 
 
 /**
@@ -16,7 +18,7 @@ import Entity.Customer;
 public class CustomerControl {
    
     public void addCustomer(Integer customerid, String firstname, String lastname, String phone, String email, String address, String city, String state, int zip) {
-        WarehouseInventory.em.getTransaction().begin();
+        Main.em.getTransaction().begin();
         Customer c1 = new Customer();
         
         c1.setCustomerid(customerid);
@@ -29,12 +31,12 @@ public class CustomerControl {
         c1.setState(state);
         c1.setZip(zip);
         
-        WarehouseInventory.em.persist(c1);
-        WarehouseInventory.em.getTransaction().commit();
+        Main.em.persist(c1);
+        Main.em.getTransaction().commit();
     }
     
     public void editCustomer(Integer customerid, String firstname, String lastname, String phone, String email, String address, String city, String state, int zip) {
-        WarehouseInventory.em.getTransaction().begin();
+        Main.em.getTransaction().begin();
         Customer c1 = new Customer();
         
         c1.setCustomerid(customerid);
@@ -47,8 +49,14 @@ public class CustomerControl {
         c1.setState(state);
         c1.setZip(zip);
         
-        WarehouseInventory.em.persist(c1);
-        WarehouseInventory.em.getTransaction().commit();
+        Main.em.persist(c1);
+        Main.em.getTransaction().commit();
+    }
+    
+    public void saveCustomer(Customer c) {
+        Main.em.getTransaction().begin();
+        Main.em.persist(c);
+        Main.em.getTransaction().commit();
     }
     
 }

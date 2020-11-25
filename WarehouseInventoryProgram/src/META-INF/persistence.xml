@@ -15,6 +15,7 @@
       <property name="javax.persistence.jdbc.user" value="username"/>
       <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
       <property name="javax.persistence.jdbc.password" value="password"/>
+<!--      <property name="eclipselink.jpa.uppercase-column-names" value="true"/>-->
     </properties>
   </persistence-unit>
 </persistence>

@@ -6,7 +6,7 @@
 package Control;
 
 import Entity.Password;
-import Main.WarehouseInventory;
+import Main.Main;
 
 /**
  *
@@ -18,12 +18,12 @@ public class LoginControl {
     }
     
     public void setPwd(String password) {
-        WarehouseInventory.em.getTransaction().begin();
+        Main.em.getTransaction().begin();
         Password pwd = new Password();
         pwd.setPassword(password);
         
-        WarehouseInventory.em.persist(pwd);
-        WarehouseInventory.em.getTransaction().commit();
+        Main.em.persist(pwd);
+        Main.em.getTransaction().commit();
         
     }
     
