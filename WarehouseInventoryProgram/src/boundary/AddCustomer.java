@@ -52,6 +52,11 @@ public class AddCustomer extends javax.swing.JFrame {
         jLabel1.setText("Add Customer");
 
         addCustomer.setText("Add Customer");
+        addCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addCustomerActionPerformed(evt);
+            }
+        });
 
         canelButton.setText("Cancel");
         canelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -181,6 +186,10 @@ public class AddCustomer extends javax.swing.JFrame {
         this.setVisible(false);
         new Manage().setVisible(true);
     }//GEN-LAST:event_canelButtonActionPerformed
+
+    private void addCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCustomerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addCustomerActionPerformed
 
     /**
      * @param args the command line arguments
