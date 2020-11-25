@@ -170,7 +170,7 @@ public class Manage extends javax.swing.JFrame {
     private void editSalespersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editSalespersonActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new ViewSalesperson().setVisible(true);
+        new ViewEditSalesperson().setVisible(true);
     }//GEN-LAST:event_editSalespersonActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed

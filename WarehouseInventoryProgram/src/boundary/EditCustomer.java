@@ -5,6 +5,10 @@
  */
 package boundary;
 
+import Control.CustomerControl;
+import Entity.Customer;
+import Main.WarehouseInventory;
+
 /**
  *
  * @author ryancavanagh
@@ -14,8 +18,21 @@ public class EditCustomer extends javax.swing.JFrame {
     /**
      * Creates new form EditCustomer
      */
-    public EditCustomer() {
+    
+    private Customer c;
+    
+    public EditCustomer(Customer c1) {
+        
         initComponents();
+        c = c1;
+        firstName.setText(c.getFirstname());
+        lastName.setText(c.getLastname());
+        streetAddress.setText(c.getAddress());
+        city.setText(c.getCity());
+        email.setText(c.getEmail());
+        state.setText(c.getState());
+        phoneNumber.setText(c.getPhone());
+        zipCode.setText(Integer.toString(c.getZip()));
     }
 
     /**
@@ -27,106 +44,238 @@ public class EditCustomer extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        saveCustomer = new javax.swing.JButton();
+        phoneNumber = new javax.swing.JTextField();
+        lastName = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        email = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        canelButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        customerDrop = new javax.swing.JComboBox<>();
-        customerEdit = new javax.swing.JButton();
-        cancelButton = new javax.swing.JButton();
+        streetAddress = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        firstName = new javax.swing.JTextField();
+        city = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        state = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        zipCode = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Select Customer to Edit");
-
-        customerDrop.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Customer 1", "Customer 2", "Customer 3", "Customer 4" }));
-
-        customerEdit.setText("Edit");
-
-        cancelButton.setText("Cancel");
-        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+        saveCustomer.setText("Save");
+        saveCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelButtonActionPerformed(evt);
+                saveCustomerActionPerformed(evt);
             }
         });
+
+        jLabel6.setText("State");
+
+        jLabel9.setText("Phone Number");
+
+        jLabel7.setText("Zip Code");
+
+        jLabel8.setText("Email");
+
+        canelButton.setText("Cancel");
+        canelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                canelButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Edit Customer");
+
+        jLabel2.setText("First Name");
+
+        jLabel3.setText("Last Name");
+
+        jLabel4.setText("Street Address");
+
+        jLabel5.setText("City");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(117, 117, 117)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(customerDrop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(saveCustomer)
+                        .addGap(18, 18, 18)
+                        .addComponent(canelButton)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cancelButton)
-                            .addComponent(customerEdit))))
-                .addContainerGap(136, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel9))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel5)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(phoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(110, 110, 110)
+                                        .addComponent(state, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel7)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(zipCode, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel2)
+                                                .addGap(20, 20, 20))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel4)
+                                                .addGap(18, 18, 18)))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(firstName, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(streetAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                                .addComponent(jLabel8)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(city, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lastName, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(17, 17, 17))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(246, 246, 246))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(customerDrop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(customerEdit))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
-                .addComponent(cancelButton)
-                .addGap(66, 66, 66))
+                    .addComponent(firstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(lastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(streetAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(state, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
+                    .addComponent(zipCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(phoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(saveCustomer)
+                    .addComponent(canelButton))
+                .addGap(40, 40, 40))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+    private void saveCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveCustomerActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new Manage().setVisible(true);
-    }//GEN-LAST:event_cancelButtonActionPerformed
+        new ViewEditSalesperson().setVisible(true);
+        //todo check to make sure not empty
+        CustomerControl cp = WarehouseInventory.controlfactory.getCustomer();
+        c.setFirstname(firstName.getText());
+        c.setLastname(lastName.getText());
+        c.setPhone(phoneNumber.getText());
+        c.setEmail(email.getText());
+        c.setAddress(streetAddress.getText());
+        c.setCity(city.getText());
+        c.setState(state.getText());
+        c.setZip(Integer.parseInt(zipCode.getText()));
+        cp.saveCustomer(c);
+        
+    }//GEN-LAST:event_saveCustomerActionPerformed
+
+    private void canelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_canelButtonActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new ViewEditSalesperson().setVisible(true);
+    }//GEN-LAST:event_canelButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EditCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EditCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EditCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EditCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new EditCustomer().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(EditCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(EditCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(EditCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(EditCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new EditCustomer().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cancelButton;
-    private javax.swing.JComboBox<String> customerDrop;
-    private javax.swing.JButton customerEdit;
+    private javax.swing.JButton canelButton;
+    private javax.swing.JTextField city;
+    private javax.swing.JTextField email;
+    private javax.swing.JTextField firstName;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JTextField lastName;
+    private javax.swing.JTextField phoneNumber;
+    private javax.swing.JButton saveCustomer;
+    private javax.swing.JTextField state;
+    private javax.swing.JTextField streetAddress;
+    private javax.swing.JTextField zipCode;
     // End of variables declaration//GEN-END:variables
 }

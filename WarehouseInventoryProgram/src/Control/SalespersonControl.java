@@ -63,5 +63,11 @@ public class SalespersonControl {
         WarehouseInventory.em.getTransaction().commit();
         return lst;
       }
+
+    public void saveCustomer(Salesperson s) {
+        WarehouseInventory.em.getTransaction().begin();
+        WarehouseInventory.em.persist(s);
+        WarehouseInventory.em.getTransaction().commit();
+    }
     
 }

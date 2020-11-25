@@ -5,7 +5,9 @@
  */
 package boundary;
 
+import Control.SalespersonControl;
 import Entity.Salesperson;
+import Main.WarehouseInventory;
 
 /**
  *
@@ -16,17 +18,21 @@ public class EditSalesperson extends javax.swing.JFrame {
     /**
      * Creates new form EditSalesperson
      */
+    
+    private Salesperson s;
+    
     public EditSalesperson(Salesperson s1) {
         initComponents();
-        firstName.setText(s1.getFirstname());
-        lastName.setText(s1.getLastname());
-        streetAddress.setText(s1.getAddress());
-        city.setText(s1.getCity());
-        email.setText(s1.getEmail());
-        state.setText(s1.getState());
-        rate.setText(Double.toString(s1.getCommissionrate()));
-        phoneNumber.setText(s1.getPhone());
-        zipCode.setText(Integer.toString(s1.getZip()));
+        s = s1;
+        firstName.setText(s.getFirstname());
+        lastName.setText(s.getLastname());
+        streetAddress.setText(s.getAddress());
+        city.setText(s.getCity());
+        email.setText(s.getEmail());
+        state.setText(s.getState());
+        rate.setText(Double.toString(s.getCommissionrate()));
+        phoneNumber.setText(s.getPhone());
+        zipCode.setText(Integer.toString(s.getZip()));
     }
 
     /**
@@ -219,13 +225,23 @@ public class EditSalesperson extends javax.swing.JFrame {
     private void saveSalespersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveSalespersonActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new ViewSalesperson().setVisible(true);
+        new ViewEditSalesperson().setVisible(true);
+        SalespersonControl sp = WarehouseInventory.controlfactory.getSalesperson();
+        s.setFirstname(firstName.getText());
+        s.setLastname(lastName.getText());
+        s.setPhone(phoneNumber.getText());
+        s.setEmail(email.getText());
+        s.setAddress(streetAddress.getText());
+        s.setCity(city.getText());
+        s.setState(state.getText());
+        s.setZip(Integer.parseInt(zipCode.getText()));
+        sp.saveCustomer(s);
     }//GEN-LAST:event_saveSalespersonActionPerformed
 
     private void canelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_canelButtonActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new ViewSalesperson().setVisible(true);
+        new ViewEditSalesperson().setVisible(true);
     }//GEN-LAST:event_canelButtonActionPerformed
 
     /**
