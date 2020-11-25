@@ -26,4 +26,5 @@ public class LoginControl {
         Main.em.getTransaction().commit();
         
     }
+    
 }
