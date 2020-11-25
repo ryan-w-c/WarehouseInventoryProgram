@@ -6,9 +6,9 @@
 package boundary;
 
 import Control.SalespersonControl;
+import static Main.Main.controlfactory;
+import Main.*;
 import Entity.Salesperson;
-import Main.WarehouseInventory;
-import static Main.WarehouseInventory.controlfactory;
 
 /**
  *
@@ -102,7 +102,7 @@ public class ViewEditSalesperson extends javax.swing.JFrame {
         SalespersonControl sp = controlfactory.getSalesperson();
         this.setVisible(false);
         //TODO pass salesperson object in
-        Salesperson s1 = WarehouseInventory.em.find(Salesperson.class, 3);
+        Salesperson s1 = Main.em.find(Salesperson.class, 3);
         new EditSalesperson(s1).setVisible(true);
     }//GEN-LAST:event_editSalespersonBtnActionPerformed
 

@@ -15,7 +15,7 @@ import Entity.Customer;
 import Entity.Invoice;
 import Entity.Orderitem;
 import Entity.Salesperson;
-import Main.WarehouseInventory;
+import Main.Main;
 import java.util.Collection;
 
 public class InvoiceControl {
@@ -24,7 +24,7 @@ public class InvoiceControl {
             double tax, double comm, double deliveryfee,double total, double balance, 
             boolean openClose, String time,Collection<Orderitem> items){
         
-      WarehouseInventory.em.getTransaction( ).begin( );
+      Main.em.getTransaction( ).begin( );
 
       Invoice inv1 = new Invoice(); 
       inv1.setInvoiceid( id );
@@ -40,10 +40,10 @@ public class InvoiceControl {
       inv1.setCustomerid(customer);  
       inv1.setSalespersonid(sp);
       
-      WarehouseInventory.em.persist( inv1 );
-      WarehouseInventory.em.getTransaction( ).commit( );
+      Main.em.persist( inv1 );
+      Main.em.getTransaction( ).commit( );
 
-      WarehouseInventory.em.close( );
+      Main.em.close( );
     }
     
     

@@ -6,9 +6,12 @@
 package Control;
 
 import Entity.Salesperson;
+import Main.Main;
+import static Main.Main.emfactory;
+import static Main.Main.em;
 import java.util.List;
 import javax.persistence.Query;
-import Main.WarehouseInventory;
+import Main.Main;
 
 
 /**
@@ -26,7 +29,7 @@ public class SalespersonControl {
             String city, String email, String state , double Crate, String phone,
             int zip, double sales, double commission){
         
-        WarehouseInventory.em.getTransaction().begin();
+        Main.em.getTransaction().begin();
         Salesperson employee = new Salesperson(); 
         employee.setFirstname(fname);
         employee.setLastname(lname);
@@ -42,10 +45,10 @@ public class SalespersonControl {
         employee.setTotalsales(0.0);
         employee.setTotalcommission(0.0);
         
-        WarehouseInventory.em.persist(employee);
-        WarehouseInventory.em.getTransaction().commit();
+        Main.em.persist(employee);
+        Main.em.getTransaction().commit();
 
-        WarehouseInventory.em.close();
+        Main.em.close();
         
     }
 
@@ -56,11 +59,11 @@ public class SalespersonControl {
 //        
 //        EntityManager em = WarehouseInventory.em;
 
-        WarehouseInventory.em.getTransaction().begin();
+        Main.em.getTransaction().begin();
        
-        Query qu1 = WarehouseInventory.em.createNativeQuery("select SALESPERSONID, FRISTNAME, LASTNAME, PHONE from SALESPERSON", Salesperson.class);
+        Query qu1 = Main.em.createNativeQuery("select SALESPERSONID, FRISTNAME, LASTNAME, PHONE from SALESPERSON", Salesperson.class);
         List<Salesperson> lst = qu1.getResultList();
-        WarehouseInventory.em.getTransaction().commit();
+        Main.em.getTransaction().commit();
         return lst;
       }
 

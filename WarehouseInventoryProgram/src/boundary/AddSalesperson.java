@@ -5,8 +5,9 @@
  */
 package boundary;
 //import Control.ControlFactory;
+
 import Control.SalespersonControl;
-import static Main.WarehouseInventory.controlfactory;
+import static Main.Main.controlfactory;
 
 /**
  *
