@@ -10,11 +10,7 @@ import Main.Main;
 import static Main.Main.emfactory;
 import static Main.Main.em;
 import java.util.List;
-//import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
-import Main.Main;
 import Main.Main;
 
 
@@ -29,21 +25,22 @@ public class SalespersonControl {
     }
     
     
-    public void addSalesperson (String fname,String lname, String address, 
+    public void addSalesperson (String fname, String lname, String address, 
             String city, String email, String state , double Crate, String phone,
-            int id, int zip, double sales, double commission  ){
+            int zip, double sales, double commission){
         
         Main.em.getTransaction().begin();
         Salesperson employee = new Salesperson(); 
-        employee.setFristname(fname);
-        employee.setLastname( lname );
+        employee.setFirstname(fname);
+        employee.setLastname(lname);
         employee.setAddress(address);
         employee.setCity(city);
         employee.setEmail(email);
         employee.setState(state);
         employee.setCommissionrate(Crate);
         employee.setPhone(phone);
-        employee.setSalespersonid(id);
+        //FIXME ID NUMBERS
+        employee.setSalespersonid(33);
         employee.setZip(90000);
         employee.setTotalsales(0.0);
         employee.setTotalcommission(0.0);

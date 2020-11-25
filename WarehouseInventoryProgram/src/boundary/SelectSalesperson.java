@@ -35,7 +35,7 @@ public class SelectSalesperson extends javax.swing.JFrame {
         for(int i = 0; i < list.size(); i++)
         {
             rowData[0] = list.get(i).getSalespersonid();
-            rowData[1] = list.get(i).getFristname();
+            rowData[1] = list.get(i).getFirstname();
             rowData[2] = list.get(i).getLastname();
             rowData[3] = list.get(i).getPhone();
             model.addRow(rowData);
