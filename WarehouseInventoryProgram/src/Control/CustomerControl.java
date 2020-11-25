@@ -15,13 +15,18 @@ import javax.persistence.Query;
  *
  * @author minkyaw
  */
-public class CustomerControl {
+public final class CustomerControl {
+    int id;
+    public CustomerControl () {
+
+    }
+    
    
     public void addCustomer(Integer customerid, String firstname, String lastname, String phone, String email, String address, String city, String state, int zip) {
         Main.em.getTransaction().begin();
         Customer c1 = new Customer();
         
-        c1.setCustomerid(customerid);
+        c1.setCustomerid(id++);
         c1.setFirstname(firstname);
         c1.setLastname(lastname);
         c1.setPhone(phone);
@@ -40,5 +45,18 @@ public class CustomerControl {
         Main.em.persist(c);
         Main.em.getTransaction().commit();
     }
+    
+       
+       public List<Customer> getCustomerResultSet(){
+  
+
+        Main.em.getTransaction().begin();
+       
+        Query qu1 = Main.em.createNativeQuery("select SALESPERSONID, FIRSTNAME, LASTNAME, PHONE from SALESPERSON", Customer.class);
+        List<Customer> lst = qu1.getResultList();
+        Main.em.getTransaction().commit();
+        return lst;
+      }
+       
     
 }
