@@ -7,6 +7,8 @@ package Control;
 
 import Main.WarehouseInventory;
 import Entity.Customer;
+import java.util.List;
+import javax.persistence.Query;
 
 
 /**

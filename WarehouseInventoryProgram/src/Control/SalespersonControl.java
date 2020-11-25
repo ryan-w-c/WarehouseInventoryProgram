@@ -6,15 +6,10 @@
 package Control;
 
 import Entity.Salesperson;
-import Main.WarehouseInventory;
-import static Main.WarehouseInventory.emfactory;
-import static Main.WarehouseInventory.em;
+
 import java.util.List;
 //import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
-import Main.WarehouseInventory;
 import Main.WarehouseInventory;
 
 
@@ -23,7 +18,6 @@ import Main.WarehouseInventory;
  * @author zubin
  */
 public class SalespersonControl {
-
     public SalespersonControl (){
         
     }
@@ -33,9 +27,10 @@ public class SalespersonControl {
             String city, String email, String state , double Crate, String phone,
             int id, int zip, double sales, double commission  ){
         
+        
         WarehouseInventory.em.getTransaction().begin();
         Salesperson employee = new Salesperson(); 
-        employee.setFristname(fname);
+        employee.setFirstname(fname);
         employee.setLastname( lname );
         employee.setAddress(address);
         employee.setCity(city);
@@ -49,25 +44,32 @@ public class SalespersonControl {
         employee.setTotalcommission(0.0);
         
         WarehouseInventory.em.persist(employee);
-        WarehouseInventory.em.getTransaction().commit();
-
-        WarehouseInventory.em.close();
-        
+        WarehouseInventory.em.getTransaction().commit();//Rutvi
+//        WarehouseInventory.em.close();
     }
 
     public List<Salesperson> getSalespersonResultSet(){
   
-//        emfactory = Persistence.createEntityManagerFactory("WarehouseInventoryProgramPU");
-//        em = emfactory.createEntityManager();
-//        
-//        EntityManager em = WarehouseInventory.em;
 
         WarehouseInventory.em.getTransaction().begin();
        
-        Query qu1 = WarehouseInventory.em.createNativeQuery("select SALESPERSONID, FRISTNAME, LASTNAME, PHONE from SALESPERSON", Salesperson.class);
+        Query qu1 = WarehouseInventory.em.createNativeQuery("select SALESPERSONID, FIRSTNAME, LASTNAME, PHONE from SALESPERSON", Salesperson.class);
         List<Salesperson> lst = qu1.getResultList();
         WarehouseInventory.em.getTransaction().commit();
         return lst;
       }
     
+   public Integer getNewID (){
+       WarehouseInventory.em.getTransaction().begin();
+        Query qu1 = WarehouseInventory.em.createNativeQuery("select max(SALESPERSONID) from SALESPERSON");
+        List lst  = qu1.getResultList();
+        WarehouseInventory.em.getTransaction().commit();
+        Integer ans;
+        if (lst.get(0) == null){
+            ans = 1;
+        }else {
+        ans = Integer.parseInt(lst.get(0).toString()) +1;
+   } 
+        return ans;
+}
 }
