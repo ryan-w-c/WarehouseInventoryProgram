@@ -23,6 +23,8 @@ public class SelectCustomer extends javax.swing.JFrame {
     public SelectCustomer() {
         initComponents();
         Update_table();
+        selectCustomerInTable();
+        
     }
     
     
@@ -36,7 +38,7 @@ public class SelectCustomer extends javax.swing.JFrame {
         Object rowData[] = new Object[4];
         for(int i = 0; i < list.size(); i++)
         {
-//            rowData[0] = list.get(i).getSalespersonid();
+            rowData[0] = list.get(i).getCustomerid();
             rowData[1] = list.get(i).getFirstname();
             rowData[2] = list.get(i).getLastname();
             rowData[3] = list.get(i).getPhone();
@@ -45,14 +47,13 @@ public class SelectCustomer extends javax.swing.JFrame {
     }
     
     
-        private Object selectSalespersonInTable(){
+        private Object selectCustomerInTable(){
         if (customerTable.getRowCount() == 0){
             return null;
         }else{
         customerTable.setRowSelectionInterval(0, customerTable.getRowCount()-1);
         int row = customerTable.getSelectedRow();
         Object sp = customerTable.getValueAt(row,0);
-    
         return sp;
         }
     }
@@ -103,15 +104,23 @@ public class SelectCustomer extends javax.swing.JFrame {
 
         customerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "First Name", "Last Name", "Phone"
+                "ID", "First Name", "Last Name", "Phone"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(customerTable);
 
         jButton2.setText("Done");

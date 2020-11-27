@@ -179,6 +179,7 @@ public class SelectSalesperson extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> {
             new SelectSalesperson().setVisible(true);
         });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

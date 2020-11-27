@@ -48,8 +48,6 @@ public final class CustomerControl {
     
        
        public List<Customer> getCustomerResultSet(){
-  
-
         Main.em.getTransaction().begin();
        
         Query qu1 = Main.em.createNativeQuery("select SALESPERSONID, FIRSTNAME, LASTNAME, PHONE from SALESPERSON", Customer.class);
