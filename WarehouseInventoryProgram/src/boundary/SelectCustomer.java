@@ -30,11 +30,12 @@ public class SelectCustomer extends javax.swing.JFrame {
     
     
         private void Update_table (){
-        CustomerControl c1 = controlfactory.getCustomer();
+//        CustomerControl c1 = controlfactory.getCustomer();
+        CustomerControl c1 = new CustomerControl();
         List <Customer> list = c1.getCustomerResultSet(); 
         
         DefaultTableModel model = (DefaultTableModel) customerTable.getModel();
-//        List<Salesperson> list = lst;
+//        List<Customer> list = lst;
         Object rowData[] = new Object[4];
         for(int i = 0; i < list.size(); i++)
         {

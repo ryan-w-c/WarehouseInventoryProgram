@@ -23,6 +23,7 @@ public final class CustomerControl {
     
    
     public void addCustomer(Integer customerid, String firstname, String lastname, String phone, String email, String address, String city, String state, int zip) {
+        
         Main.em.getTransaction().begin();
         Customer c1 = new Customer();
         
@@ -50,7 +51,7 @@ public final class CustomerControl {
        public List<Customer> getCustomerResultSet(){
         Main.em.getTransaction().begin();
        
-        Query qu1 = Main.em.createNativeQuery("select SALESPERSONID, FIRSTNAME, LASTNAME, PHONE from SALESPERSON", Customer.class);
+        Query qu1 = Main.em.createNativeQuery("select CUSTOMERID, FIRSTNAME, LASTNAME, PHONE from CUSTOMER", Customer.class);
         List<Customer> lst = qu1.getResultList();
         Main.em.getTransaction().commit();
         return lst;
