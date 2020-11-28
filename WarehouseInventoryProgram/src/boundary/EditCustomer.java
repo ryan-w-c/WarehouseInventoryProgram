@@ -218,7 +218,7 @@ public class EditCustomer extends javax.swing.JFrame {
     private void canelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_canelButtonActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new ViewEditSalesperson().setVisible(true);
+        new ViewEditCustomer().setVisible(true);
     }//GEN-LAST:event_canelButtonActionPerformed
 
     /**
