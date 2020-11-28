@@ -7,6 +7,8 @@ package boundary;
 
 import Control.CustomerControl;
 import Entity.Customer;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,6 +21,27 @@ public class ViewEditCustomer extends javax.swing.JFrame {
      */
     public ViewEditCustomer() {
         initComponents();
+        updateTable();
+    }
+    
+    private void updateTable (){
+        CustomerControl cc = Main.Main.controlfactory.getCustomer();
+        List <Customer> list = cc.getCustomerResultSet(); 
+        
+        DefaultTableModel model = (DefaultTableModel) customerTable.getModel();
+//        List<Salesperson> list = lst;
+        Object rowData[] = new Object[4];
+        for(int i = 0; i < list.size(); i++)
+        {
+            rowData[0] = list.get(i).getCustomerid();
+            rowData[1] = list.get(i).getFirstname() + " " + list.get(i).getLastname();
+            rowData[2] = list.get(i).getAddress();
+            rowData[3] = list.get(i).getPhone();
+            model.addRow(rowData);
+        }
+//        java.sql.ResultSet rs1 = (java.sql.ResultSet) rs;
+//        SalespersonTable.setModel(DbUtils.resultSetToTableModel(rs));
+       
     }
 
     /**
@@ -32,28 +55,40 @@ public class ViewEditCustomer extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         customerTable = new javax.swing.JTable();
-        editSalespersonBtn = new javax.swing.JButton();
+        editCustomerBtn = new javax.swing.JButton();
         backBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         customerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "Customer Name", "Customer Address", "Customer Phone"
+                "Customer ID", "Customer Name", "Customer Address", "Customer Phone"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(customerTable);
 
-        editSalespersonBtn.setText("Edit Selected Salesperon");
-        editSalespersonBtn.addActionListener(new java.awt.event.ActionListener() {
+        editCustomerBtn.setText("Edit Selected Salesperon");
+        editCustomerBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editSalespersonBtnActionPerformed(evt);
+                editCustomerBtnActionPerformed(evt);
             }
         });
 
@@ -74,7 +109,7 @@ public class ViewEditCustomer extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(65, 65, 65)
-                .addComponent(editSalespersonBtn)
+                .addComponent(editCustomerBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
                 .addComponent(backBtn)
                 .addGap(65, 65, 65))
@@ -86,7 +121,7 @@ public class ViewEditCustomer extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(editSalespersonBtn)
+                    .addComponent(editCustomerBtn)
                     .addComponent(backBtn))
                 .addContainerGap())
         );
@@ -94,15 +129,14 @@ public class ViewEditCustomer extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void editSalespersonBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editSalespersonBtnActionPerformed
+    private void editCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editCustomerBtnActionPerformed
 
         // TODO add your handling code here:
-        CustomerControl c = Main.Main.controlfactory.getCustomer();
         this.setVisible(false);
         //TODO pass salesperson object in
-        Customer c1 = Main.Main.em.find(Customer.class, 3);
+        Customer c1 = Main.Main.em.find(Customer.class, selectCustomerInTable());
         new EditCustomer(c1).setVisible(true);
-    }//GEN-LAST:event_editSalespersonBtnActionPerformed
+    }//GEN-LAST:event_editCustomerBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         // TODO add your handling code here:
@@ -147,11 +181,23 @@ public class ViewEditCustomer extends javax.swing.JFrame {
             }
         });
     }
+    
+    private Object selectCustomerInTable(){
+        if (customerTable.getRowCount() == 0){
+            System.out.println(customerTable.getRowCount());
+            return 0;
+        } else {
+            int row = customerTable.getSelectedRow();
+            Object sp = customerTable.getValueAt(row, 0);
+
+            return sp;
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backBtn;
     private javax.swing.JTable customerTable;
-    private javax.swing.JButton editSalespersonBtn;
+    private javax.swing.JButton editCustomerBtn;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

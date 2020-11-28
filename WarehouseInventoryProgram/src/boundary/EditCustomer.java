@@ -200,7 +200,7 @@ public class EditCustomer extends javax.swing.JFrame {
     private void saveCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveCustomerActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new ViewEditSalesperson().setVisible(true);
+        new ViewEditCustomer().setVisible(true);
         //todo check to make sure not empty
         CustomerControl cp = Main.Main.controlfactory.getCustomer();
         c.setFirstname(firstName.getText());
