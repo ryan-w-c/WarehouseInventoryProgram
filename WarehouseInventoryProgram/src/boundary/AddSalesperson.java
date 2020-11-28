@@ -8,6 +8,7 @@ package boundary;
 
 import Control.SalespersonControl;
 import static Main.Main.controlfactory;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -211,14 +212,19 @@ public class AddSalesperson extends javax.swing.JFrame {
 
     private void addSalespersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSalespersonActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
-        new Manage().setVisible(true);
-       SalespersonControl sp = controlfactory.getSalesperson();
-       sp.addSalesperson(SpFname.getText(), SpLname.getText(), SpAddress.getText(), 
-               SpCity.getText(), SpEmail.getText(), SpState.getText(), Double.parseDouble(SpRate.getText()) ,
-               SpPhone.getText(), Integer.parseInt(SpZipCode.getText()), 
-               0.0, 0.0);
-        
+        try {
+           SalespersonControl sp = controlfactory.getSalesperson();
+           sp.addSalesperson(SpFname.getText(), SpLname.getText(), SpAddress.getText(), 
+                   SpCity.getText(), SpEmail.getText(), SpState.getText(), Double.parseDouble(SpRate.getText()) ,
+                   SpPhone.getText(), Integer.parseInt(SpZipCode.getText()), 
+                   0.0, 0.0);
+            this.setVisible(false);
+            new Manage().setVisible(true);
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please fill out all info correctly.", "Alert", JOptionPane.ERROR_MESSAGE);
+        }
+
         
     }//GEN-LAST:event_addSalespersonActionPerformed
 

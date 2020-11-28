@@ -7,6 +7,7 @@ package boundary;
 
 import Control.CustomerControl;
 import static Main.Main.controlfactory;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -192,12 +193,17 @@ public class AddCustomer extends javax.swing.JFrame {
 
     private void addCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCustomerActionPerformed
         // TODO add your handling code here:
-        new Manage().setVisible(true);
-        this.setVisible(false);
-        CustomerControl cs = controlfactory.getCustomer();
-        cs.addCustomer(firstName.getText(), lastName.getText(), phoneNumber.getText(), 
-                email.getText(), streetAddress.getText(), city.getText(), state.getText(),
-               Integer.parseInt(zipCode.getText()));
+        try {
+            CustomerControl cs = controlfactory.getCustomer();
+            cs.addCustomer(firstName.getText(), lastName.getText(), phoneNumber.getText(), 
+                    email.getText(), streetAddress.getText(), city.getText(), state.getText(),
+                   Integer.parseInt(zipCode.getText()));
+            new Manage().setVisible(true);
+            this.setVisible(false);
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please fill out all info correctly.", "Alert", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_addCustomerActionPerformed
 
     /**
