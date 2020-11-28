@@ -8,6 +8,7 @@ package boundary;
 import Control.SalespersonControl;
 import Entity.Salesperson;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -81,7 +82,7 @@ public class ViewEditSalesperson extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
@@ -118,13 +119,13 @@ public class ViewEditSalesperson extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(65, 65, 65)
                 .addComponent(editSalespersonBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(backBtn)
                 .addGap(65, 65, 65))
             .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,11 +145,17 @@ public class ViewEditSalesperson extends javax.swing.JFrame {
     private void editSalespersonBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editSalespersonBtnActionPerformed
 
         // TODO add your handling code here:
-        this.setVisible(false);
-        //TODO pass salesperson object in
-        Salesperson s1 = Main.Main.em.find(Salesperson.class, selectSalespersonInTable());
-        System.out.println("s1: " + s1.toString() + " ||| fname: " +s1.getFirstname() + " ||| lname: " + s1.getLastname() + " ||| address, city, state, zip: " + s1.getAddress() + s1.getCity() + s1.getState() + s1.getZip() + " ||| phone, email: " + s1.getPhone() + s1.getEmail() + " ||| commission rate: " + s1.getCommissionrate());
-        new EditSalesperson(s1).setVisible(true);
+        try {
+            //TODO pass salesperson object in
+            Salesperson s1 = Main.Main.em.find(Salesperson.class, selectSalespersonInTable());
+    //        System.out.println("s1: " + s1.toString() + " ||| fname: " +s1.getFirstname() + " ||| lname: " + s1.getLastname() + " ||| address, city, state, zip: " + s1.getAddress() + s1.getCity() + s1.getState() + s1.getZip() + " ||| phone, email: " + s1.getPhone() + s1.getEmail() + " ||| commission rate: " + s1.getCommissionrate());
+            new EditSalesperson(s1).setVisible(true);
+            this.setVisible(false);
+        }
+        catch (Exception ArrayIndexOutOfBoundsException){
+            System.out.println("Error");
+            JOptionPane.showMessageDialog(null, "Select One Salesperson", "Alert", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_editSalespersonBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed

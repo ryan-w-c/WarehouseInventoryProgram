@@ -8,6 +8,7 @@ package boundary;
 import Control.CustomerControl;
 import Entity.Customer;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -104,15 +105,15 @@ public class ViewEditCustomer extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(65, 65, 65)
                 .addComponent(editCustomerBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(backBtn)
                 .addGap(65, 65, 65))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 654, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(43, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,10 +133,16 @@ public class ViewEditCustomer extends javax.swing.JFrame {
     private void editCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editCustomerBtnActionPerformed
 
         // TODO add your handling code here:
-        this.setVisible(false);
         //TODO pass salesperson object in
-        Customer c1 = Main.Main.em.find(Customer.class, selectCustomerInTable());
-        new EditCustomer(c1).setVisible(true);
+        try {
+            Customer c1 = Main.Main.em.find(Customer.class, selectCustomerInTable());
+            new EditCustomer(c1).setVisible(true);
+            this.setVisible(false);
+        }
+        catch (Exception ArrayIndexOutOfBoundsException){
+            System.out.println("Error");
+            JOptionPane.showMessageDialog(null, "Select One Customer", "Alert", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_editCustomerBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed

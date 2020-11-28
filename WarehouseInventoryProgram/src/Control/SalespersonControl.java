@@ -52,11 +52,11 @@ public final class SalespersonControl {
 
         Main.em.getTransaction().begin();
        
-        Query qu1 = Main.em.createNativeQuery("select SALESPERSONID, FIRSTNAME, LASTNAME, PHONE from SALESPERSON", Salesperson.class);
+        Query qu1 = Main.em.createNativeQuery("select * from SALESPERSON", Salesperson.class);
         List<Salesperson> lst = qu1.getResultList();
         Main.em.getTransaction().commit();
         return lst;
-      }
+    }
 
     public void saveSalesperson(Salesperson s) {
         Main.em.getTransaction().begin();
