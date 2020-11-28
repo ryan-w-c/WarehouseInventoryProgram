@@ -51,7 +51,7 @@ public class CustomerControl {
     public List<Customer> getCustomerResultSet(){
         Main.em.getTransaction().begin();
        
-        Query qu1 = Main.em.createNativeQuery("select CUSTOMERID, FIRSTNAME, LASTNAME, ADDRESS, PHONE from CUSTOMER", Customer.class);
+        Query qu1 = Main.em.createNativeQuery("select * from CUSTOMER", Customer.class);
         List<Customer> lst = qu1.getResultList();
         Main.em.getTransaction().commit();
         return lst;
