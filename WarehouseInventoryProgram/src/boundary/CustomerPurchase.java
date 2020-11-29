@@ -5,6 +5,9 @@
  */
 package boundary;
 
+import Entity.Product;
+import java.util.List;
+
 /**
  *
  * @author zubin
@@ -17,6 +20,8 @@ public class CustomerPurchase extends javax.swing.JFrame {
     Integer customerVal;
     Integer salesPersonVal;
     Integer productVal;
+    List <Product> productList;
+    double deliveryFee;
     public CustomerPurchase() {
         initComponents();
         
@@ -46,6 +51,11 @@ public class CustomerPurchase extends javax.swing.JFrame {
         jLabel1.setText("Customer Purchase");
 
         jButton3.setText("Delivery Fee");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("View Subtotal");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -101,9 +111,9 @@ public class CustomerPurchase extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton5))
                     .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton3))
                 .addContainerGap(22, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -184,7 +194,8 @@ public class CustomerPurchase extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new InvoiceSubtotal().setVisible(true);
+//        new InvoiceSubtotal(customerVal, salesPersonVal, productList,deliveryFee).setVisible(true);
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -198,6 +209,12 @@ public class CustomerPurchase extends javax.swing.JFrame {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
