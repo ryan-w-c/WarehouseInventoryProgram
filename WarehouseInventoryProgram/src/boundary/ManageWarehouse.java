@@ -19,6 +19,7 @@ public class ManageWarehouse extends javax.swing.JFrame {
     public ManageWarehouse(Warehouse w1) {
         initComponents();
         w = w1;
+        warehouseName.setText("Warehouse: " + w.getWarehousename());
     }
 
     /**
@@ -33,6 +34,7 @@ public class ManageWarehouse extends javax.swing.JFrame {
         viewLow = new javax.swing.JButton();
         back = new javax.swing.JButton();
         viewAndEdit = new javax.swing.JButton();
+        warehouseName = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,23 +64,32 @@ public class ManageWarehouse extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(viewLow, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(viewAndEdit))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(viewLow, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(viewAndEdit)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(warehouseName))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(148, 148, 148)
+                        .addComponent(back)))
                 .addContainerGap(102, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(49, 49, 49)
+                .addGap(15, 15, 15)
+                .addComponent(warehouseName)
+                .addGap(18, 18, 18)
                 .addComponent(viewAndEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addGap(30, 30, 30)
                 .addComponent(viewLow, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                .addComponent(back)
+                .addGap(54, 54, 54))
         );
 
         pack();
@@ -91,6 +102,8 @@ public class ManageWarehouse extends javax.swing.JFrame {
 
     private void viewLowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewLowActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
+        new ViewWarehouseLowQuantity(w).setVisible(true);
     }//GEN-LAST:event_viewLowActionPerformed
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
@@ -138,5 +151,6 @@ public class ManageWarehouse extends javax.swing.JFrame {
     private javax.swing.JButton back;
     private javax.swing.JButton viewAndEdit;
     private javax.swing.JButton viewLow;
+    private javax.swing.JLabel warehouseName;
     // End of variables declaration//GEN-END:variables
 }

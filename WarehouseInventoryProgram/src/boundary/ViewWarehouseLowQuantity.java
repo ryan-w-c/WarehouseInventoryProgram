@@ -5,6 +5,12 @@
  */
 package boundary;
 
+import Control.WarehouseControl;
+import Entity.Product;
+import Entity.Warehouse;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Psyric
@@ -14,10 +20,31 @@ public class ViewWarehouseLowQuantity extends javax.swing.JFrame {
     /**
      * Creates new form ViewLowQuantity
      */
-    public ViewWarehouseLowQuantity() {
+    
+    private Warehouse w;
+    public ViewWarehouseLowQuantity(Warehouse w1) {
         initComponents();
+        w = w1;
+        updateTable();
     }
 
+    private void updateTable (){
+        WarehouseControl wc = Main.Main.controlfactory.getWarehouse();
+        List <Product> list = wc.getLowProductResultSet(w); 
+        
+        DefaultTableModel model = (DefaultTableModel) lowTable.getModel();
+//        List<Salesperson> list = lst;
+        Object rowData[] = new Object[2];
+        for(int i = 0; i < list.size(); i++)
+        {
+            rowData[0] = list.get(i).getProductPK().getProductname();
+            rowData[1] = list.get(i).getQuantity();
+            model.addRow(rowData);
+        }
+//        java.sql.ResultSet rs1 = (java.sql.ResultSet) rs;
+//        SalespersonTable.setModel(DbUtils.resultSetToTableModel(rs));
+       
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,12 +55,12 @@ public class ViewWarehouseLowQuantity extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        lowTable = new javax.swing.JTable();
         backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        lowTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -41,7 +68,7 @@ public class ViewWarehouseLowQuantity extends javax.swing.JFrame {
                 "Product Name", "Quantity"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(lowTable);
 
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
@@ -77,48 +104,48 @@ public class ViewWarehouseLowQuantity extends javax.swing.JFrame {
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-//        new ().setVisible(true);
+        new ManageWarehouse(w).setVisible(true);
     }//GEN-LAST:event_backButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewWarehouseLowQuantity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewWarehouseLowQuantity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewWarehouseLowQuantity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewWarehouseLowQuantity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ViewWarehouseLowQuantity().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(ViewWarehouseLowQuantity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(ViewWarehouseLowQuantity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(ViewWarehouseLowQuantity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(ViewWarehouseLowQuantity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new ViewWarehouseLowQuantity().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable lowTable;
     // End of variables declaration//GEN-END:variables
 }
