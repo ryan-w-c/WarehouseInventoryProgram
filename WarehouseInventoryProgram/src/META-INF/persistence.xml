@@ -3,19 +3,18 @@
   <persistence-unit name="WarehouseInventoryProgramPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>Entity.Customer</class>
-    <class>Entity.Product</class>
     <class>Entity.Salesperson</class>
-    <class>Entity.Producttitle</class>
     <class>Entity.Orderitem</class>
     <class>Entity.Warehouse</class>
     <class>Entity.Invoice</class>
     <class>Entity.Password</class>
+    <class>Entity.Product</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/WarehouseInventory"/>
       <property name="javax.persistence.jdbc.user" value="username"/>
       <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
       <property name="javax.persistence.jdbc.password" value="password"/>
-<!--      <property name="eclipselink.jpa.uppercase-column-names" value="true"/>-->
+      <!--      <property name="eclipselink.jpa.uppercase-column-names" value="true"/>-->
     </properties>
   </persistence-unit>
 </persistence>
