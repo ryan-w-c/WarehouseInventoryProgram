@@ -7,6 +7,8 @@ package Control;
 
 import Main.Main;
 import Entity.Warehouse;
+import java.util.List;
+import javax.persistence.Query;
 
 /**
  *
@@ -34,5 +36,14 @@ public class WarehouseControl {
         Main.em.getTransaction().commit();
 
     }
+    
+    public List<Warehouse> getWarehouseResultSet(){
 
+        Main.em.getTransaction().begin();
+       
+        Query qu1 = Main.em.createNativeQuery("select * from Warehouse", Warehouse.class);
+        List<Warehouse> lst = qu1.getResultList();
+        Main.em.getTransaction().commit();
+        return lst;
+    }
 }

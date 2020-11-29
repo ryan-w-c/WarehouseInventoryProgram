@@ -5,6 +5,13 @@
  */
 package boundary;
 
+import Control.WarehouseControl;
+import Entity.Salesperson;
+import Entity.Warehouse;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author minkyaw
@@ -16,6 +23,37 @@ public class ViewEditWarehouse extends javax.swing.JFrame {
      */
     public ViewEditWarehouse() {
         initComponents();
+        updateTable();
+    }
+    
+    private void updateTable (){
+        WarehouseControl sp = Main.Main.controlfactory.getWarehouse();
+        List <Warehouse> list = sp.getWarehouseResultSet(); 
+        
+        DefaultTableModel model = (DefaultTableModel) warehouseTable.getModel();
+//        List<Salesperson> list = lst;
+        Object rowData[] = new Object[2];
+        for(int i = 0; i < list.size(); i++)
+        {
+            rowData[0] = list.get(i).getWarehousename();
+            rowData[1] = list.get(i).getAddress();
+            model.addRow(rowData);
+        }
+//        java.sql.ResultSet rs1 = (java.sql.ResultSet) rs;
+//        SalespersonTable.setModel(DbUtils.resultSetToTableModel(rs));
+       
+    }
+    
+    private Object selectWarehouseInTable(){
+        if (warehouseTable.getRowCount() == 0){
+            System.out.println(warehouseTable.getRowCount());
+            return 0;
+        } else {
+            int row = warehouseTable.getSelectedRow();
+            Object sp = warehouseTable.getValueAt(row, 0);
+
+            return sp;
+        }
     }
 
     /**
@@ -28,12 +66,13 @@ public class ViewEditWarehouse extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        warehouseTable = new javax.swing.JTable();
+        viewWarehouse = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        warehouseTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -56,7 +95,14 @@ public class ViewEditWarehouse extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(warehouseTable);
+
+        viewWarehouse.setText("View Warehouse");
+        viewWarehouse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewWarehouseActionPerformed(evt);
+            }
+        });
 
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
@@ -71,9 +117,13 @@ public class ViewEditWarehouse extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(backButton)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(viewWarehouse)
+                        .addGap(64, 64, 64)
+                        .addComponent(backButton)))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -82,16 +132,32 @@ public class ViewEditWarehouse extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(backButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(viewWarehouse)
+                    .addComponent(backButton))
                 .addContainerGap(7, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void viewWarehouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewWarehouseActionPerformed
+        // TODO add your handling code here:
+        try {
+            //TODO pass salesperson object in
+            Warehouse w1 = Main.Main.em.find(Warehouse.class, selectWarehouseInTable());
+            new ManageWarehouse(w1).setVisible(true);
+            this.setVisible(false);
+        }
+        catch (Exception ArrayIndexOutOfBoundsException){
+            System.out.println("Error");
+            JOptionPane.showMessageDialog(null, "Select One Warehouse", "Alert", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_viewWarehouseActionPerformed
+
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
-        
         this.setVisible(false);
         new Manage().setVisible(true);
     }//GEN-LAST:event_backButtonActionPerformed
@@ -134,6 +200,7 @@ public class ViewEditWarehouse extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JButton viewWarehouse;
+    private javax.swing.JTable warehouseTable;
     // End of variables declaration//GEN-END:variables
 }
