@@ -5,9 +5,13 @@
  */
 package boundary;
 
+import Control.TableCellListener;
 import Control.ProductControl;
 import Entity.Product;
+import java.awt.event.ActionEvent;
 import java.util.List;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -26,6 +30,7 @@ public class EditProductQuantity extends javax.swing.JFrame {
         initComponents();
         productName.setText("Product: " + p);
         updateTable();
+        TableCellListener obs = new TableCellListener(warehouseTable, action);
     }
     
     private void updateTable (){
@@ -44,6 +49,22 @@ public class EditProductQuantity extends javax.swing.JFrame {
 //        SalespersonTable.setModel(DbUtils.resultSetToTableModel(rs));
        
     }
+    
+    Action action = new AbstractAction()
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            TableCellListener tcl = (TableCellListener)e.getSource();
+//            System.out.println("Row   : " + tcl.getRow());
+//            System.out.println("Column: " + tcl.getColumn());
+//            System.out.println("Old   : " + tcl.getOldValue());
+//            System.out.println("New   : " + tcl.getNewValue());
+            if (!tcl.getNewValue().equals(tcl.getOldValue())) {
+                ProductControl pc = Main.Main.controlfactory.getProduct();
+                pc.updateQuantity(p, warehouseTable.getValueAt(tcl.getRow(), 0).toString(), Integer.parseInt(tcl.getNewValue().toString()));
+            }
+        }
+    };
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -70,7 +91,7 @@ public class EditProductQuantity extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
                 false, true

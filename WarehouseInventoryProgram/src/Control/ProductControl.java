@@ -89,4 +89,17 @@ public class ProductControl {
         return lst;
     }
     
+    public void updateQuantity(String p, String w, Integer q) {
+        Main.em.getTransaction().begin();
+        Query qu1 = Main.em.createNamedQuery("Product.findByPK");
+        qu1.setParameter("productname", p);
+        qu1.setParameter("warehousename", w);
+        List<Product> lst = qu1.getResultList();
+        Main.em.getTransaction().commit();
+        Main.em.getTransaction().begin();
+        lst.get(0).setQuantity(q);
+        Main.em.persist(lst.get(0));
+        Main.em.getTransaction().commit();
+    }
+    
 }
