@@ -97,7 +97,8 @@ public class ManageWarehouse extends javax.swing.JFrame {
 
     private void viewAndEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAndEditActionPerformed
         // TODO add your handling code here:
-        
+        this.setVisible(false);
+        new ViewWarehouseQuantity(w).setVisible(true);
     }//GEN-LAST:event_viewAndEditActionPerformed
 
     private void viewLowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewLowActionPerformed
