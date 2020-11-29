@@ -5,6 +5,7 @@
  */
 package Control;
 
+import Entity.Product;
 import Main.Main;
 import Entity.Warehouse;
 import java.util.List;
@@ -34,7 +35,20 @@ public class WarehouseControl {
         
         Main.em.persist(w1);
         Main.em.getTransaction().commit();
+        
+        updateProducts(wName);
 
+    }
+    
+    public void updateProducts(String w){
+        Main.em.getTransaction().begin();
+        Query qu1 = Main.em.createNativeQuery("SELECT distinct productname, sellingprice, costprice FROM Product");
+        List<Object[]> lst = qu1.getResultList();
+        Main.em.getTransaction().commit();
+        ProductControl pc = Main.controlfactory.getProduct();
+        for (int i = 0; i < lst.size(); i++) {
+            pc.createProduct(lst.get(i)[0].toString(), w, Double.parseDouble(lst.get(i)[1].toString()), Double.parseDouble(lst.get(i)[2].toString()));
+        }
     }
     
     public List<Warehouse> getWarehouseResultSet(){
