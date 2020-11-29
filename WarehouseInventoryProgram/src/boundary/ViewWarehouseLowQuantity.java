@@ -25,6 +25,7 @@ public class ViewWarehouseLowQuantity extends javax.swing.JFrame {
     public ViewWarehouseLowQuantity(Warehouse w1) {
         initComponents();
         w = w1;
+        warehouseName.setText("Low Quantity Warehouse: " + w.getWarehousename());
         updateTable();
     }
 
@@ -57,6 +58,7 @@ public class ViewWarehouseLowQuantity extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         lowTable = new javax.swing.JTable();
         backButton = new javax.swing.JButton();
+        warehouseName = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,18 +86,23 @@ public class ViewWarehouseLowQuantity extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(backButton)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(123, Short.MAX_VALUE))
+                    .addComponent(warehouseName)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(150, 150, 150)
+                        .addComponent(backButton)))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
-                .addComponent(backButton)
+                .addContainerGap(38, Short.MAX_VALUE)
+                .addComponent(warehouseName)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54))
+                .addGap(18, 18, 18)
+                .addComponent(backButton)
+                .addGap(14, 14, 14))
         );
 
         pack();
@@ -147,5 +154,6 @@ public class ViewWarehouseLowQuantity extends javax.swing.JFrame {
     private javax.swing.JButton backButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable lowTable;
+    private javax.swing.JLabel warehouseName;
     // End of variables declaration//GEN-END:variables
 }
