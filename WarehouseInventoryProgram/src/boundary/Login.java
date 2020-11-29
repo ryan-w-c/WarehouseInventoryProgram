@@ -34,6 +34,7 @@ public class Login extends javax.swing.JFrame {
         Login = new javax.swing.JButton();
         loginLabel = new javax.swing.JLabel();
         success = new javax.swing.JLabel();
+        skip = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,14 +47,17 @@ public class Login extends javax.swing.JFrame {
 
         loginLabel.setText("Warehouse Inventory");
 
+        skip.setText("skip");
+        skip.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                skipActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(160, 160, 160)
-                .addComponent(Login)
-                .addContainerGap(168, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -61,6 +65,12 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(password, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(success, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(160, 160, 160)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Login)
+                    .addComponent(skip))
+                .addContainerGap(168, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -73,57 +83,33 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(Login)
                 .addGap(18, 18, 18)
                 .addComponent(success)
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addComponent(skip)
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
-        // TODO add your handling code here:
-//        LoginControl pwd = new LoginControl();
-//        pwd.setPwd("warehouse");
-//        String p = pwd.toString();
-//        String passwrd = password.getText();
-//<<<<<<< HEAD
-//        
-//        if (passwrd.equals(p)) {
-//            new MainMenu().setVisible(true);
-//            this.setVisible(false);
-//        }
-//        else {
-//            success.setText("Login failed - incorrect password");
-//        }
-//        Password user = new Password("warehouse");
-//        String pwd = password.getText();
-//=======
-//>>>>>>> 4dc7df672cff1a08ef9db39cbb0d05d2ef1ecdf0
-//        
-//        if (passwrd.equals(p)) {
-//            new MainMenu().setVisible(true);
-//            this.setVisible(false);
-//        }
-//        else {
-//            success.setText("Login failed - incorrect password");
-//        }
-//<<<<<<< HEAD
-        
-        new MainMenu().setVisible(true);
-            this.setVisible(false);
-//=======
-        Password user = new Password("warehouse");
-        String pwd = password.getText();
-        
-        if (user.getPassword().equals(pwd)) {
-            success.setText("Login Successful");
+        LoginControl lc = Main.Main.controlfactory.getLogin();
+        if (lc.checkPassword(password.getText())){
+            //password matches
             new MainMenu().setVisible(true);
             this.setVisible(false);
         }
         else {
+            //password incorrect
             success.setText("Login failed - incorrect password");
         }
-//>>>>>>> 4dc7df672cff1a08ef9db39cbb0d05d2ef1ecdf0
+                  
     }//GEN-LAST:event_LoginActionPerformed
+
+    private void skipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skipActionPerformed
+        // TODO add your handling code here:
+        new MainMenu().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_skipActionPerformed
 
     /**
      * @param args the command line arguments
@@ -164,6 +150,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton Login;
     private javax.swing.JLabel loginLabel;
     private javax.swing.JPasswordField password;
+    private javax.swing.JButton skip;
     private javax.swing.JLabel success;
     // End of variables declaration//GEN-END:variables
 }
