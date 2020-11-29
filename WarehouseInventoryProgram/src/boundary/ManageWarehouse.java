@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package boundary;
-
 import Entity.Warehouse;
 
 /**
@@ -16,7 +15,6 @@ public class ManageWarehouse extends javax.swing.JFrame {
     /**
      * Creates new form ManageWarehouse
      */
-    
     private Warehouse w;
     public ManageWarehouse(Warehouse w1) {
         initComponents();
@@ -32,18 +30,35 @@ public class ManageWarehouse extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        viewAndEdit = new javax.swing.JButton();
         viewLow = new javax.swing.JButton();
         back = new javax.swing.JButton();
+        viewAndEdit = new javax.swing.JButton();
 
-        viewAndEdit.setText("View Products and Edit Quantity");
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         viewLow.setText("View Low Quantity");
+        viewLow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewLowActionPerformed(evt);
+            }
+        });
 
         back.setText("Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        viewAndEdit.setText("View Products and Edit Quantity");
+        viewAndEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewAndEditActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -52,7 +67,7 @@ public class ManageWarehouse extends javax.swing.JFrame {
                     .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(viewLow, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(viewAndEdit))
-                .addContainerGap(222, Short.MAX_VALUE))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -65,8 +80,59 @@ public class ManageWarehouse extends javax.swing.JFrame {
                 .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41))
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void viewAndEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAndEditActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_viewAndEditActionPerformed
+
+    private void viewLowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewLowActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewLowActionPerformed
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new ViewEditWarehouse().setVisible(true);
+    }//GEN-LAST:event_backActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+////    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(ManageWarehouse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(ManageWarehouse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(ManageWarehouse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(ManageWarehouse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new ManageWarehouse().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back;
