@@ -127,7 +127,7 @@ public class AddProduct extends javax.swing.JFrame {
             ProductControl pc = controlfactory.getProduct();
             pc.addProduct(pName.getText(), Double.parseDouble(sellingPrice.getText()), Double.parseDouble(costPrice.getText()));
             this.setVisible(false);
-            new Manage().setVisible(true);
+            new EditProductQuantity(pName.getText()).setVisible(true);
 //        }
 //        catch (Exception e) {
 //            JOptionPane.showMessageDialog(null, "Please fill out all info correctly.", "Alert", JOptionPane.ERROR_MESSAGE);

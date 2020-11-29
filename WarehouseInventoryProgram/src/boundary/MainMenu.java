@@ -106,7 +106,7 @@ public class MainMenu extends javax.swing.JFrame {
     private void productsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productsButtonActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new ProductsTable().setVisible(true);
+        new ManageProducts().setVisible(true);
     }//GEN-LAST:event_productsButtonActionPerformed
 
     /**

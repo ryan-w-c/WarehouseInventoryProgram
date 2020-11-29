@@ -5,6 +5,10 @@
  */
 package boundary;
 
+import Control.ProductControl;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Psyric
@@ -16,7 +20,33 @@ public class ViewAllProducts extends javax.swing.JFrame {
      */
     public ViewAllProducts() {
         initComponents();
+        updateTable();
     }
+    
+    private void updateTable (){
+        ProductControl pc = Main.Main.controlfactory.getProduct();
+        List <List<String>> list = pc.getProductResultSet(); 
+        
+        DefaultTableModel model = (DefaultTableModel) productsTable.getModel();
+        Object rowData[] = new Object[9];
+        for(int i = 0; i < list.size(); i++)
+        {
+            rowData[0] = list.get(i).get(0);
+            rowData[1] = list.get(i).get(1);
+            rowData[2] = list.get(i).get(2);
+            rowData[3] = list.get(i).get(3);
+            rowData[4] = list.get(i).get(4);
+            rowData[5] = list.get(i).get(5);
+            rowData[6] = list.get(i).get(6);
+            rowData[7] = list.get(i).get(7);
+            rowData[8] = list.get(i).get(8);
+            model.addRow(rowData);
+        }
+//        java.sql.ResultSet rs1 = (java.sql.ResultSet) rs;
+//        SalespersonTable.setModel(DbUtils.resultSetToTableModel(rs));
+       
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,12 +58,12 @@ public class ViewAllProducts extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        productsTable = new javax.swing.JTable();
         backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        productsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
@@ -44,7 +74,7 @@ public class ViewAllProducts extends javax.swing.JFrame {
                 "Product Name", "Selling Price", "Cost Price", "Total Quantity", "Quantity Sold", "Total Sales", "Total Cost", "Total Profit", "Total Profit %"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(productsTable);
 
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
@@ -58,20 +88,23 @@ public class ViewAllProducts extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(backButton)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(483, 483, 483)
+                        .addComponent(backButton)))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
-                .addComponent(backButton)
+                .addContainerGap(41, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52))
+                .addComponent(backButton)
+                .addGap(12, 12, 12))
         );
 
         pack();
@@ -80,7 +113,7 @@ public class ViewAllProducts extends javax.swing.JFrame {
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new ProductsTable().setVisible(true);
+        new ManageProducts().setVisible(true);
     }//GEN-LAST:event_backButtonActionPerformed
 
     /**
@@ -121,6 +154,6 @@ public class ViewAllProducts extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable productsTable;
     // End of variables declaration//GEN-END:variables
 }

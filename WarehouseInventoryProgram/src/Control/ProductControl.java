@@ -11,6 +11,7 @@ import Entity.Warehouse;
 import Main.Main;
 import java.util.List;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 public class ProductControl {
     
@@ -34,22 +35,24 @@ public class ProductControl {
         Main.em.getTransaction().commit();
     }
     
-    public List<Product> getProductResultSet(){
+    public List<Product> getOnlyProductResultSet(String p){
         Main.em.getTransaction().begin();
-        Query qu1 = Main.em.createNativeQuery("SELECT ProductName, SUM(Quantity) FROM Product"
-                + " GROUP BY ProductName");
+        Query qu1 = Main.em.createNamedQuery("Product.findByProductname");
+        qu1.setParameter("productname", p);
         List<Product> lst = qu1.getResultList();
         Main.em.getTransaction().commit();
         return lst;
     }
     
-//    public List<Producttitle> getProductTitleResultSet(){
-//        Main.em.getTransaction().begin();
-//        Query qu1 = Main.em.createNativeQuery("SELECT SellingPrice, CostPrice FROM Product");
-//        List<Producttitle> lst = qu1.getResultList();
-//        Main.em.getTransaction().commit();
-//        return lst;
-//    }
+    public List<List<String>> getProductResultSet(){
+        Main.em.getTransaction().begin();
+        //FIXME query maybe have to use views?? see: https://stackoverflow.com/questions/30275317/cannot-be-cast-to-ljava-lang-object?rq=1 
+        //or maybe a named query like above
+        Query qu1 = Main.em.createNativeQuery("SELECT p.productname, p.sellingprice, p.costprice, SUM(p.quantity) as totalquantity, SUM(o.quantity) as quantitysold, SUM(o.quantity) * p.sellingprice as totalsales, SUM(o.quantity) * p.costprice as totalcost, SUM(o.quantity) * p.sellingprice - p.costprice as profit, profit / totalsales * 100 FROM Product p inner join ORDERITEM o on p.productname = o.productname group by productname, sellingprice, costprice order by desc profpercent");
+        List<List<String>> lst = qu1.getResultList();
+        Main.em.getTransaction().commit();
+        return lst;
+    }
     
     public void addProduct(String pName, double sellingPrice, double costPrice){
         Main.em.getTransaction().begin();
@@ -57,7 +60,6 @@ public class ProductControl {
         List<String> lst = qu1.getResultList();
         Main.em.getTransaction().commit();
         for (int i = 0; i < lst.size(); i++) {
-            System.out.println(lst.get(i));
             createProduct(pName, lst.get(i), sellingPrice, costPrice);
         }
         
