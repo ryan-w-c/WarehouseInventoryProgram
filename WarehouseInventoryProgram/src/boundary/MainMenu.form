@@ -23,35 +23,19 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                      <Component id="mainMenuDrop" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="manageButton" min="-2" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="goButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="invoiceOrderButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="77" max="32767" attributes="0"/>
-                      <Component id="productsButton" min="-2" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-          </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="221" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace pref="89" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="manageButton" max="32767" attributes="0"/>
+                  <Component id="invoiceOrderButton" max="32767" attributes="0"/>
+                  <Component id="productsButton" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -60,18 +44,13 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="mainMenuDrop" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="goButton" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="130" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="manageButton" alignment="3" min="-2" pref="64" max="-2" attributes="0"/>
-                  <Component id="invoiceOrderButton" alignment="3" min="-2" pref="64" max="-2" attributes="0"/>
-                  <Component id="productsButton" alignment="3" min="-2" pref="64" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+              <Component id="manageButton" min="-2" pref="64" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="invoiceOrderButton" min="-2" pref="64" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+              <Component id="productsButton" min="-2" pref="64" max="-2" attributes="0"/>
+              <EmptySpace pref="65" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -82,35 +61,9 @@
         <Property name="text" type="java.lang.String" value="Home"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="mainMenuDrop">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Warehouse 1"/>
-            <StringItem index="1" value="Warehouse 2"/>
-            <StringItem index="2" value="Warehouse 3"/>
-            <StringItem index="3" value="Warehouse 4"/>
-          </StringArray>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mainMenuDropActionPerformed"/>
-      </Events>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.swing.JButton" name="goButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Go"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="goButtonActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="manageButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Manage"/>
+        <Property name="text" type="java.lang.String" value="Manage Customer/Salesperson/Warehouse"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="manageButtonActionPerformed"/>
@@ -118,7 +71,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="invoiceOrderButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Invoices and Orders"/>
+        <Property name="text" type="java.lang.String" value="Manage Invoices and Orders"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="invoiceOrderButtonActionPerformed"/>
@@ -126,7 +79,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="productsButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Products"/>
+        <Property name="text" type="java.lang.String" value="Manage Products"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="productsButtonActionPerformed"/>

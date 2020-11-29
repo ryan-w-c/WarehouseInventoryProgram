@@ -36,6 +36,7 @@ public class Manage extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         backBtn = new javax.swing.JButton();
+        viewEditWarehouse = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,6 +88,14 @@ public class Manage extends javax.swing.JFrame {
             }
         });
 
+        viewEditWarehouse.setText("View/Edit Warehouse");
+        viewEditWarehouse.setToolTipText("");
+        viewEditWarehouse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewEditWarehouseActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -110,6 +119,8 @@ public class Manage extends javax.swing.JFrame {
                         .addContainerGap(112, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(addWarehouse, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(viewEditWarehouse, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(backBtn)
                         .addGap(22, 22, 22))))
@@ -132,7 +143,9 @@ public class Manage extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(addWarehouse, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addWarehouse, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(viewEditWarehouse, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -179,6 +192,12 @@ public class Manage extends javax.swing.JFrame {
         new MainMenu().setVisible(true);
     }//GEN-LAST:event_backBtnActionPerformed
 
+    private void viewEditWarehouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewEditWarehouseActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new ViewEditWarehouse().setVisible(true);
+    }//GEN-LAST:event_viewEditWarehouseActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -224,5 +243,6 @@ public class Manage extends javax.swing.JFrame {
     private javax.swing.JButton editSalesperson;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton viewEditWarehouse;
     // End of variables declaration//GEN-END:variables
 }
