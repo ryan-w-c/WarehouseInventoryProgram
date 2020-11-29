@@ -6,9 +6,7 @@
 package Entity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -16,36 +14,45 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author zubin
+ * @author ryancavanagh
  */
 @Entity
 @Table(name = "PRODUCT")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
     @NamedQuery(name = "Product.findByProductname", query = "SELECT p FROM Product p WHERE p.productPK.productname = :productname"),
     @NamedQuery(name = "Product.findByWarehousename", query = "SELECT p FROM Product p WHERE p.productPK.warehousename = :warehousename"),
-    @NamedQuery(name = "Product.findByQuantity", query = "SELECT p FROM Product p WHERE p.quantity = :quantity")})
+    @NamedQuery(name = "Product.findByWarehousenameLow", query = "SELECT p FROM Product p WHERE p.productPK.warehousename = :warehousename and p.quantity < 6"),
+    @NamedQuery(name = "Product.findByQuantity", query = "SELECT p FROM Product p WHERE p.quantity = :quantity"),
+    @NamedQuery(name = "Product.findBySellingprice", query = "SELECT p FROM Product p WHERE p.sellingprice = :sellingprice"),
+    @NamedQuery(name = "Product.findByCostprice", query = "SELECT p FROM Product p WHERE p.costprice = :costprice")})
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected ProductPK productPK;
     @Basic(optional = false)
+    @NotNull
     @Column(name = "QUANTITY")
     private int quantity;
-    @JoinColumn(name = "PRODUCTNAME", referencedColumnName = "PRODUCTNAME", insertable = false, updatable = false)
-    @ManyToOne(optional = false)
-    private Producttitle producttitle;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "SELLINGPRICE")
+    private double sellingprice;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "COSTPRICE")
+    private double costprice;
     @JoinColumn(name = "WAREHOUSENAME", referencedColumnName = "WAREHOUSENAME", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Warehouse warehouse;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
-    private Collection<Orderitem> orderitemCollection;
 
     public Product() {
     }
@@ -54,9 +61,11 @@ public class Product implements Serializable {
         this.productPK = productPK;
     }
 
-    public Product(ProductPK productPK, int quantity) {
+    public Product(ProductPK productPK, int quantity, double sellingprice, double costprice) {
         this.productPK = productPK;
         this.quantity = quantity;
+        this.sellingprice = sellingprice;
+        this.costprice = costprice;
     }
 
     public Product(String productname, String warehousename) {
@@ -79,12 +88,20 @@ public class Product implements Serializable {
         this.quantity = quantity;
     }
 
-    public Producttitle getProducttitle() {
-        return producttitle;
+    public double getSellingprice() {
+        return sellingprice;
     }
 
-    public void setProducttitle(Producttitle producttitle) {
-        this.producttitle = producttitle;
+    public void setSellingprice(double sellingprice) {
+        this.sellingprice = sellingprice;
+    }
+
+    public double getCostprice() {
+        return costprice;
+    }
+
+    public void setCostprice(double costprice) {
+        this.costprice = costprice;
     }
 
     public Warehouse getWarehouse() {
@@ -93,14 +110,6 @@ public class Product implements Serializable {
 
     public void setWarehouse(Warehouse warehouse) {
         this.warehouse = warehouse;
-    }
-
-    public Collection<Orderitem> getOrderitemCollection() {
-        return orderitemCollection;
-    }
-
-    public void setOrderitemCollection(Collection<Orderitem> orderitemCollection) {
-        this.orderitemCollection = orderitemCollection;
     }
 
     @Override

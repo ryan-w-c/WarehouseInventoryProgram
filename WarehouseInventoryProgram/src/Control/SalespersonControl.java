@@ -49,14 +49,13 @@ public final class SalespersonControl {
 
     public List<Salesperson> getSalespersonResultSet(){
   
-
         Main.em.getTransaction().begin();
        
-        Query qu1 = Main.em.createNativeQuery("select SALESPERSONID, FIRSTNAME, LASTNAME, PHONE from SALESPERSON", Salesperson.class);
+        Query qu1 = Main.em.createNativeQuery("select * from SALESPERSON", Salesperson.class);
         List<Salesperson> lst = qu1.getResultList();
         Main.em.getTransaction().commit();
         return lst;
-      }
+    }
 
     public void saveSalesperson(Salesperson s) {
         Main.em.getTransaction().begin();
@@ -65,7 +64,7 @@ public final class SalespersonControl {
     }
     
    public Integer getNewID (){
-       Main.em.getTransaction().begin();
+        Main.em.getTransaction().begin();
         Query qu1 = Main.em.createNativeQuery("select max(SALESPERSONID) from SALESPERSON");
         List lst  = qu1.getResultList();
         Main.em.getTransaction().commit();
@@ -73,7 +72,7 @@ public final class SalespersonControl {
         if (lst.get(0) == null) {
             ans = 1;
         } else {
-        ans = Integer.parseInt(lst.get(0).toString()) +1;
+            ans = Integer.parseInt(lst.get(0).toString()) +1;
         } 
         return ans;
     }

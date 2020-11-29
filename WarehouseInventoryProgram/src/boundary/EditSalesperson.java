@@ -7,6 +7,7 @@ package boundary;
 
 import Control.SalespersonControl;
 import Entity.Salesperson;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -223,18 +224,23 @@ public class EditSalesperson extends javax.swing.JFrame {
 
     private void saveSalespersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveSalespersonActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
-        new ViewEditSalesperson().setVisible(true);
-        SalespersonControl sp = Main.Main.controlfactory.getSalesperson();
-        s.setFirstname(firstName.getText());
-        s.setLastname(lastName.getText());
-        s.setPhone(phoneNumber.getText());
-        s.setEmail(email.getText());
-        s.setAddress(streetAddress.getText());
-        s.setCity(city.getText());
-        s.setState(state.getText());
-        s.setZip(Integer.parseInt(zipCode.getText()));
-        sp.saveSalesperson(s);
+        try {
+            SalespersonControl sp = Main.Main.controlfactory.getSalesperson();
+            s.setFirstname(firstName.getText());
+            s.setLastname(lastName.getText());
+            s.setPhone(phoneNumber.getText());
+            s.setEmail(email.getText());
+            s.setAddress(streetAddress.getText());
+            s.setCity(city.getText());
+            s.setState(state.getText());
+            s.setZip(Integer.parseInt(zipCode.getText()));
+            sp.saveSalesperson(s);
+            this.setVisible(false);
+            new ViewEditSalesperson().setVisible(true);
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please fill out all info correctly.", "Alert", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_saveSalespersonActionPerformed
 
     private void canelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_canelButtonActionPerformed

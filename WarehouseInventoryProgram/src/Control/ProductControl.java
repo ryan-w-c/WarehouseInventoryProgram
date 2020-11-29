@@ -7,51 +7,86 @@ package Control;
 
 import Entity.Product;
 import Entity.ProductPK;
-import Entity.Producttitle;
 import Entity.Warehouse;
 import Main.Main;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 public class ProductControl {
     
-    public void createProduct(String productName, String warehouseName, int quantity){
-        EntityManagerFactory productFactory = Persistence.createEntityManagerFactory( "Eclipselink_JPA" );
-        EntityManager productManager = productFactory.createEntityManager( );
-        productManager.getTransaction().begin();
+    public void createProduct(String productName, String warehouseName, double sellingPrice, double costPrice){
+        Main.em.getTransaction().begin();
         
         ProductPK productPK = new ProductPK();
         productPK.setProductname(productName);
         productPK.setWarehousename(warehouseName);
         
-        Product product = new Product();
-        product.setQuantity(quantity);
-        product.setProductPK(productPK);
+        Product p = new Product();
+        p.setQuantity(0);
+        p.setProductPK(productPK);
+        p.setCostprice(costPrice);
+        p.setSellingprice(sellingPrice);
+        Warehouse w = Main.em.find(Warehouse.class, warehouseName);
         
-        Warehouse warehouse = productManager.find(Warehouse.class, warehouseName);
+        p.setWarehouse(w);
         
-        product.setWarehouse(warehouse);
-        
-        productManager.getTransaction().commit();
+        Main.em.persist(p);
+        Main.em.getTransaction().commit();
     }
     
-    public List<Product> getProductResultSet(){
+    public List<Product> getSingleProductResultSet(String p){
         Main.em.getTransaction().begin();
-        Query qu1 = Main.em.createNativeQuery("SELECT ProductName, SUM(Quantity) FROM Product"
-                + " GROUP BY ProductName");
+        Query qu1 = Main.em.createNamedQuery("Product.findByProductname");
+        qu1.setParameter("productname", p);
         List<Product> lst = qu1.getResultList();
         Main.em.getTransaction().commit();
         return lst;
     }
     
-    public List<Producttitle> getProductTitleResultSet(){
+    public List<List<String>> getProductResultSet(){
         Main.em.getTransaction().begin();
-        Query qu1 = Main.em.createNativeQuery("SELECT SellingPrice, CostPrice FROM Product");
-        List<Producttitle> lst = qu1.getResultList();
+        //FIXME query maybe have to use views?? see: https://stackoverflow.com/questions/30275317/cannot-be-cast-to-ljava-lang-object?rq=1 
+        //or maybe a named query like above
+        Query qu1 = Main.em.createNativeQuery("SELECT p.productname, p.sellingprice, p.costprice, SUM(p.quantity) as totalquantity, SUM(o.quantity) as quantitysold, SUM(o.quantity) * p.sellingprice as totalsales, SUM(o.quantity) * p.costprice as totalcost, SUM(o.quantity) * p.sellingprice - p.costprice as profit, profit / totalsales * 100 FROM Product p inner join ORDERITEM o on p.productname = o.productname group by productname, sellingprice, costprice order by desc profpercent");
+        List<List<String>> lst = qu1.getResultList();
         Main.em.getTransaction().commit();
         return lst;
     }
+    
+    public void addProduct(String pName, double sellingPrice, double costPrice){
+        Main.em.getTransaction().begin();
+        Query qu1 = Main.em.createNativeQuery("SELECT warehousename FROM Warehouse");
+        List<String> lst = qu1.getResultList();
+        Main.em.getTransaction().commit();
+        for (int i = 0; i < lst.size(); i++) {
+            createProduct(pName, lst.get(i), sellingPrice, costPrice);
+        }
+    }
+    
+    public List<String> getDistinctProductResultSet(){
+        Main.em.getTransaction().begin();
+        Query qu1 = Main.em.createNativeQuery("SELECT distinct productname FROM product");
+        List<String> lst = qu1.getResultList();
+        Main.em.getTransaction().commit();
+        return lst;
+    }
+    
+    public List<Product> getLowProductResultSet(Warehouse w) {
+        Main.em.getTransaction().begin();
+        Query qu1 = Main.em.createNamedQuery("Product.findByWarehousenameLow");
+        qu1.setParameter("warehousename", w.getWarehousename());
+        List<Product> lst = qu1.getResultList();
+        Main.em.getTransaction().commit();
+        return lst;
+    }
+    
+    public List<Product> getAllProductResultSet(Warehouse w) {
+        Main.em.getTransaction().begin();
+        Query qu1 = Main.em.createNamedQuery("Product.findByWarehousename");
+        qu1.setParameter("warehousename", w.getWarehousename());
+        List<Product> lst = qu1.getResultList();
+        Main.em.getTransaction().commit();
+        return lst;
+    }
+    
 }

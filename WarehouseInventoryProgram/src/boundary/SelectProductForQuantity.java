@@ -6,47 +6,54 @@
 package boundary;
 
 import Control.ProductControl;
+import Control.SalespersonControl;
+import Entity.Salesperson;
+import static Main.Main.controlfactory;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Psyric
+ * @author ryancavanagh
  */
-public class ViewAllProducts extends javax.swing.JFrame {
+public class SelectProductForQuantity extends javax.swing.JFrame {
 
     /**
-     * Creates new form ViewAllProducts
+     * Creates new form SelectProductForQuantity
      */
-    public ViewAllProducts() {
+    public SelectProductForQuantity() {
         initComponents();
         updateTable();
     }
-    
     private void updateTable (){
         ProductControl pc = Main.Main.controlfactory.getProduct();
-        List <List<String>> list = pc.getProductResultSet(); 
+        List<String> list = pc.getDistinctProductResultSet(); 
         
         DefaultTableModel model = (DefaultTableModel) productsTable.getModel();
-        Object rowData[] = new Object[9];
+//        List<Salesperson> list = lst;
+        Object rowData[] = new Object[1];
         for(int i = 0; i < list.size(); i++)
         {
-            rowData[0] = list.get(i).get(0);
-            rowData[1] = list.get(i).get(1);
-            rowData[2] = list.get(i).get(2);
-            rowData[3] = list.get(i).get(3);
-            rowData[4] = list.get(i).get(4);
-            rowData[5] = list.get(i).get(5);
-            rowData[6] = list.get(i).get(6);
-            rowData[7] = list.get(i).get(7);
-            rowData[8] = list.get(i).get(8);
+            rowData[0] = list.get(i);
             model.addRow(rowData);
         }
 //        java.sql.ResultSet rs1 = (java.sql.ResultSet) rs;
 //        SalespersonTable.setModel(DbUtils.resultSetToTableModel(rs));
        
     }
+    
+    private Object selectProductInTable(){
+        if (productsTable.getRowCount() == 0){
+            System.out.println(productsTable.getRowCount());
+            return 0;
+        } else {
+            int row = productsTable.getSelectedRow();
+            Object sp = productsTable.getValueAt(row, 0);
 
+            return sp;
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -59,22 +66,30 @@ public class ViewAllProducts extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         productsTable = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        editQuantity = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         productsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "Product Name", "Selling Price", "Cost Price", "Total Quantity", "Quantity Sold", "Total Sales", "Total Cost", "Total Profit", "Total Profit %"
+                "Product Name"
             }
         ));
         jScrollPane1.setViewportView(productsTable);
+
+        jLabel1.setText("Select Product to Edit Quantity");
+
+        editQuantity.setText("Edit Quantity");
+        editQuantity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editQuantityActionPerformed(evt);
+            }
+        });
 
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
@@ -88,27 +103,44 @@ public class ViewAllProducts extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(483, 483, 483)
-                        .addComponent(backButton)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                        .addGap(21, 21, 21)
+                        .addComponent(editQuantity)
+                        .addGap(18, 18, 18)
+                        .addComponent(backButton))
+                    .addComponent(jLabel1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(41, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(backButton)
-                .addGap(12, 12, 12))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(backButton)
+                    .addComponent(editQuantity))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void editQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editQuantityActionPerformed
+        // TODO add your handling code here:
+        try {
+            new EditProductQuantity(selectProductInTable().toString()).setVisible(true);
+            this.setVisible(false);
+        }
+        catch (Exception ArrayIndexOutOfBoundsException){
+            JOptionPane.showMessageDialog(null, "Select One Product.", "Alert", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_editQuantityActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
@@ -133,26 +165,28 @@ public class ViewAllProducts extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewAllProducts.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SelectProductForQuantity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewAllProducts.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SelectProductForQuantity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewAllProducts.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SelectProductForQuantity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewAllProducts.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SelectProductForQuantity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewAllProducts().setVisible(true);
+                new SelectProductForQuantity().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
+    private javax.swing.JButton editQuantity;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable productsTable;
     // End of variables declaration//GEN-END:variables

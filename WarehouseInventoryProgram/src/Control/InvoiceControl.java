@@ -17,10 +17,12 @@ import Entity.Orderitem;
 import Entity.Salesperson;
 import Main.Main;
 import java.util.Collection;
+import java.util.List;
+import javax.persistence.Query;
 
 public class InvoiceControl {
     
-    public void addInvoice(Salesperson sp,Customer customer, Integer id, double subTotal,
+    public void addInvoice(Integer sp,Object customer, Integer id, double subTotal,
             double tax, double comm, double deliveryfee,double total, double balance, 
             boolean openClose, String time,Collection<Orderitem> items){
         
@@ -37,8 +39,8 @@ public class InvoiceControl {
       inv1.setOpenclose(openClose);
       inv1.setDatetime(time);
       inv1.setOrderitemCollection(items);
-      inv1.setCustomerid(customer);  
-      inv1.setSalespersonid(sp);
+//      inv1.setCustomerid(customer);  
+//      inv1.setSalespersonid(sp);
       
       Main.em.persist( inv1 );
       Main.em.getTransaction( ).commit( );
@@ -46,6 +48,15 @@ public class InvoiceControl {
       Main.em.close( );
     }
     
+        public List<Invoice> getSalespersonResultSet(){
+  
+        Main.em.getTransaction().begin();
+       
+        Query qu1 = Main.em.createNativeQuery("select * from INVOICE", Invoice.class);
+        List<Invoice> lst = qu1.getResultList();
+        Main.em.getTransaction().commit();
+        return lst;
+    }
     
     
     

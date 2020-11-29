@@ -7,6 +7,7 @@ package boundary;
 
 import Control.CustomerControl;
 import Entity.Customer;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -199,26 +200,31 @@ public class EditCustomer extends javax.swing.JFrame {
 
     private void saveCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveCustomerActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
-        new ViewEditSalesperson().setVisible(true);
+
         //todo check to make sure not empty
-        CustomerControl cp = Main.Main.controlfactory.getCustomer();
-        c.setFirstname(firstName.getText());
-        c.setLastname(lastName.getText());
-        c.setPhone(phoneNumber.getText());
-        c.setEmail(email.getText());
-        c.setAddress(streetAddress.getText());
-        c.setCity(city.getText());
-        c.setState(state.getText());
-        c.setZip(Integer.parseInt(zipCode.getText()));
-        cp.saveCustomer(c);
-        
+        try { 
+            CustomerControl cp = Main.Main.controlfactory.getCustomer();
+            c.setFirstname(firstName.getText());
+            c.setLastname(lastName.getText());
+            c.setPhone(phoneNumber.getText());
+            c.setEmail(email.getText());
+            c.setAddress(streetAddress.getText());
+            c.setCity(city.getText());
+            c.setState(state.getText());
+            c.setZip(Integer.parseInt(zipCode.getText()));
+            cp.saveCustomer(c);
+            this.setVisible(false);
+            new ViewEditCustomer().setVisible(true);
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please fill out all info correctly.", "Alert", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_saveCustomerActionPerformed
 
     private void canelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_canelButtonActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new ViewEditSalesperson().setVisible(true);
+        new ViewEditCustomer().setVisible(true);
     }//GEN-LAST:event_canelButtonActionPerformed
 
     /**

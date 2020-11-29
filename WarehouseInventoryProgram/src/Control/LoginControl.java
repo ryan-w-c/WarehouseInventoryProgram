@@ -7,6 +7,8 @@ package Control;
 
 import Entity.Password;
 import Main.Main;
+import java.util.List;
+import javax.persistence.Query;
 
 /**
  *
@@ -25,6 +27,19 @@ public class LoginControl {
         Main.em.persist(pwd);
         Main.em.getTransaction().commit();
         
+    }
+    
+    public boolean checkPassword(String pwd){
+        Main.em.getTransaction().begin();
+        Query qu1 = Main.em.createNativeQuery("select password from PASSWORD");
+        List lst  = qu1.getResultList();
+        Main.em.getTransaction().commit();
+        if (pwd.equals(lst.get(0))){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
     
 }

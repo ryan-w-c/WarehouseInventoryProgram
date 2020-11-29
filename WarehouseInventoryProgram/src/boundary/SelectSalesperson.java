@@ -45,7 +45,7 @@ public class SelectSalesperson extends javax.swing.JFrame {
        
     }
     
-    private Object selectSalespersonInTable(){
+    public Object selectSalespersonInTable(){
         if (SalespersonTable.getRowCount() == 0){
             return null;
         }else{
