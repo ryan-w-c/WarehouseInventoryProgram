@@ -5,6 +5,10 @@
  */
 package boundary;
 
+import Entity.Product;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  *
  * @author zubin
@@ -14,8 +18,15 @@ public class CustomerPurchase extends javax.swing.JFrame {
     /**
      * Creates new form CustomerPurchase
      */
+    private Map order;
     public CustomerPurchase() {
         initComponents();
+        order = new HashMap<Product, Integer>();
+    }
+    
+    public CustomerPurchase(Map o) {
+        initComponents();
+        order = o;
     }
 
     /**
@@ -161,7 +172,7 @@ public class CustomerPurchase extends javax.swing.JFrame {
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new SelectProduct().setVisible(true);
+        new SelectProductForOrder(order).setVisible(true);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
