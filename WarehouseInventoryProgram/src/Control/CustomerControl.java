@@ -15,15 +15,14 @@ import javax.persistence.Query;
  *
  * @author minkyaw
  */
+
 public final class CustomerControl {
     int id;
     public CustomerControl () {
-
+          id = getNewID();
     }
-    
    
-    public void addCustomer(Integer customerid, String firstname, String lastname, String phone, String email, String address, String city, String state, int zip) {
-        
+    public void addCustomer(String firstname, String lastname, String phone, String email, String address, String city, String state, int zip) {
         Main.em.getTransaction().begin();
         Customer c1 = new Customer();
         
@@ -57,5 +56,30 @@ public final class CustomerControl {
         return lst;
       }
        
+    
+    public List<Customer> getSalespersonResultSet(){
+  
+
+        Main.em.getTransaction().begin();
+       
+        Query qu1 = Main.em.createNativeQuery("select FIRSTNAME, ADDRESS, PHONE from CUSTOMER", Customer.class);
+        List<Customer> lst = qu1.getResultList();
+        Main.em.getTransaction().commit();
+        return lst;
+      }
+    
+    public Integer getNewID (){
+       Main.em.getTransaction().begin();
+        Query qu1 = Main.em.createNativeQuery("select max(CUSTOMERID) from CUSTOMER");
+        List lst  = qu1.getResultList();
+        Main.em.getTransaction().commit();
+        Integer ans;
+        if (lst.get(0) == null) {
+            ans = 1;
+        } else {
+        ans = Integer.parseInt(lst.get(0).toString()) +1;
+        } 
+        return ans;
+    }
     
 }

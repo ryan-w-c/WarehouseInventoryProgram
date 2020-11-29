@@ -22,9 +22,7 @@ public class SelectCustomer extends javax.swing.JFrame {
      */
     public SelectCustomer() {
         initComponents();
-        Update_table();
-        selectCustomerInTable();
-        
+        Update_table();        
     }
     
     
@@ -48,7 +46,7 @@ public class SelectCustomer extends javax.swing.JFrame {
     }
     
     
-        private Object selectCustomerInTable(){
+        public Object selectCustomerInTable(){
         if (customerTable.getRowCount() == 0){
             return null;
         }else{
@@ -105,10 +103,7 @@ public class SelectCustomer extends javax.swing.JFrame {
 
         customerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "ID", "First Name", "Last Name", "Phone"
@@ -169,6 +164,7 @@ public class SelectCustomer extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         
+               System.out.println(selectCustomerInTable());
               this.setVisible(false);
         new CustomerPurchase().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed

@@ -81,18 +81,6 @@ public class Login extends javax.swing.JFrame {
 
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
         // TODO add your handling code here:
-//        LoginControl pwd = new LoginControl();
-//        pwd.setPwd("warehouse");
-//        String p = pwd.toString();
-//        String passwrd = password.getText();
-//        
-//        if (passwrd.equals(p)) {
-//            new MainMenu().setVisible(true);
-//            this.setVisible(false);
-//        }
-//        else {
-//            success.setText("Login failed - incorrect password");
-//        }
         Password user = new Password("warehouse");
         String pwd = password.getText();
         

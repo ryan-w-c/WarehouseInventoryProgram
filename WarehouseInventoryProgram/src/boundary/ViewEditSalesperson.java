@@ -6,10 +6,7 @@
 package boundary;
 
 import Control.SalespersonControl;
-import static Main.Main.controlfactory;
-import Main.*;
 import Entity.Salesperson;
-import static Main.Main.controlfactory;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -28,7 +25,7 @@ public class ViewEditSalesperson extends javax.swing.JFrame {
     }
     
     private void updateTable (){
-        SalespersonControl sp = controlfactory.getSalesperson();
+        SalespersonControl sp = Main.Main.controlfactory.getSalesperson();
         List <Salesperson> list = sp.getSalespersonResultSet(); 
         
         DefaultTableModel model = (DefaultTableModel) salespersonTable.getModel();
@@ -49,9 +46,9 @@ public class ViewEditSalesperson extends javax.swing.JFrame {
     
     private Object selectSalespersonInTable(){
         if (salespersonTable.getRowCount() == 0){
+            System.out.println(salespersonTable.getRowCount());
             return 0;
         } else {
-            salespersonTable.setRowSelectionInterval(0, salespersonTable.getRowCount()-1);
             int row = salespersonTable.getSelectedRow();
             Object sp = salespersonTable.getValueAt(row, 0);
 
@@ -82,7 +79,15 @@ public class ViewEditSalesperson extends javax.swing.JFrame {
             new String [] {
                 "ID Number", "Salesperson Name", "Total Sales", "Total Commission"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(salespersonTable);
 
         editSalespersonBtn.setText("Edit Selected Salesperon");
@@ -134,9 +139,7 @@ public class ViewEditSalesperson extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setVisible(false);
         //TODO pass salesperson object in
-        System.out.println("Person: " + selectSalespersonInTable());
-        Salesperson s1 = Main.em.find(Salesperson.class, selectSalespersonInTable());
-        System.out.println(s1.toString());
+        Salesperson s1 = Main.Main.em.find(Salesperson.class, selectSalespersonInTable());
         new EditSalesperson(s1).setVisible(true);
     }//GEN-LAST:event_editSalespersonBtnActionPerformed
 

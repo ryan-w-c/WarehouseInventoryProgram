@@ -6,6 +6,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import Control.ControlFactory;
 import boundary.Login;
+import boundary.SelectCustomer;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -32,17 +33,8 @@ public class Main {
         em = emfactory.createEntityManager();
         controlfactory = new ControlFactory();
         
-//        SalespersonControl sp = controlfactory.getSalesperson();
-        
-//        System.out.println(sp.getNewID());
-//        sp.addSalesperson("dfx","dfsa","gf",
-//                "fgd", "fgd","5er",454,"564",9,543,45,2 );
-//        
-//        System.out.println(sp.getNewID());
-
-//        em.close();
-//        emfactory.close();
-
+//        SelectCustomer sc = new SelectCustomer();
+//        System.out.println(sc.jButton2ActionPerformed());
     }
       
 }
