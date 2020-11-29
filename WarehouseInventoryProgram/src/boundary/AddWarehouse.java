@@ -6,6 +6,7 @@
 package boundary;
 
 import Control.WarehouseControl;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -166,12 +167,16 @@ public class AddWarehouse extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addWarehouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addWarehouseActionPerformed
-        WarehouseControl wc = new WarehouseControl();
-        wc.addWarehouse(WareHouseName.getText(), streetAddress.getText(), city.getText(), state.getText(), Integer.parseInt(zipCode.getText()), phoneNumber.getText());
-        //TODO error handling PK already exists
-        this.setVisible(false);
-        new Manage().setVisible(true);
-        
+        try {
+            WarehouseControl wc = new WarehouseControl();
+            wc.addWarehouse(WareHouseName.getText(), streetAddress.getText(), city.getText(), state.getText(), Integer.parseInt(zipCode.getText()), phoneNumber.getText());
+            //TODO error handling PK already exists
+            this.setVisible(false);
+            new Manage().setVisible(true);
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please fill out all info correctly.", "Alert", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_addWarehouseActionPerformed
 
     private void canelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_canelButtonActionPerformed
