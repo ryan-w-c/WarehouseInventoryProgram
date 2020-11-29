@@ -5,7 +5,7 @@
  */
 package boundary;
 
-import Control.WarehouseControl;
+import Control.ProductControl;
 import Entity.Product;
 import Entity.Warehouse;
 import java.util.List;
@@ -30,8 +30,8 @@ public class ViewWarehouseLowQuantity extends javax.swing.JFrame {
     }
 
     private void updateTable (){
-        WarehouseControl wc = Main.Main.controlfactory.getWarehouse();
-        List <Product> list = wc.getLowProductResultSet(w); 
+        ProductControl pc = Main.Main.controlfactory.getProduct();
+        List <Product> list = pc.getLowProductResultSet(w); 
         
         DefaultTableModel model = (DefaultTableModel) lowTable.getModel();
 //        List<Salesperson> list = lst;

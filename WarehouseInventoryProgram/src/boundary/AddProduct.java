@@ -123,22 +123,22 @@ public class AddProduct extends javax.swing.JFrame {
 
     private void addProductButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProductButtonActionPerformed
         // TODO add your handling code here:
-//        try {
+        try {
             ProductControl pc = controlfactory.getProduct();
             pc.addProduct(pName.getText(), Double.parseDouble(sellingPrice.getText()), Double.parseDouble(costPrice.getText()));
             this.setVisible(false);
             new EditProductQuantity(pName.getText()).setVisible(true);
-//        }
-//        catch (Exception e) {
-//            JOptionPane.showMessageDialog(null, "Please fill out all info correctly.", "Alert", JOptionPane.ERROR_MESSAGE);
-//        }
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please fill out all info correctly.", "Alert", JOptionPane.ERROR_MESSAGE);
+        }
 //        
     }//GEN-LAST:event_addProductButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new MainMenu().setVisible(true);
+        new ManageProducts().setVisible(true);
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     /**

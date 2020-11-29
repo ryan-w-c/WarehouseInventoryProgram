@@ -140,7 +140,6 @@ public class ViewEditCustomer extends javax.swing.JFrame {
             this.setVisible(false);
         }
         catch (Exception ArrayIndexOutOfBoundsException){
-            System.out.println("Error");
             JOptionPane.showMessageDialog(null, "Select One Customer.", "Alert", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_editCustomerBtnActionPerformed

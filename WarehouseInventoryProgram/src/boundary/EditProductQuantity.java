@@ -30,7 +30,7 @@ public class EditProductQuantity extends javax.swing.JFrame {
     
     private void updateTable (){
         ProductControl pc = Main.Main.controlfactory.getProduct();
-        List <Product> list = pc.getOnlyProductResultSet(p); 
+        List <Product> list = pc.getSingleProductResultSet(p); 
         
         DefaultTableModel model = (DefaultTableModel) warehouseTable.getModel();
         Object rowData[] = new Object[2];
@@ -57,7 +57,6 @@ public class EditProductQuantity extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         warehouseTable = new javax.swing.JTable();
         saveQuantity = new javax.swing.JButton();
-        backButton = new javax.swing.JButton();
         productName = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -94,13 +93,6 @@ public class EditProductQuantity extends javax.swing.JFrame {
             }
         });
 
-        backButton.setText("Back");
-        backButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -109,16 +101,13 @@ public class EditProductQuantity extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(16, 16, 16)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(67, 67, 67)
-                                .addComponent(saveQuantity)
-                                .addGap(64, 64, 64)
-                                .addComponent(backButton))))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(43, 43, 43)
-                        .addComponent(productName)))
+                        .addComponent(productName))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(139, 139, 139)
+                        .addComponent(saveQuantity)))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -128,10 +117,8 @@ public class EditProductQuantity extends javax.swing.JFrame {
                 .addComponent(productName)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(saveQuantity)
-                    .addComponent(backButton))
+                .addGap(12, 12, 12)
+                .addComponent(saveQuantity)
                 .addContainerGap())
         );
 
@@ -140,15 +127,9 @@ public class EditProductQuantity extends javax.swing.JFrame {
 
     private void saveQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveQuantityActionPerformed
         // TODO add your handling code here:
-        
-
-    }//GEN-LAST:event_saveQuantityActionPerformed
-
-    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        // TODO add your handling code here:
         this.setVisible(false);
-        new Manage().setVisible(true);
-    }//GEN-LAST:event_backButtonActionPerformed
+        new ManageProducts().setVisible(true);
+    }//GEN-LAST:event_saveQuantityActionPerformed
 
     /**
      * @param args the command line arguments
@@ -187,7 +168,6 @@ public class EditProductQuantity extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton backButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel productName;
     private javax.swing.JButton saveQuantity;

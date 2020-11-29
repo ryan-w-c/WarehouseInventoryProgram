@@ -153,7 +153,6 @@ public class ViewEditSalesperson extends javax.swing.JFrame {
             this.setVisible(false);
         }
         catch (Exception ArrayIndexOutOfBoundsException){
-            System.out.println("Error");
             JOptionPane.showMessageDialog(null, "Select One Salesperson.", "Alert", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_editSalespersonBtnActionPerformed

@@ -51,24 +51,6 @@ public class WarehouseControl {
         }
     }
     
-    public List<Product> getLowProductResultSet(Warehouse w) {
-        Main.em.getTransaction().begin();
-        Query qu1 = Main.em.createNamedQuery("Product.findByWarehousenameLow");
-        qu1.setParameter("warehousename", w.getWarehousename());
-        List<Product> lst = qu1.getResultList();
-        Main.em.getTransaction().commit();
-        return lst;
-    }
-    
-    public List<Product> getAllProductResultSet(Warehouse w) {
-        Main.em.getTransaction().begin();
-        Query qu1 = Main.em.createNamedQuery("Product.findByWarehousename");
-        qu1.setParameter("warehousename", w.getWarehousename());
-        List<Product> lst = qu1.getResultList();
-        Main.em.getTransaction().commit();
-        return lst;
-    }
-    
     public List<Warehouse> getWarehouseResultSet(){
         Main.em.getTransaction().begin();
         Query qu1 = Main.em.createNativeQuery("select * from Warehouse", Warehouse.class);

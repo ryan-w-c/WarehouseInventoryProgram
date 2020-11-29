@@ -5,38 +5,37 @@
  */
 package boundary;
 
-import Control.WarehouseControl;
+import Control.ProductControl;
+import Control.SalespersonControl;
 import Entity.Salesperson;
-import Entity.Warehouse;
+import static Main.Main.controlfactory;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author minkyaw
+ * @author ryancavanagh
  */
-public class ViewEditWarehouse extends javax.swing.JFrame {
+public class SelectProductForQuantity extends javax.swing.JFrame {
 
     /**
-     * Creates new form ViewEditWarehouse
+     * Creates new form SelectProductForQuantity
      */
-    public ViewEditWarehouse() {
+    public SelectProductForQuantity() {
         initComponents();
         updateTable();
     }
-    
     private void updateTable (){
-        WarehouseControl sp = Main.Main.controlfactory.getWarehouse();
-        List <Warehouse> list = sp.getWarehouseResultSet(); 
+        ProductControl pc = Main.Main.controlfactory.getProduct();
+        List<String> list = pc.getDistinctProductResultSet(); 
         
-        DefaultTableModel model = (DefaultTableModel) warehouseTable.getModel();
+        DefaultTableModel model = (DefaultTableModel) productsTable.getModel();
 //        List<Salesperson> list = lst;
-        Object rowData[] = new Object[2];
+        Object rowData[] = new Object[1];
         for(int i = 0; i < list.size(); i++)
         {
-            rowData[0] = list.get(i).getWarehousename();
-            rowData[1] = list.get(i).getAddress();
+            rowData[0] = list.get(i);
             model.addRow(rowData);
         }
 //        java.sql.ResultSet rs1 = (java.sql.ResultSet) rs;
@@ -44,13 +43,13 @@ public class ViewEditWarehouse extends javax.swing.JFrame {
        
     }
     
-    private Object selectWarehouseInTable(){
-        if (warehouseTable.getRowCount() == 0){
-            System.out.println(warehouseTable.getRowCount());
+    private Object selectProductInTable(){
+        if (productsTable.getRowCount() == 0){
+            System.out.println(productsTable.getRowCount());
             return 0;
         } else {
-            int row = warehouseTable.getSelectedRow();
-            Object sp = warehouseTable.getValueAt(row, 0);
+            int row = productsTable.getSelectedRow();
+            Object sp = productsTable.getValueAt(row, 0);
 
             return sp;
         }
@@ -66,41 +65,29 @@ public class ViewEditWarehouse extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        warehouseTable = new javax.swing.JTable();
-        viewWarehouse = new javax.swing.JButton();
+        productsTable = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        editQuantity = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        warehouseTable.setModel(new javax.swing.table.DefaultTableModel(
+        productsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Warehouse Name", "Address"
+                "Product Name"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
+        ));
+        jScrollPane1.setViewportView(productsTable);
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
+        jLabel1.setText("Select Product to Edit Quantity");
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(warehouseTable);
-
-        viewWarehouse.setText("View Warehouse");
-        viewWarehouse.addActionListener(new java.awt.event.ActionListener() {
+        editQuantity.setText("Edit Quantity");
+        editQuantity.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viewWarehouseActionPerformed(evt);
+                editQuantityActionPerformed(evt);
             }
         });
 
@@ -116,49 +103,49 @@ public class ViewEditWarehouse extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addComponent(viewWarehouse)
-                        .addGap(64, 64, 64)
-                        .addComponent(backButton)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                        .addGap(21, 21, 21)
+                        .addComponent(editQuantity)
+                        .addGap(18, 18, 18)
+                        .addComponent(backButton))
+                    .addComponent(jLabel1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(viewWarehouse)
-                    .addComponent(backButton))
-                .addContainerGap(7, Short.MAX_VALUE))
+                    .addComponent(backButton)
+                    .addComponent(editQuantity))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void viewWarehouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewWarehouseActionPerformed
+    private void editQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editQuantityActionPerformed
         // TODO add your handling code here:
         try {
-            //TODO pass salesperson object in
-            Warehouse w1 = Main.Main.em.find(Warehouse.class, selectWarehouseInTable());
-            new ManageWarehouse(w1).setVisible(true);
+            new EditProductQuantity(selectProductInTable().toString()).setVisible(true);
             this.setVisible(false);
         }
         catch (Exception ArrayIndexOutOfBoundsException){
-            JOptionPane.showMessageDialog(null, "Select One Warehouse", "Alert", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Select One Product.", "Alert", JOptionPane.ERROR_MESSAGE);
         }
-        
-    }//GEN-LAST:event_viewWarehouseActionPerformed
+    }//GEN-LAST:event_editQuantityActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new Manage().setVisible(true);
+        new ManageProducts().setVisible(true);
     }//GEN-LAST:event_backButtonActionPerformed
 
     /**
@@ -178,28 +165,29 @@ public class ViewEditWarehouse extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewEditWarehouse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SelectProductForQuantity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewEditWarehouse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SelectProductForQuantity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewEditWarehouse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SelectProductForQuantity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewEditWarehouse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SelectProductForQuantity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewEditWarehouse().setVisible(true);
+                new SelectProductForQuantity().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
+    private javax.swing.JButton editQuantity;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton viewWarehouse;
-    private javax.swing.JTable warehouseTable;
+    private javax.swing.JTable productsTable;
     // End of variables declaration//GEN-END:variables
 }

@@ -11,7 +11,6 @@ import Entity.Warehouse;
 import Main.Main;
 import java.util.List;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 
 public class ProductControl {
     
@@ -35,7 +34,7 @@ public class ProductControl {
         Main.em.getTransaction().commit();
     }
     
-    public List<Product> getOnlyProductResultSet(String p){
+    public List<Product> getSingleProductResultSet(String p){
         Main.em.getTransaction().begin();
         Query qu1 = Main.em.createNamedQuery("Product.findByProductname");
         qu1.setParameter("productname", p);
@@ -62,8 +61,32 @@ public class ProductControl {
         for (int i = 0; i < lst.size(); i++) {
             createProduct(pName, lst.get(i), sellingPrice, costPrice);
         }
-        
-        
+    }
+    
+    public List<String> getDistinctProductResultSet(){
+        Main.em.getTransaction().begin();
+        Query qu1 = Main.em.createNativeQuery("SELECT distinct productname FROM product");
+        List<String> lst = qu1.getResultList();
+        Main.em.getTransaction().commit();
+        return lst;
+    }
+    
+    public List<Product> getLowProductResultSet(Warehouse w) {
+        Main.em.getTransaction().begin();
+        Query qu1 = Main.em.createNamedQuery("Product.findByWarehousenameLow");
+        qu1.setParameter("warehousename", w.getWarehousename());
+        List<Product> lst = qu1.getResultList();
+        Main.em.getTransaction().commit();
+        return lst;
+    }
+    
+    public List<Product> getAllProductResultSet(Warehouse w) {
+        Main.em.getTransaction().begin();
+        Query qu1 = Main.em.createNamedQuery("Product.findByWarehousename");
+        qu1.setParameter("warehousename", w.getWarehousename());
+        List<Product> lst = qu1.getResultList();
+        Main.em.getTransaction().commit();
+        return lst;
     }
     
 }

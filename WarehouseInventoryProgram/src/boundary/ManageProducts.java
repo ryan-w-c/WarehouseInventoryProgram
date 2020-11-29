@@ -116,9 +116,8 @@ public class ManageProducts extends javax.swing.JFrame {
 
     private void editQuantityButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editQuantityButtonActionPerformed
         // TODO add your handling code here:
-//        this.setVisible(false);
-        //fixme create new jframe class to pick product that sends it to editproductquantity()
-//        new EditProductQuantity().setVisible(true);
+        this.setVisible(false);
+        new SelectProductForQuantity().setVisible(true);
     }//GEN-LAST:event_editQuantityButtonActionPerformed
 
     /**
