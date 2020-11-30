@@ -7,7 +7,6 @@ package boundary;
 
 import Control.CustomerControl;
 import Entity.Customer;
-import Entity.Salesperson;
 import static Main.Main.controlfactory;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -21,16 +20,19 @@ public class SelectCustomer extends javax.swing.JFrame {
     /**
      * Creates new form SelectCustomer
      */
-    public SelectCustomer() {
+    CustomerPurchase cpBoundry;
+    public SelectCustomer(CustomerPurchase cp) {
+        cpBoundry = cp;
         initComponents();
-        Update_table();        
+        Update_table();   
+        
     }
     
     
     
         private void Update_table (){
-//        CustomerControl c1 = controlfactory.getCustomer();
-        CustomerControl c1 = new CustomerControl();
+        CustomerControl c1 = controlfactory.getCustomer();
+//        CustomerControl c1 = new CustomerControl();
         List <Customer> list = c1.getCustomerResultSet(); 
         
         DefaultTableModel model = (DefaultTableModel) customerTable.getModel();
@@ -44,6 +46,7 @@ public class SelectCustomer extends javax.swing.JFrame {
             rowData[3] = list.get(i).getPhone();
             model.addRow(rowData);
         }
+        customerTable.setRowSelectionInterval(0, customerTable.getRowCount()-1);
     }
     
     
@@ -51,7 +54,7 @@ public class SelectCustomer extends javax.swing.JFrame {
         if (customerTable.getRowCount() == 0){
             return null;
         }else{
-        customerTable.setRowSelectionInterval(0, customerTable.getRowCount()-1);
+        int count = customerTable.getRowCount();
         int row = customerTable.getSelectedRow();
         Object sp = customerTable.getValueAt(row,0);
             System.out.println((Integer)sp);
@@ -165,54 +168,52 @@ public class SelectCustomer extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
-        System.out.println(selectCustomerInTable());
-        Customer s1 = Main.Main.em.find(Customer.class, selectCustomerInTable());
+        Customer c1 = Main.Main.em.find(Customer.class, selectCustomerInTable());
+        cpBoundry.setCustomer(c1);
         this.setVisible(false);
-        new CustomerPurchase().setVisible(true);
-        
+        cpBoundry.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-                      this.setVisible(false);
-        new CustomerPurchase().setVisible(true);
+        this.setVisible(false);
+        cpBoundry.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SelectCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SelectCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SelectCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SelectCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SelectCustomer().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(SelectCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(SelectCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(SelectCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(SelectCustomer.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new SelectCustomer().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable customerTable;

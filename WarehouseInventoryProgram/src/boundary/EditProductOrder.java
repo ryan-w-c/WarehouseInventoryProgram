@@ -9,6 +9,7 @@ import Control.ProductControl;
 import Control.TableCellListener;
 import Entity.Product;
 import java.awt.event.ActionEvent;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.AbstractAction;
@@ -27,10 +28,12 @@ public class EditProductOrder extends javax.swing.JFrame {
      */
     
     private String p;
-    private Map order;
-    public EditProductOrder(String p1, Map o) {
+    private HashMap<Product, Integer> order;
+    private CustomerPurchase cpBoundry;
+    public EditProductOrder(String p1, HashMap<Product, Integer> o, CustomerPurchase cp) {
         initComponents();
         p = p1;
+        cpBoundry = cp;
         order = o;
         productName.setText("Product: " + p);
         updateTable();
@@ -160,8 +163,9 @@ public class EditProductOrder extends javax.swing.JFrame {
 
     private void addToOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addToOrderActionPerformed
         // TODO add your handling code here:
+        cpBoundry.updateOrder(this.order);
         this.setVisible(false);
-        new CustomerPurchase(order).setVisible(true);
+        cpBoundry.setVisible(true);
     }//GEN-LAST:event_addToOrderActionPerformed
 
     /**

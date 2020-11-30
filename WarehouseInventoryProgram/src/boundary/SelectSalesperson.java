@@ -20,12 +20,11 @@ public class SelectSalesperson extends javax.swing.JFrame {
     /**
      * Creates new form SelectSalesperson
      */
-    public SelectSalesperson() {
+    private CustomerPurchase cpBoundry;
+    public SelectSalesperson(CustomerPurchase cp) {
+        cpBoundry = cp;
         initComponents();
         Update_table();
-        Object sp = this.selectSalespersonInTable();
-        System.out.println(sp);
-               
     }
     private void Update_table (){
         SalespersonControl sp = controlfactory.getSalesperson();
@@ -42,19 +41,16 @@ public class SelectSalesperson extends javax.swing.JFrame {
             rowData[3] = list.get(i).getPhone();
             model.addRow(rowData);
         }
-//        java.sql.ResultSet rs1 = (java.sql.ResultSet) rs;
-//        SalespersonTable.setModel(DbUtils.resultSetToTableModel(rs));
-       
+        SalespersonTable.setRowSelectionInterval(0, SalespersonTable.getRowCount()-1);
+
     }
     
     public Object selectSalespersonInTable(){
         if (SalespersonTable.getRowCount() == 0){
             return null;
         }else{
-        SalespersonTable.setRowSelectionInterval(0, SalespersonTable.getRowCount()-1);
-        int column = 0;
         int row = SalespersonTable.getSelectedRow();
-        Object sp = SalespersonTable.getValueAt(row,column);
+        Object sp = SalespersonTable.getValueAt(row,0);
             System.out.println(sp);
         return sp;
         }
@@ -140,9 +136,10 @@ public class SelectSalesperson extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        Salesperson sp = Main.Main.em.find(Salesperson.class, selectSalespersonInTable());
+        cpBoundry.setSp(sp);
         this.setVisible(false);
-        new CustomerPurchase().setVisible(true);
-        selectSalespersonInTable();
+        cpBoundry.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -154,36 +151,36 @@ public class SelectSalesperson extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SelectSalesperson.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SelectSalesperson.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SelectSalesperson.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SelectSalesperson.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new SelectSalesperson().setVisible(true);
-        });
-        
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(SelectSalesperson.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(SelectSalesperson.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(SelectSalesperson.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(SelectSalesperson.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(() -> {
+//            new SelectSalesperson().setVisible(true);
+//        });
+//        
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable SalespersonTable;

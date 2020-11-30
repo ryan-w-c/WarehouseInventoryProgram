@@ -21,15 +21,18 @@ import java.util.List;
 import javax.persistence.Query;
 
 public class InvoiceControl {
-    
-    public void addInvoice(Integer sp,Object customer, Integer id, double subTotal,
+    private int id;
+    public InvoiceControl(){
+    id = getNewID();
+}
+    public void addInvoice(Salesperson sp,Customer customer, double subTotal,
             double tax, double comm, double deliveryfee,double total, double balance, 
             boolean openClose, String time,Collection<Orderitem> items){
         
       Main.em.getTransaction( ).begin( );
 
       Invoice inv1 = new Invoice(); 
-      inv1.setInvoiceid( id );
+      inv1.setInvoiceid( id ++);
       inv1.setSubtotal( subTotal);
       inv1.setTax( tax );
       inv1.setCommission( comm );
@@ -39,8 +42,8 @@ public class InvoiceControl {
       inv1.setOpenclose(openClose);
       inv1.setDatetime(time);
       inv1.setOrderitemCollection(items);
-//      inv1.setCustomerid(customer);  
-//      inv1.setSalespersonid(sp);
+      inv1.setCustomerid(customer);  
+      inv1.setSalespersonid(sp);
       
       Main.em.persist( inv1 );
       Main.em.getTransaction( ).commit( );
@@ -52,7 +55,7 @@ public class InvoiceControl {
   
         Main.em.getTransaction().begin();
        
-        Query qu1 = Main.em.createNativeQuery("select * from INVOICE", Invoice.class);
+        Query qu1 = Main.em.createNativeQuery("SELECT * FROM INVOICE where OPENCLOSE = true", Invoice.class);
         List<Invoice> lst = qu1.getResultList();
         Main.em.getTransaction().commit();
         return lst;
@@ -61,10 +64,25 @@ public class InvoiceControl {
   
         Main.em.getTransaction().begin();
        
-        Query qu1 = Main.em.createNativeQuery("select * from INVOICE", Invoice.class);
+        Query qu1 = Main.em.createNativeQuery("SELECT * FROM INVOICE where OPENCLOSE = false", Invoice.class);
         List<Invoice> lst = qu1.getResultList();
         Main.em.getTransaction().commit();
         return lst;
+    }
+       
+       
+        public Integer getNewID (){
+        Main.em.getTransaction().begin();
+        Query qu1 = Main.em.createNativeQuery("select max(SALESPERSONID) from SALESPERSON");
+        List lst  = qu1.getResultList();
+        Main.em.getTransaction().commit();
+        Integer ans;
+        if (lst.get(0) == null) {
+            ans = 1;
+        } else {
+            ans = Integer.parseInt(lst.get(0).toString()) +1;
+        } 
+        return ans;
     }
     
     

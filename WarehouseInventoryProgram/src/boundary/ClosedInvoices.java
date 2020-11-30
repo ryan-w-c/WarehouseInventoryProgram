@@ -5,6 +5,12 @@
  */
 package boundary;
 
+import Control.InvoiceControl;
+import Entity.Invoice;
+import static Main.Main.controlfactory;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author zubin
@@ -16,6 +22,26 @@ public class ClosedInvoices extends javax.swing.JFrame {
      */
     public ClosedInvoices() {
         initComponents();
+        Update_table();
+    }
+    
+    
+    private void Update_table (){
+        InvoiceControl in1 = controlfactory.getInvoice();
+        List <Invoice> list = in1.getCloseInvoiceResultSet(); 
+        
+        DefaultTableModel model = (DefaultTableModel) closeInvoiceTable.getModel();
+//        List<Salesperson> list = lst;
+        Object rowData[] = new Object[4];
+        for(int i = 0; i < list.size(); i++)
+        {
+            rowData[0] = list.get(i).getInvoiceid();
+            rowData[1] = list.get(i).getCustomerid().getFirstname();
+            rowData[2] = list.get(i).getCustomerid().getPhone();
+            rowData[3] = list.get(i).getTotal();
+            rowData[4] = list.get(i).getDatetime();
+            model.addRow(rowData);
+        }
     }
 
     /**
@@ -30,7 +56,7 @@ public class ClosedInvoices extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        closeInvoiceTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -43,35 +69,35 @@ public class ClosedInvoices extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        closeInvoiceTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Invoice Number", "Customer Name", "Customer Phone", "Total", "Amount Paid", "Date"
+                "Invoice Number", "Customer Name", "Customer Phone", "Total", "Date"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(closeInvoiceTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(16, 16, 16))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)
-                        .addGap(38, 38, 38))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 563, Short.MAX_VALUE)
+                                .addComponent(jButton1)))
+                        .addGap(16, 16, 16))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 645, Short.MAX_VALUE)
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -81,9 +107,9 @@ public class ClosedInvoices extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap())
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         jButton1.getAccessibleContext().setAccessibleDescription("Back");
@@ -133,9 +159,9 @@ public class ClosedInvoices extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable closeInvoiceTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

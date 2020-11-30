@@ -5,6 +5,12 @@
  */
 package boundary;
 
+import Control.InvoiceControl;
+import Entity.Invoice;
+import static Main.Main.controlfactory;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author zubin
@@ -16,7 +22,28 @@ public class OpenInvoices extends javax.swing.JFrame {
      */
     public OpenInvoices() {
         initComponents();
+        Update_table();
     }
+    
+    private void Update_table (){
+        InvoiceControl in1 = controlfactory.getInvoice();
+        List <Invoice> list = in1.getOpenInvoiceResultSet(); 
+        
+        DefaultTableModel model = (DefaultTableModel) openInvoiceTable.getModel();
+//        List<Salesperson> list = lst;
+        Object rowData[] = new Object[4];
+        for(int i = 0; i < list.size(); i++)
+        {
+            rowData[0] = list.get(i).getInvoiceid();
+            rowData[1] = list.get(i).getCustomerid().getFirstname();
+            rowData[2] = list.get(i).getCustomerid().getPhone();
+            rowData[3] = list.get(i).getTotal();
+            rowData[4] = list.get(i).getTotal() - list.get(i).getBalanceremaining();
+            rowData[5] = list.get(i).getDatetime();
+            model.addRow(rowData);
+        }
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,7 +57,7 @@ public class OpenInvoices extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        openInvoiceTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,7 +71,7 @@ public class OpenInvoices extends javax.swing.JFrame {
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        openInvoiceTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -55,25 +82,22 @@ public class OpenInvoices extends javax.swing.JFrame {
                 "Invoice Number", "Customer Name", "Customer Phone", "Total", "Amount Paid", "Date"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(openInvoiceTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 614, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addGap(14, 14, 14))))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton2)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 614, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -82,9 +106,9 @@ public class OpenInvoices extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
                 .addComponent(jButton2)
-                .addGap(15, 15, 15))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -135,6 +159,6 @@ public class OpenInvoices extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable openInvoiceTable;
     // End of variables declaration//GEN-END:variables
 }

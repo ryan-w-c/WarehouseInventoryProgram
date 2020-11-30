@@ -6,9 +6,10 @@
 package boundary;
 
 import Control.ProductControl;
+import Entity.Product;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,11 +21,13 @@ public class SelectProductForOrder extends javax.swing.JFrame {
     /**
      * Creates new form SelectProduct
      */
-    private Map order;
-    public SelectProductForOrder(Map o) {
+    private HashMap <Product, Integer> order;
+    private CustomerPurchase cpBoundry;
+    public SelectProductForOrder(CustomerPurchase cp) {
         initComponents();
         updateTable();
-        order = o;
+        cpBoundry = cp;
+        order = new HashMap<>();
     }
     
     private void updateTable (){
@@ -39,9 +42,6 @@ public class SelectProductForOrder extends javax.swing.JFrame {
             rowData[0] = list.get(i);
             model.addRow(rowData);
         }
-//        java.sql.ResultSet rs1 = (java.sql.ResultSet) rs;
-//        SalespersonTable.setModel(DbUtils.resultSetToTableModel(rs));
-       
     }    
     
     private Object selectProductInTable(){
@@ -51,7 +51,6 @@ public class SelectProductForOrder extends javax.swing.JFrame {
         } else {
             int row = productsTable.getSelectedRow();
             Object sp = productsTable.getValueAt(row, 0);
-
             return sp;
         }
     }
@@ -135,7 +134,7 @@ public class SelectProductForOrder extends javax.swing.JFrame {
     private void addProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProductActionPerformed
         // TODO add your handling code here:
 //        try {x
-            new EditProductOrder(selectProductInTable().toString(), order).setVisible(true);
+            new EditProductOrder(selectProductInTable().toString(), order, cpBoundry ).setVisible(true);
             this.setVisible(false);
 //        }
 //        catch (Exception ArrayIndexOutOfBoundsException){
@@ -146,7 +145,7 @@ public class SelectProductForOrder extends javax.swing.JFrame {
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new CustomerPurchase(order).setVisible(true);
+        cpBoundry.setVisible(true);
     }//GEN-LAST:event_backButtonActionPerformed
 
     /**

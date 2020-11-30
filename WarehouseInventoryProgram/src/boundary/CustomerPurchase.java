@@ -5,9 +5,15 @@
  */
 package boundary;
 
+import Entity.Customer;
 import Entity.Product;
+import Entity.Salesperson;
+import static com.google.common.io.Files.map;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import static java.util.Map.entry;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,16 +24,41 @@ public class CustomerPurchase extends javax.swing.JFrame {
     /**
      * Creates new form CustomerPurchase
      */
-    private Map order;
+    private HashMap order;
     private double  deliveryFee;
+    private Customer customer;
+    private Salesperson sp;
+
+    
     public CustomerPurchase(){
         initComponents();
         order = new HashMap<Product, Integer>();
+        
     }
     
-    public CustomerPurchase(Map o) {
-        initComponents();
-        order = o;
+//    public CustomerPurchase(Map o, Customer c1) {
+//        initComponents();
+//        order = o;
+//    }
+
+    public void setSp(Salesperson sp) {
+        this.sp = sp;
+        System.out.println(this.sp);
+    }
+
+        public void setCustomer(Customer customer) {
+        this.customer = customer;
+            System.out.println(this.customer);
+    }
+        
+        public void updateOrder(HashMap<Product, Integer> order) {
+            
+          Iterator it = order.entrySet().iterator();
+            while (it.hasNext()) {
+                Map.Entry pair = (Map.Entry)it.next();
+                this.order.put(pair.getKey(),pair.getValue());
+                it.remove(); 
+            }
     }
 
     /**
@@ -46,8 +77,7 @@ public class CustomerPurchase extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        SpPhone = new javax.swing.JTextField();
+        delivery = new javax.swing.JTextField();
         phoneNumberLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -89,10 +119,9 @@ public class CustomerPurchase extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Back");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        delivery.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                deliveryActionPerformed(evt);
             }
         });
 
@@ -115,11 +144,8 @@ public class CustomerPurchase extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(phoneNumberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(SpPhone)))
-                .addContainerGap(39, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(delivery)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,7 +156,7 @@ public class CustomerPurchase extends javax.swing.JFrame {
                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(SpPhone, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                    .addComponent(delivery, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
                     .addComponent(phoneNumberLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -138,9 +164,7 @@ public class CustomerPurchase extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4)
                     .addComponent(jButton5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -148,11 +172,10 @@ public class CustomerPurchase extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,46 +193,46 @@ public class CustomerPurchase extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new SelectSalesperson().setVisible(true);
-//        SelectSalesperson salesp = new SelectSalesperson();
-//        salesp.setVisible(true);
-//        Integer salesPersonVal = (Integer)salesp.selectSalespersonInTable();
-//        System.out.println(salesPersonVal);
+        new SelectSalesperson(this).setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new SelectProductForOrder(order).setVisible(true);
+        new SelectProductForOrder(this).setVisible(true);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
               this.setVisible(false);
-        SelectCustomer sc = new SelectCustomer();
-        sc.setVisible(true);
-        Integer customerVal = (Integer)sc.selectCustomerInTable();
-        System.out.println(customerVal);
+              new SelectCustomer(this).setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        try{
+            deliveryFee = Double.parseDouble(delivery.getText());
+            new InvoiceSubtotal(customer, sp, this.order ,deliveryFee).setVisible(true);
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Please fill out all info correctly.", "Alert", JOptionPane.ERROR_MESSAGE);
+        }
+        
         this.setVisible(false);
 //        new InvoiceSubtotal(customerVal, salesPersonVal, productList,deliveryFee).setVisible(true);
         
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        
-        this.setVisible(false);
-        new Invoices().setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
+        new Invoices().setVisible(true);
         
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void deliveryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deliveryActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deliveryActionPerformed
 
     /**
      * @param args the command line arguments
@@ -247,8 +270,7 @@ public class CustomerPurchase extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField SpPhone;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField delivery;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
