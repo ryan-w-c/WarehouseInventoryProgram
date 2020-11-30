@@ -6,7 +6,6 @@
 package boundary;
 
 import Control.ProductControl;
-import Control.SalespersonControl;
 import static Main.Main.controlfactory;
 import javax.swing.JOptionPane;
 

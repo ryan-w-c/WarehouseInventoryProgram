@@ -213,12 +213,12 @@ public class CustomerPurchase extends javax.swing.JFrame {
         try{
             deliveryFee = Double.parseDouble(delivery.getText());
             new InvoiceSubtotal(customer, sp, this.order ,deliveryFee).setVisible(true);
+            this.setVisible(false);
         }
         catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Please fill out all info correctly.", "Alert", JOptionPane.ERROR_MESSAGE);
         }
         
-        this.setVisible(false);
 //        new InvoiceSubtotal(customerVal, salesPersonVal, productList,deliveryFee).setVisible(true);
         
     }//GEN-LAST:event_jButton4ActionPerformed

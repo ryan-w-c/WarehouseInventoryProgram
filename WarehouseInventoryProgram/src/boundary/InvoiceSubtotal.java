@@ -53,10 +53,10 @@ public class InvoiceSubtotal extends javax.swing.JFrame {
             rowData[0] = me.getKey().getProductPK().getProductname();
             return me;
         }).map(me -> {
-            rowData[2] = me.getKey().getProductPK().getWarehousename();
+            rowData[1] = me.getKey().getProductPK().getWarehousename();
             return me;
         }).map(me -> {
-            rowData[3] = me.getValue();
+            rowData[2] = me.getValue();
             return me;
         }).forEachOrdered(_item -> {
             model.addRow(rowData);
@@ -190,7 +190,7 @@ public class InvoiceSubtotal extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-              this.setVisible(false);
+        this.setVisible(false);
         new CustomerPurchase().setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
