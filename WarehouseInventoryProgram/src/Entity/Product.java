@@ -74,7 +74,6 @@ public class Product implements Serializable {
         this.quantity = quantity;
         this.sellingprice = sellingprice;
         this.costprice = costprice;
-//        this.addQuantity = addQuantity;
     }
 
     public Product(String productname, String warehousename) {

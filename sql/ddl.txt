@@ -14,14 +14,15 @@ create table Salesperson (
     constraint Salesperson_PK primary key (SalespersonID)
 ); 
 
-CREATE TABLE Product (
-    ProductName varchar(50) not null,
-    WarehouseName varchar(100) not null,
-    Quantity integer not null,
-    constraint OrderItem_FK foreign key (ProductName) references ProductTitle (ProductName),
-    constraint Warehouse_FK foreign key (WarehouseName) references Warehouse (WarehouseName),
-    constraint Product_PK primary key (ProductName, WarehouseName)
+CREATE TABLE PRODUCT (
+    PRODUCTNAME VARCHAR(50) NOT NULL, 
+    WAREHOUSENAME VARCHAR(100) NOT NULL, 
+    QUANTITY INTEGER NOT NULL, 
+    SELLINGPRICE DOUBLE NOT NULL, 
+    COSTPRICE DOUBLE NOT NULL, 
+    PRIMARY KEY (PRODUCTNAME, WAREHOUSENAME)
 );
+
 
 CREATE TABLE OrderItem (
     InvoiceID integer not null,
@@ -55,14 +56,6 @@ create Table Warehouse(
     Zipcode integer not null,
     constraint Warehouse_PK primary key (WarehouseName)
 );
-
-create table ProductTitle ( 
-    ProductName varchar(50) not null,
-    SellingPrice float not null,
-    CostPrice int not null, 
-    constraint ProductTitle_PK primary key (ProductName)
-); 
-
 
 create Table Invoice(
     SalespersonID integer not null,
