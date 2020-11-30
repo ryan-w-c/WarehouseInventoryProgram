@@ -101,7 +101,6 @@ public class ProductControl {
     
     public void updateQuantity(String p, String w, Integer q) {
         Product p1 = getProduct(p, w);
-        Main.em.getTransaction().commit();
         Main.em.getTransaction().begin();
         p1.setQuantity(q);
         Main.em.persist(p1);
