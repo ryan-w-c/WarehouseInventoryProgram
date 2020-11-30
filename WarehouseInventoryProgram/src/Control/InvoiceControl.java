@@ -48,7 +48,16 @@ public class InvoiceControl {
       Main.em.close( );
     }
     
-        public List<Invoice> getSalespersonResultSet(){
+        public List<Invoice> getOpenInvoiceResultSet(){
+  
+        Main.em.getTransaction().begin();
+       
+        Query qu1 = Main.em.createNativeQuery("select * from INVOICE", Invoice.class);
+        List<Invoice> lst = qu1.getResultList();
+        Main.em.getTransaction().commit();
+        return lst;
+    }
+       public List<Invoice> getCloseInvoiceResultSet(){
   
         Main.em.getTransaction().begin();
        

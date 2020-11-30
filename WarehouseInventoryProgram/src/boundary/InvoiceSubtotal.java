@@ -143,7 +143,7 @@ public class InvoiceSubtotal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InvoiceSubtotal().setVisible(true);
+//                new InvoiceSubtotal().setVisible(true);
             }
         });
     }

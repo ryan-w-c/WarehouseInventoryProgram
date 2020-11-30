@@ -16,7 +16,7 @@ import javax.persistence.Query;
  * @author minkyaw
  */
 
-public class CustomerControl {
+public final class CustomerControl {
     
     private int idNum;
     
@@ -37,6 +37,7 @@ public class CustomerControl {
         c1.setCity(city);
         c1.setState(state);
         c1.setZip(zip);
+        c1.setCustomerid(idNum++);
         
         Main.em.persist(c1);
         Main.em.getTransaction().commit();

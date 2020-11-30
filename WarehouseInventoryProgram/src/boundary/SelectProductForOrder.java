@@ -7,21 +7,24 @@ package boundary;
 
 import Control.ProductControl;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author ryancavanagh
+ * @author zubin
  */
-public class SelectProductForQuantity extends javax.swing.JFrame {
+public class SelectProductForOrder extends javax.swing.JFrame {
 
     /**
-     * Creates new form SelectProductForQuantity
+     * Creates new form SelectProduct
      */
-    public SelectProductForQuantity() {
+    private Map order;
+    public SelectProductForOrder(Map o) {
         initComponents();
         updateTable();
+        order = o;
     }
     
     private void updateTable (){
@@ -39,7 +42,7 @@ public class SelectProductForQuantity extends javax.swing.JFrame {
 //        java.sql.ResultSet rs1 = (java.sql.ResultSet) rs;
 //        SalespersonTable.setModel(DbUtils.resultSetToTableModel(rs));
        
-    }
+    }    
     
     private Object selectProductInTable(){
         if (productsTable.getRowCount() == 0){
@@ -52,7 +55,7 @@ public class SelectProductForQuantity extends javax.swing.JFrame {
             return sp;
         }
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -65,7 +68,7 @@ public class SelectProductForQuantity extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         productsTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        editQuantity = new javax.swing.JButton();
+        addProduct = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -80,12 +83,12 @@ public class SelectProductForQuantity extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(productsTable);
 
-        jLabel1.setText("Select Product to Edit Quantity");
+        jLabel1.setText("Select Product to Add to Order");
 
-        editQuantity.setText("Edit Quantity");
-        editQuantity.addActionListener(new java.awt.event.ActionListener() {
+        addProduct.setText("Add Product");
+        addProduct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editQuantityActionPerformed(evt);
+                addProductActionPerformed(evt);
             }
         });
 
@@ -105,12 +108,12 @@ public class SelectProductForQuantity extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
-                        .addComponent(editQuantity)
+                        .addComponent(addProduct)
                         .addGap(18, 18, 18)
                         .addComponent(backButton))
                     .addComponent(jLabel1)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,68 +125,69 @@ public class SelectProductForQuantity extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(backButton)
-                    .addComponent(editQuantity))
-                .addContainerGap(14, Short.MAX_VALUE))
+                    .addComponent(addProduct))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void editQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editQuantityActionPerformed
+    private void addProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProductActionPerformed
         // TODO add your handling code here:
-        try {
-            new EditProductQuantity(selectProductInTable().toString()).setVisible(true);
+//        try {x
+            new EditProductOrder(selectProductInTable().toString(), order).setVisible(true);
             this.setVisible(false);
-        }
-        catch (Exception ArrayIndexOutOfBoundsException){
-            JOptionPane.showMessageDialog(null, "Select One Product.", "Alert", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_editQuantityActionPerformed
+//        }
+//        catch (Exception ArrayIndexOutOfBoundsException){
+//            JOptionPane.showMessageDialog(null, "Select One Product.", "Alert", JOptionPane.ERROR_MESSAGE);
+//        }
+    }//GEN-LAST:event_addProductActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new ManageProducts().setVisible(true);
+        new CustomerPurchase(order).setVisible(true);
     }//GEN-LAST:event_backButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SelectProductForQuantity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SelectProductForQuantity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SelectProductForQuantity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SelectProductForQuantity.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SelectProductForQuantity().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(SelectProductForOrder.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(SelectProductForOrder.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(SelectProductForOrder.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(SelectProductForOrder.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new SelectProductForOrder().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addProduct;
     private javax.swing.JButton backButton;
-    private javax.swing.JButton editQuantity;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable productsTable;

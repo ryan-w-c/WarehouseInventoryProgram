@@ -23,7 +23,9 @@ public class SelectSalesperson extends javax.swing.JFrame {
     public SelectSalesperson() {
         initComponents();
         Update_table();
-        selectSalespersonInTable();
+        Object sp = this.selectSalespersonInTable();
+        System.out.println(sp);
+               
     }
     private void Update_table (){
         SalespersonControl sp = controlfactory.getSalesperson();
@@ -53,7 +55,7 @@ public class SelectSalesperson extends javax.swing.JFrame {
         int column = 0;
         int row = SalespersonTable.getSelectedRow();
         Object sp = SalespersonTable.getValueAt(row,column);
-    
+            System.out.println(sp);
         return sp;
         }
     }
@@ -140,6 +142,7 @@ public class SelectSalesperson extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setVisible(false);
         new CustomerPurchase().setVisible(true);
+        selectSalespersonInTable();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

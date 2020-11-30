@@ -7,6 +7,7 @@ package boundary;
 
 import Control.CustomerControl;
 import Entity.Customer;
+import Entity.Salesperson;
 import static Main.Main.controlfactory;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -53,6 +54,7 @@ public class SelectCustomer extends javax.swing.JFrame {
         customerTable.setRowSelectionInterval(0, customerTable.getRowCount()-1);
         int row = customerTable.getSelectedRow();
         Object sp = customerTable.getValueAt(row,0);
+            System.out.println((Integer)sp);
         return sp;
         }
     }
@@ -164,9 +166,11 @@ public class SelectCustomer extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         
-               System.out.println(selectCustomerInTable());
-              this.setVisible(false);
+        System.out.println(selectCustomerInTable());
+        Customer s1 = Main.Main.em.find(Customer.class, selectCustomerInTable());
+        this.setVisible(false);
         new CustomerPurchase().setVisible(true);
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

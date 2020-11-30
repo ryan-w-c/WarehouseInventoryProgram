@@ -27,11 +27,11 @@ public class Main {
     public static ControlFactory controlfactory;
     
     public static void main(String[] args) {
-        new Login().setVisible(true);
         
         EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("WarehouseInventoryProgramPU");
         em = emfactory.createEntityManager();
         controlfactory = new ControlFactory();
+        new Login().setVisible(true);
         
 //        SelectCustomer sc = new SelectCustomer();
 //        System.out.println(sc.jButton2ActionPerformed());
