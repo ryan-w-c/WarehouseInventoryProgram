@@ -70,14 +70,22 @@ public class EditProductOrder extends javax.swing.JFrame {
             TableCellListener tcl = (TableCellListener)e.getSource();
             ProductControl pc = Main.Main.controlfactory.getProduct();
             Product p1 = pc.getProduct(p, warehouseTable.getValueAt(tcl.getRow(), 0).toString());
-            if (Integer.parseInt(tcl.getNewValue().toString()) <= Integer.parseInt(warehouseTable.getValueAt(tcl.getRow(), 1).toString())) {
+            
+            int addQuantity = Integer.parseInt(tcl.getNewValue().toString());
+            int inStock = Integer.parseInt(warehouseTable.getValueAt(tcl.getRow(), 1).toString());
+            if (addQuantity <= inStock 
+                    && addQuantity > 0) {
                 order.put(p1, Integer.parseInt(warehouseTable.getValueAt(tcl.getRow(), 2).toString()));
             }
-            else {
-                int inStock = Integer.parseInt(warehouseTable.getValueAt(tcl.getRow(), 1).toString());
+            else if (addQuantity > inStock){
                 order.put(p1, inStock);
                 warehouseTable.setValueAt(inStock, tcl.getRow(), 2);
                 JOptionPane.showMessageDialog(null, "Quantity to Add must be lower than In Stock, Changed to all in stock", "Alert", JOptionPane.ERROR_MESSAGE);
+            }
+            else{
+                order.remove(p1);
+                warehouseTable.setValueAt(0, tcl.getRow(), 2);
+                JOptionPane.showMessageDialog(null, "Quantity to Add must greater than or equal to 0, removed from order", "Alert", JOptionPane.ERROR_MESSAGE);
             }
         }
     };

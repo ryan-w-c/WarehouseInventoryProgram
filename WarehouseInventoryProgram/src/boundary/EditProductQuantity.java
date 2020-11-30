@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.util.List;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -57,7 +58,14 @@ public class EditProductQuantity extends javax.swing.JFrame {
             TableCellListener tcl = (TableCellListener)e.getSource();
             if (!tcl.getNewValue().equals(tcl.getOldValue())) {
                 ProductControl pc = Main.Main.controlfactory.getProduct();
-                pc.updateQuantity(p, warehouseTable.getValueAt(tcl.getRow(), 0).toString(), Integer.parseInt(tcl.getNewValue().toString()));
+                if (Integer.parseInt(tcl.getNewValue().toString()) < 0){
+                    warehouseTable.setValueAt(0, tcl.getRow(), 2);
+                    pc.updateQuantity(p, warehouseTable.getValueAt(tcl.getRow(), 0).toString(), 0);
+                    JOptionPane.showMessageDialog(null, "Quantity must be greater than or equal to 0", "Alert", JOptionPane.ERROR_MESSAGE);
+                }
+                else{
+                    pc.updateQuantity(p, warehouseTable.getValueAt(tcl.getRow(), 0).toString(), Integer.parseInt(tcl.getNewValue().toString()));
+                }
             }
         }
     };
