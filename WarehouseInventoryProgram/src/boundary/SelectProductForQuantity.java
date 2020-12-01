@@ -77,7 +77,15 @@ public class SelectProductForQuantity extends javax.swing.JFrame {
             new String [] {
                 "Product Name"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(productsTable);
 
         jLabel1.setText("Select Product to Edit Quantity");

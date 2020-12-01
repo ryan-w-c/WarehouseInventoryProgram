@@ -73,15 +73,20 @@ public class OpenInvoices extends javax.swing.JFrame {
 
         openInvoiceTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Invoice Number", "Customer Name", "Customer Phone", "Total", "Amount Paid", "Date"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(openInvoiceTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

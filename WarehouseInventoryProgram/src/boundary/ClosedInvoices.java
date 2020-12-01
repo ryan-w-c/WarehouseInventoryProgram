@@ -71,15 +71,20 @@ public class ClosedInvoices extends javax.swing.JFrame {
 
         closeInvoiceTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Invoice Number", "Customer Name", "Customer Phone", "Total", "Date"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(closeInvoiceTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
