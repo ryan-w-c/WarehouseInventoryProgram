@@ -43,12 +43,10 @@ public class ProductControl {
         return lst;
     }
     
-    public List<List<String>> getProductResultSet(){
+    public List<Object[]> getProductResultSet(){
         Main.em.getTransaction().begin();
-        //FIXME query maybe have to use views?? see: https://stackoverflow.com/questions/30275317/cannot-be-cast-to-ljava-lang-object?rq=1 
-        //or maybe a named query like above
-        Query qu1 = Main.em.createNativeQuery("SELECT p.productname, p.sellingprice, p.costprice, SUM(p.quantity) as totalquantity, SUM(o.quantity) as quantitysold, SUM(o.quantity) * p.sellingprice as totalsales, SUM(o.quantity) * p.costprice as totalcost, SUM(o.quantity) * p.sellingprice - p.costprice as profit, profit / totalsales * 100 FROM Product p inner join ORDERITEM o on p.productname = o.productname group by productname, sellingprice, costprice order by desc profpercent");
-        List<List<String>> lst = qu1.getResultList();
+        Query qu1 = Main.em.createNativeQuery("SELECT p.productname, p.sellingprice, p.costprice, SUM(p.quantity), coalesce(SUM(o.quantity), 0), coalesce(SUM(o.quantity) * (p.sellingprice - p.costprice) / (SUM(o.quantity) * p.sellingprice) * 100, 0) as profpercent from product p left outer join orderitem o on p.productname = o.productname group by p.productname, p.sellingprice, p.costprice order by profpercent desc");
+        List<Object[]> lst = qu1.getResultList();
         Main.em.getTransaction().commit();
         return lst;
     }

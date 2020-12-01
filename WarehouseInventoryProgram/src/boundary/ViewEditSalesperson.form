@@ -66,8 +66,8 @@
               <Table columnCount="4" rowCount="0">
                 <Column editable="false" title="ID Number" type="java.lang.String"/>
                 <Column editable="false" title="Salesperson Name" type="java.lang.String"/>
-                <Column editable="false" title="Total Sales" type="java.lang.String"/>
-                <Column editable="false" title="Total Commission" type="java.lang.String"/>
+                <Column editable="false" title="Total Sales" type="java.lang.Double"/>
+                <Column editable="false" title="Total Commission" type="java.lang.Double"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

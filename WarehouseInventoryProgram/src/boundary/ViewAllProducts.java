@@ -25,25 +25,36 @@ public class ViewAllProducts extends javax.swing.JFrame {
     
     private void updateTable (){
         ProductControl pc = Main.Main.controlfactory.getProduct();
-        List <List<String>> list = pc.getProductResultSet(); 
+        List <Object[]> list = pc.getProductResultSet(); 
         
         DefaultTableModel model = (DefaultTableModel) productsTable.getModel();
         Object rowData[] = new Object[9];
+        
+        Object pName;
+        double sPrice, cPrice, totalSales, profit;
+        int onHand, sold;
         for(int i = 0; i < list.size(); i++)
         {
-            rowData[0] = list.get(i).get(0);
-            rowData[1] = list.get(i).get(1);
-            rowData[2] = list.get(i).get(2);
-            rowData[3] = list.get(i).get(3);
-            rowData[4] = list.get(i).get(4);
-            rowData[5] = list.get(i).get(5);
-            rowData[6] = list.get(i).get(6);
-            rowData[7] = list.get(i).get(7);
-            rowData[8] = list.get(i).get(8);
+            pName = list.get(i)[0];
+            sPrice = Double.parseDouble(list.get(i)[1].toString());
+            cPrice = Double.parseDouble(list.get(i)[2].toString());
+            onHand = Integer.parseInt(list.get(i)[3].toString());            
+            sold = Integer.parseInt(list.get(i)[4].toString());
+            totalSales = sold * sPrice;
+            profit = sold * (sPrice - cPrice);
+
+            rowData[0] = pName;
+            rowData[1] = sPrice;
+            rowData[2] = cPrice;
+            rowData[3] = onHand;
+            rowData[4] = sold;
+            rowData[5] = totalSales;
+            rowData[6] = sold * cPrice;
+            rowData[7] = profit;
+            rowData[8] = list.get(i)[5];                        
+            
             model.addRow(rowData);
         }
-//        java.sql.ResultSet rs1 = (java.sql.ResultSet) rs;
-//        SalespersonTable.setModel(DbUtils.resultSetToTableModel(rs));
        
     }
 
@@ -65,15 +76,27 @@ public class ViewAllProducts extends javax.swing.JFrame {
 
         productsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Product Name", "Selling Price", "Cost Price", "Total Quantity", "Quantity Sold", "Total Sales", "Total Cost", "Total Profit", "Total Profit %"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(productsTable);
 
         backButton.setText("Back");
@@ -91,11 +114,11 @@ public class ViewAllProducts extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1199, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(483, 483, 483)
+                        .addGap(582, 582, 582)
                         .addComponent(backButton)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
