@@ -174,8 +174,13 @@ public class EditProductOrder extends javax.swing.JFrame {
 
     private void addToOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addToOrderActionPerformed
         // TODO add your handling code here:
-        
-        System.out.println("Order Size EditProductOrder:" +this.order.size());
+        try {
+            warehouseTable.editCellAt(warehouseTable.getEditingRow(), 0);
+        }
+        catch (Exception e) {
+            
+        }
+//        System.out.println("Order Size EditProductOrder:" +this.order.size());
         cpBoundry.updateOrder(this.order);
         this.setVisible(false);
         cpBoundry.setVisible(true);

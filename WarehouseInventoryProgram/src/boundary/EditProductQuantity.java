@@ -13,6 +13,7 @@ import java.util.List;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JOptionPane;
+import javax.swing.event.ChangeEvent;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -152,6 +153,12 @@ public class EditProductQuantity extends javax.swing.JFrame {
 
     private void saveQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveQuantityActionPerformed
         // TODO add your handling code here:
+        try {
+            warehouseTable.editCellAt(warehouseTable.getEditingRow(), 0);
+        }
+        catch (Exception e) {
+            
+        }
         this.setVisible(false);
         new ManageProducts().setVisible(true);
     }//GEN-LAST:event_saveQuantityActionPerformed
