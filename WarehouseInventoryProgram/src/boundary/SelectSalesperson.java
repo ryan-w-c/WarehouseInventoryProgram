@@ -8,6 +8,7 @@ import Control.SalespersonControl;
 import Entity.Salesperson;
 import static Main.Main.controlfactory;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -26,6 +27,7 @@ public class SelectSalesperson extends javax.swing.JFrame {
         initComponents();
         Update_table();
     }
+    
     private void Update_table (){
         SalespersonControl sp = controlfactory.getSalesperson();
         List <Salesperson> list = sp.getActiveSalespersonResultSet(); 
@@ -143,10 +145,15 @@ public class SelectSalesperson extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        Salesperson sp = Main.Main.em.find(Salesperson.class, selectSalespersonInTable());
-        cpBoundry.setSp(sp);
-        this.setVisible(false);
-        cpBoundry.setVisible(true);
+        try {
+            Salesperson sp = Main.Main.em.find(Salesperson.class, selectSalespersonInTable());
+            cpBoundry.setSp(sp, "Salesperson: " + sp.getFirstname() + " " + sp.getLastname());
+            this.setVisible(false);
+            cpBoundry.setVisible(true);
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Select One Salesperson.", "Alert", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

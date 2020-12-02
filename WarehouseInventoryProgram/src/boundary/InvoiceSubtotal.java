@@ -6,13 +6,18 @@
 package boundary;
 
 import Control.InvoiceControl;
+import Control.ProductControl;
+import Control.SalespersonControl;
 import Entity.Customer;
 import Entity.Orderitem;
 import Entity.Product;
 import Entity.Salesperson;
 import static Main.Main.controlfactory;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -31,11 +36,10 @@ public class InvoiceSubtotal extends javax.swing.JFrame {
     private Salesperson sp1;
     private Customer c1;
     private Double dfee;
-    private HashMap order;
-    private List<Orderitem> orderLst;
+    private HashMap<Product, Integer> order;
     private int invID;
     
-    public InvoiceSubtotal(Customer c1,Salesperson s1, HashMap<Product,Integer> pList,double deliveryFee) {
+    public InvoiceSubtotal(Customer c1,Salesperson s1, HashMap<Product, Integer> pList, double deliveryFee) {
         initComponents();
         this.sp1 = s1;
         this.c1 = c1;
@@ -53,7 +57,7 @@ public class InvoiceSubtotal extends javax.swing.JFrame {
                 "\n----------------------------------------");  
         DefaultTableModel model = (DefaultTableModel) productTable.getModel();
 //        List<Salesperson> list = lst;
-        Object rowData[] = new Object[4];
+        Object rowData[] = new Object[3];
         //FIXME fix the product table understand product database
         pList.entrySet().stream().map(me -> {
             rowData[0] = me.getKey().getProductPK().getProductname();
@@ -63,19 +67,19 @@ public class InvoiceSubtotal extends javax.swing.JFrame {
             rowData[1] = me.getKey().getProductPK().getWarehousename();
             return me;
         }).map(me -> {
-            rowData[2] = me.getValue();
-            orderLst.add(inc.addOrderItem(invID,me.getKey().getProductPK().getProductname(),
-                    me.getKey().getProductPK().getWarehousename(), me.getValue()));
-            subT = subT + me.getValue();
+            rowData[2] = me.getValue();        
+//            orderLst.add(in1.addOrderItem(invID, me.getKey().getProductPK().getProductname(),
+//                me.getKey().getProductPK().getWarehousename(), me.getValue()));
+            subT += me.getValue() * me.getKey().getSellingprice();
             return me;
         }).forEachOrdered(_item -> {
             model.addRow(rowData);
         });
         
         
-//        tax = c1.getTaxrate()*subT;
-        comm = s1.getCommissionrate()*subT;
-        Total = tax+comm+dfee+ subT;
+        tax = c1.getTax() / 100 * subT;
+        comm = s1.getCommissionrate() / 100 * subT;
+        Total = tax + subT;
         
 
         jTextArea3.setText(
@@ -202,16 +206,36 @@ public class InvoiceSubtotal extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
-        String str = java.time.LocalDate.now().toString() + java.time.LocalDate.now().toString();
-        InvoiceControl in1 = controlfactory.getInvoice();
-        in1.addInvoice(sp1,c1,subT,tax,comm,dfee,Total,Total,true,str, this.orderLst, invID);
-        for(int i=0; i < orderLst.size(); i++){
-            in1.removeQuantityinDB(orderLst.get(i));
+        try {
+            String str = java.time.LocalDate.now().toString() + " " + java.time.LocalTime.now().toString();
+            InvoiceControl in1 = controlfactory.getInvoice();
+            ProductControl pc = controlfactory.getProduct();
+            in1.addInvoice(sp1, c1, subT, tax, comm, dfee, Total, true, str, invID);
+
+
+            Iterator iterator = order.entrySet().iterator();
+            while (iterator.hasNext()) {
+                 HashMap.Entry me = (HashMap.Entry) iterator.next();
+                 Product p = (Product)me.getKey();
+                 Integer q = (Integer) me.getValue();
+              in1.addOrderItem(invID, p.getProductPK().getProductname(),
+                    p.getProductPK().getWarehousename(), q);
+                pc.updateQuantityOrder(p.getProductPK().getProductname(), p.getProductPK().getWarehousename(), q);
+            }
+
+            //TODO update salesperson total sales/commission
+            SalespersonControl sc = controlfactory.getSalesperson();
+
+            sc.updateSalesperson(sp1, comm, subT);
+
+            this.setVisible(false);
+            new CustomerPurchase().setVisible(true);
         }
-        
-        this.setVisible(false);
-        new CustomerPurchase().setVisible(true);
+        catch (Exception e){
+            this.setVisible(false);
+            new CustomerPurchase().setVisible(true);
+            JOptionPane.showMessageDialog(null, "Something went wrong... :(", "Alert", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

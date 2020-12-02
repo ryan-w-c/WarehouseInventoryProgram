@@ -9,6 +9,7 @@ import Control.CustomerControl;
 import Entity.Customer;
 import static Main.Main.controlfactory;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -30,13 +31,13 @@ public class SelectCustomer extends javax.swing.JFrame {
     
     
     
-        private void Update_table (){
+    private void Update_table (){
         CustomerControl c1 = controlfactory.getCustomer();
-//        CustomerControl c1 = new CustomerControl();
+    //        CustomerControl c1 = new CustomerControl();
         List <Customer> list = c1.getActiveCustomerResultSet(); 
-        
+
         DefaultTableModel model = (DefaultTableModel) customerTable.getModel();
-//        List<Customer> list = lst;
+    //        List<Customer> list = lst;
         Object rowData[] = new Object[4];
         for(int i = 0; i < list.size(); i++)
         {
@@ -46,19 +47,18 @@ public class SelectCustomer extends javax.swing.JFrame {
             rowData[3] = list.get(i).getPhone();
             model.addRow(rowData);
         }
-        
     }
     
     
-        public Object selectCustomerInTable(){
+    public Object selectCustomerInTable(){
         if (customerTable.getRowCount() == 0){
             return null;
-        }else{
-        int count = customerTable.getRowCount();
-        int row = customerTable.getSelectedRow();
-        Object sp = customerTable.getValueAt(row,0);
-            System.out.println((Integer)sp);
-        return sp;
+        } else {
+            int count = customerTable.getRowCount();
+            int row = customerTable.getSelectedRow();
+            Object sp = customerTable.getValueAt(row,0);
+                System.out.println((Integer)sp);
+            return sp;
         }
     }
 
@@ -168,10 +168,15 @@ public class SelectCustomer extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        Customer c1 = Main.Main.em.find(Customer.class, selectCustomerInTable());
-        cpBoundry.setCustomer(c1);
-        this.setVisible(false);
-        cpBoundry.setVisible(true);
+        try {
+            Customer c1 = Main.Main.em.find(Customer.class, selectCustomerInTable());
+            cpBoundry.setCustomer(c1, "Customer: " + c1.getFirstname() + " " + c1.getLastname());
+            this.setVisible(false);
+            cpBoundry.setVisible(true);
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Select One Customer.", "Alert", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

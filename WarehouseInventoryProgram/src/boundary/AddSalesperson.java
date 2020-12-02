@@ -212,7 +212,7 @@ public class AddSalesperson extends javax.swing.JFrame {
 
     private void addSalespersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSalespersonActionPerformed
         // TODO add your handling code here:
-        try {
+//        try {
            SalespersonControl sp = controlfactory.getSalesperson();
            sp.addSalesperson(SpFname.getText(), SpLname.getText(), SpAddress.getText(), 
                    SpCity.getText(), SpEmail.getText(), SpState.getText(), Double.parseDouble(SpRate.getText()) ,
@@ -220,10 +220,10 @@ public class AddSalesperson extends javax.swing.JFrame {
                    0.0, 0.0);
             this.setVisible(false);
             new Manage().setVisible(true);
-        }
-        catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Please fill out all info correctly.", "Alert", JOptionPane.ERROR_MESSAGE);
-        }
+//        }
+//        catch (Exception e) {
+//            JOptionPane.showMessageDialog(null, "Please fill out all info correctly.", "Alert", JOptionPane.ERROR_MESSAGE);
+//        }
 
         
     }//GEN-LAST:event_addSalespersonActionPerformed

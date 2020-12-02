@@ -19,7 +19,6 @@ import Entity.Product;
 import Entity.ProductPK;
 import Entity.Salesperson;
 import Main.Main;
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.Query;
 
@@ -29,8 +28,8 @@ public final class InvoiceControl {
         id = getNewID();
     }
     public void addInvoice(Salesperson sp,Customer customer, double subTotal,
-        double tax, double comm, double deliveryfee,double total, double balance, 
-        boolean openClose, String time,Collection<Orderitem> items, int id1){
+        double tax, double comm, double deliveryfee,double total, 
+        boolean openClose, String time, int id1){
         
         Main.em.getTransaction( ).begin( );
 
@@ -41,10 +40,9 @@ public final class InvoiceControl {
         inv1.setCommission( comm );
         inv1.setDeliverfee(deliveryfee);
         inv1.setTotal(total);
-        inv1.setBalanceremaining(balance);
+        inv1.setBalanceremaining(total);
         inv1.setOpenclose(openClose);
         inv1.setDatetime(time);
-        inv1.setOrderitemCollection(items);
         inv1.setCustomerid(customer);  
         inv1.setSalespersonid(sp);
 
@@ -73,7 +71,7 @@ public final class InvoiceControl {
        
     public Integer getNewID (){
         Main.em.getTransaction().begin();
-        Query qu1 = Main.em.createNativeQuery("select max(SALESPERSONID) from SALESPERSON");
+        Query qu1 = Main.em.createNativeQuery("select max(INVOICEID) from INVOICE");
         List lst  = qu1.getResultList();
         Main.em.getTransaction().commit();
         Integer ans;
@@ -94,7 +92,9 @@ public final class InvoiceControl {
 
         Main.em.getTransaction( ).begin( );
 
-        Orderitem oi = new Orderitem(invID, pn, wn,quantity ); 
+        Orderitem oi = new Orderitem(invID, pn, wn, quantity); 
+        System.out.println(oi);
+        System.out.println(invID + " " + pn + " " + wn + " " + quantity);
 
         Main.em.persist( oi );
         Main.em.getTransaction( ).commit( );
