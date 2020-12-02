@@ -1,3 +1,22 @@
+CREATE TABLE PRODUCT (
+    PRODUCTNAME VARCHAR(50) NOT NULL, 
+    WAREHOUSENAME VARCHAR(100) NOT NULL, 
+    QUANTITY INTEGER NOT NULL, 
+    SELLINGPRICE DOUBLE NOT NULL, 
+    COSTPRICE DOUBLE NOT NULL, 
+    PRIMARY KEY (PRODUCTNAME, WAREHOUSENAME)
+);
+
+create Table Warehouse(
+    WarehouseName varchar(100) not null,
+    Phone varchar(20) not null,
+    Address varchar(100) not null,
+    City varchar(50) not null,
+    State varchar(100) not null,
+    Zipcode integer not null,
+    constraint Warehouse_PK primary key (WarehouseName)
+);
+
 create table Salesperson ( 
     FirstName varchar(50) not null, 
     LastName varchar(50) not null, 
@@ -8,31 +27,12 @@ create table Salesperson (
     State varchar(50) not null,
     Zip integer not null,
     CommissionRate float not null,
+    Active boolean not null,
     TotalSales float,
     TotalCommission float,
     SalespersonID integer not null,
     constraint Salesperson_PK primary key (SalespersonID)
 ); 
-
-CREATE TABLE PRODUCT (
-    PRODUCTNAME VARCHAR(50) NOT NULL, 
-    WAREHOUSENAME VARCHAR(100) NOT NULL, 
-    QUANTITY INTEGER NOT NULL, 
-    SELLINGPRICE DOUBLE NOT NULL, 
-    COSTPRICE DOUBLE NOT NULL, 
-    PRIMARY KEY (PRODUCTNAME, WAREHOUSENAME)
-);
-
-
-CREATE TABLE OrderItem (
-    InvoiceID integer not null,
-    ProductName varchar(50) not null,
-    WarehouseName varchar(100) not null,
-    Quantity integer not null,
-    constraint Invoice_FK foreign key (InvoiceID) references Invoice (InvoiceID),
-    constraint OrderItem_Warehouse_FK foreign key (ProductName, WarehouseName) references Product (ProductName, WarehouseName),
-    constraint OrderItem_PK primary key (InvoiceID, ProductName, WarehouseName)
-);
 
 create table Customer ( 
     FirstName varchar(50) not null, 
@@ -43,18 +43,20 @@ create table Customer (
     City varchar(50) not null,
     State varchar(50) not null,
     Zip integer not null,
+    Active boolean not null,
+    Tax float not null,
     CustomerID integer not null,
     constraint Customer_PK primary key (CustomerID)
 ); 
 
-create Table Warehouse(
+CREATE TABLE OrderItem (
+    InvoiceID integer not null,
+    ProductName varchar(50) not null,
     WarehouseName varchar(100) not null,
-    Phone varchar(20) not null,
-    Address varchar(100) not null,
-    City varchar(50) not null,
-    State varchar(100) not null,
-    Zipcode integer not null,
-    constraint Warehouse_PK primary key (WarehouseName)
+    Quantity integer not null,
+    constraint Invoice_FK foreign key (InvoiceID) references Invoice (InvoiceID),
+    constraint OrderItem_Warehouse_FK foreign key (ProductName, WarehouseName) references Product (ProductName, WarehouseName),
+    constraint OrderItem_PK primary key (InvoiceID, ProductName, WarehouseName)
 );
 
 create Table Invoice(
