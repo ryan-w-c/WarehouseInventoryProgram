@@ -27,12 +27,12 @@ public class InvoiceControl {
 }
     public void addInvoice(Salesperson sp,Customer customer, double subTotal,
             double tax, double comm, double deliveryfee,double total, double balance, 
-            boolean openClose, String time,Collection<Orderitem> items){
+            boolean openClose, String time,Collection<Orderitem> items, int id1){
         
       Main.em.getTransaction( ).begin( );
 
       Invoice inv1 = new Invoice(); 
-      inv1.setInvoiceid( id ++);
+      inv1.setInvoiceid( id1);
       inv1.setSubtotal( subTotal);
       inv1.setTax( tax );
       inv1.setCommission( comm );
@@ -48,7 +48,6 @@ public class InvoiceControl {
       Main.em.persist( inv1 );
       Main.em.getTransaction( ).commit( );
 
-      Main.em.close( );
     }
     
         public List<Invoice> getOpenInvoiceResultSet(){
@@ -83,6 +82,22 @@ public class InvoiceControl {
             ans = Integer.parseInt(lst.get(0).toString()) +1;
         } 
         return ans;
+    }
+        
+        public int getInvoiceID(){
+            return id++;
+        }
+        
+        
+         public Orderitem addOrderItem(int invID, String pn, String wn, int quantity){
+
+            Main.em.getTransaction( ).begin( );
+
+            Orderitem oi = new Orderitem(invID, pn, wn,quantity ); 
+
+            Main.em.persist( oi );
+            Main.em.getTransaction( ).commit( );
+            return oi;
     }
     
     

@@ -7,10 +7,12 @@ package boundary;
 
 import Control.InvoiceControl;
 import Entity.Customer;
+import Entity.Orderitem;
 import Entity.Product;
 import Entity.Salesperson;
 import static Main.Main.controlfactory;
 import java.util.HashMap;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -32,6 +34,8 @@ public class InvoiceSubtotal extends javax.swing.JFrame {
     private Customer c1;
     private Double dfee;
     private HashMap order;
+    private List<Orderitem> orderLst;
+    private int invID;
     
     public InvoiceSubtotal(Customer c1,Salesperson s1, HashMap<Product,Integer> pList,double deliveryFee) {
         initComponents();
@@ -41,34 +45,52 @@ public class InvoiceSubtotal extends javax.swing.JFrame {
         this.order = pList;
         this.dfee = deliveryFee;
         
-        jLabel2.setText("Customer Name: " + c1.getFirstname() + " " + c1.getLastname()+
+        InvoiceControl inc = controlfactory.getInvoice();
+        this.invID =  inc.getInvoiceID();
+        subT = 0;
+        
+        
+        jTextArea1.setText("Customer Name: " + c1.getFirstname() + " " + c1.getLastname()+
         "\nCustomer Phone: "+ c1.getPhone() + "\nCustomer Address:" + c1.getAddress()+ 
-                "\n----------------------------------------");
-        jLabel3.setText("Products");       
+                "\n----------------------------------------");  
         DefaultTableModel model = (DefaultTableModel) productTable.getModel();
 //        List<Salesperson> list = lst;
         Object rowData[] = new Object[4];
         //FIXME fix the product table understand product database
         pList.entrySet().stream().map(me -> {
             rowData[0] = me.getKey().getProductPK().getProductname();
+            
             return me;
         }).map(me -> {
             rowData[1] = me.getKey().getProductPK().getWarehousename();
             return me;
         }).map(me -> {
             rowData[2] = me.getValue();
+            orderLst.add(inc.addOrderItem(invID,me.getKey().getProductPK().getProductname(),
+                    me.getKey().getProductPK().getWarehousename(), me.getValue()));
+            subT = subT + me.getValue();
             return me;
         }).forEachOrdered(_item -> {
             model.addRow(rowData);
         });
+        
+        
+//        tax = c1.getTaxrate()*subT;
+        comm = s1.getCommissionrate()*subT;
+        Total = tax+comm+dfee+ subT;
+        
 
-        jLabel4.setText("---------------------------------------\n" +
+        jTextArea3.setText("---------------------------------------\n" +
                 "Salesperson Name: "+ s1.getFirstname() + " " + s1.getLastname()+
                 "\nSalesperson Phone: "+ s1.getPhone() +
                 "\n---------------------------------------------");
         //FIXME
-        jLabel5.setText ("Subtotal: $" + subT+ 
-                "\nSales Tax: $"+ tax );
+
+        jTextArea2.setText ("Subtotal: $" + subT+ 
+                "\nSales Tax: $"+ tax +
+                "\nDelivery Fee: $"+ dfee +
+                "\nSales Commission: $"+ comm +
+                "\nTotal: $"+ Total );
         
     }
     
@@ -85,12 +107,14 @@ public class InvoiceSubtotal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         productTable = new javax.swing.JTable();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTextArea3 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,10 +134,6 @@ public class InvoiceSubtotal extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("hi");
-
-        jLabel3.setText("hi");
-
         productTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -128,9 +148,17 @@ public class InvoiceSubtotal extends javax.swing.JFrame {
             productTable.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        jLabel4.setText("hi");
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
 
-        jLabel5.setText("hi");
+        jTextArea2.setColumns(20);
+        jTextArea2.setRows(5);
+        jScrollPane3.setViewportView(jTextArea2);
+
+        jTextArea3.setColumns(20);
+        jTextArea3.setRows(5);
+        jScrollPane4.setViewportView(jTextArea3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -139,41 +167,36 @@ public class InvoiceSubtotal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2)
-                        .addGap(57, 57, 57)
-                        .addComponent(jButton3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 134, Short.MAX_VALUE))))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 13, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton3)
+                    .addComponent(jButton2))
+                .addGap(17, 17, 17))
         );
 
         pack();
@@ -183,7 +206,7 @@ public class InvoiceSubtotal extends javax.swing.JFrame {
         // TODO add your handling code here:
         String str = java.time.LocalDate.now().toString() + java.time.LocalDate.now().toString();
         InvoiceControl in1 = controlfactory.getInvoice();
-        in1.addInvoice(sp1,c1,subT,tax,comm,dfee,Total,balance,true,str, this.order.keySet());
+        in1.addInvoice(sp1,c1,subT,tax,comm,dfee,Total,balance,true,str, this.orderLst, invID);
         this.setVisible(false);
         new CustomerPurchase().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -233,11 +256,13 @@ public class InvoiceSubtotal extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTable productTable;
     // End of variables declaration//GEN-END:variables
 }
