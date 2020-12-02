@@ -41,7 +41,6 @@ public class SelectSalesperson extends javax.swing.JFrame {
             rowData[3] = list.get(i).getPhone();
             model.addRow(rowData);
         }
-        SalespersonTable.setRowSelectionInterval(0, SalespersonTable.getRowCount()-1);
 
     }
     
