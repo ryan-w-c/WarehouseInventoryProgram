@@ -31,7 +31,7 @@ public class OpenInvoices extends javax.swing.JFrame {
         
         DefaultTableModel model = (DefaultTableModel) openInvoiceTable.getModel();
 //        List<Salesperson> list = lst;
-        Object rowData[] = new Object[4];
+        Object rowData[] = new Object[6];
         for(int i = 0; i < list.size(); i++)
         {
             rowData[0] = list.get(i).getInvoiceid();

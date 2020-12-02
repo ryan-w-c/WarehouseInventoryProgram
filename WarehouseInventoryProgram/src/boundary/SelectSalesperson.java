@@ -82,7 +82,15 @@ public class SelectSalesperson extends javax.swing.JFrame {
             new String [] {
                 "SpID", "First Name", "Last Name", "Phone"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(SalespersonTable);
 
         jButton1.setText("Cancel");
