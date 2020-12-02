@@ -23,7 +23,6 @@ public final class SalespersonControl {
         idNum = getNewID();
     }
     
-    
     public void addSalesperson (String fname, String lname, String address, 
             String city, String email, String state , double Crate, String phone,
             int zip, double sales, double commission){
@@ -38,8 +37,9 @@ public final class SalespersonControl {
         employee.setState(state);
         employee.setCommissionrate(Crate);
         employee.setPhone(phone);
+        employee.setActive(true);
         employee.setSalespersonid(idNum++);
-        employee.setZip(90000);
+        employee.setZip(zip);
         employee.setTotalsales(0.0);
         employee.setTotalcommission(0.0);
         
@@ -52,6 +52,16 @@ public final class SalespersonControl {
         Main.em.getTransaction().begin();
        
         Query qu1 = Main.em.createNativeQuery("select * from SALESPERSON", Salesperson.class);
+        List<Salesperson> lst = qu1.getResultList();
+        Main.em.getTransaction().commit();
+        return lst;
+    }
+    
+    public List<Salesperson> getActiveSalespersonResultSet(){
+        Main.em.getTransaction().begin();
+       
+        Query qu1 = Main.em.createNamedQuery("Salesperson.findByActive");
+        qu1.setParameter("active", true);
         List<Salesperson> lst = qu1.getResultList();
         Main.em.getTransaction().commit();
         return lst;

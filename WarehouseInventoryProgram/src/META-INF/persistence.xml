@@ -2,13 +2,13 @@
 <persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
   <persistence-unit name="WarehouseInventoryProgramPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>Entity.Customer</class>
-    <class>Entity.Salesperson</class>
     <class>Entity.Orderitem</class>
     <class>Entity.Warehouse</class>
     <class>Entity.Invoice</class>
     <class>Entity.Password</class>
     <class>Entity.Product</class>
+    <class>Entity.Salesperson</class>
+    <class>Entity.Customer</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/WarehouseInventory"/>
       <property name="javax.persistence.jdbc.user" value="username"/>

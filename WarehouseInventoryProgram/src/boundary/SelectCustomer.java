@@ -33,7 +33,7 @@ public class SelectCustomer extends javax.swing.JFrame {
         private void Update_table (){
         CustomerControl c1 = controlfactory.getCustomer();
 //        CustomerControl c1 = new CustomerControl();
-        List <Customer> list = c1.getCustomerResultSet(); 
+        List <Customer> list = c1.getActiveCustomerResultSet(); 
         
         DefaultTableModel model = (DefaultTableModel) customerTable.getModel();
 //        List<Customer> list = lst;
@@ -46,7 +46,7 @@ public class SelectCustomer extends javax.swing.JFrame {
             rowData[3] = list.get(i).getPhone();
             model.addRow(rowData);
         }
-        customerTable.setRowSelectionInterval(0, customerTable.getRowCount()-1);
+        
     }
     
     
