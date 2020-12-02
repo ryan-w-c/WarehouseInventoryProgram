@@ -33,6 +33,8 @@ public class EditCustomer extends javax.swing.JFrame {
         state.setText(c.getState());
         phoneNumber.setText(c.getPhone());
         zipCode.setText(Integer.toString(c.getZip()));
+        salesTax.setText(Double.toString(c.getTax()));
+        active.setSelected(c.getActive());
     }
 
     /**
@@ -63,6 +65,9 @@ public class EditCustomer extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         zipCode = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        active = new javax.swing.JCheckBox();
+        salesTax = new javax.swing.JTextField();
+        salesTaxLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -97,6 +102,10 @@ public class EditCustomer extends javax.swing.JFrame {
         jLabel4.setText("Street Address");
 
         jLabel5.setText("City");
+
+        active.setText("Active");
+
+        salesTaxLabel.setText("Sales Tax");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -147,12 +156,19 @@ public class EditCustomer extends javax.swing.JFrame {
                                             .addComponent(firstName, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(streetAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                                .addComponent(jLabel8)))
+                                .addComponent(jLabel8))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(260, 260, 260)
+                                .addComponent(salesTaxLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(salesTax, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(city, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lastName, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lastName, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(active))
                         .addGap(17, 17, 17))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -187,7 +203,11 @@ public class EditCustomer extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(phoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
+                    .addComponent(jLabel9)
+                    .addComponent(active)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(salesTax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(salesTaxLabel)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveCustomer)
@@ -212,6 +232,7 @@ public class EditCustomer extends javax.swing.JFrame {
             c.setCity(city.getText());
             c.setState(state.getText());
             c.setZip(Integer.parseInt(zipCode.getText()));
+            c.setActive(active.isSelected());
             cp.saveCustomer(c);
             this.setVisible(false);
             new ViewEditCustomer().setVisible(true);
@@ -263,6 +284,7 @@ public class EditCustomer extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox active;
     private javax.swing.JButton canelButton;
     private javax.swing.JTextField city;
     private javax.swing.JTextField email;
@@ -278,6 +300,8 @@ public class EditCustomer extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField lastName;
     private javax.swing.JTextField phoneNumber;
+    private javax.swing.JTextField salesTax;
+    private javax.swing.JLabel salesTaxLabel;
     private javax.swing.JButton saveCustomer;
     private javax.swing.JTextField state;
     private javax.swing.JTextField streetAddress;

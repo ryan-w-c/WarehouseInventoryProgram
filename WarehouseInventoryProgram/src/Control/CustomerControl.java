@@ -25,7 +25,7 @@ public final class CustomerControl {
 
     }
    
-    public void addCustomer(String firstname, String lastname, String phone, String email, String address, String city, String state, int zip) {
+    public void addCustomer(String firstname, String lastname, String phone, String email, String address, String city, String state, int zip, double tax) {
         Main.em.getTransaction().begin();
         Customer c1 = new Customer();
         
@@ -37,6 +37,8 @@ public final class CustomerControl {
         c1.setCity(city);
         c1.setState(state);
         c1.setZip(zip);
+        c1.setActive(true);
+        c1.setTax(tax);
         c1.setCustomerid(idNum++);
         
         Main.em.persist(c1);
@@ -58,7 +60,17 @@ public final class CustomerControl {
         List<Customer> lst = qu1.getResultList();
         Main.em.getTransaction().commit();
         return lst;
-      }
+    }
+    
+    public List<Customer> getActiveCustomerResultSet(){
+        Main.em.getTransaction().begin();
+       
+        Query qu1 = Main.em.createNamedQuery("Customer.findByActive");
+        qu1.setParameter("active", true);
+        List<Customer> lst = qu1.getResultList();
+        Main.em.getTransaction().commit();
+        return lst;
+    }
     
     public Integer getNewID (){
         Main.em.getTransaction().begin();

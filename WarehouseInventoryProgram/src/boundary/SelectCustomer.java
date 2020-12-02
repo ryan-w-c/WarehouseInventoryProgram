@@ -33,7 +33,7 @@ public class SelectCustomer extends javax.swing.JFrame {
         private void Update_table (){
         CustomerControl c1 = controlfactory.getCustomer();
 //        CustomerControl c1 = new CustomerControl();
-        List <Customer> list = c1.getCustomerResultSet(); 
+        List <Customer> list = c1.getActiveCustomerResultSet(); 
         
         DefaultTableModel model = (DefaultTableModel) customerTable.getModel();
 //        List<Customer> list = lst;

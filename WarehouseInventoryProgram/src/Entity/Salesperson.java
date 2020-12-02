@@ -35,6 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Salesperson.findByState", query = "SELECT s FROM Salesperson s WHERE s.state = :state"),
     @NamedQuery(name = "Salesperson.findByZip", query = "SELECT s FROM Salesperson s WHERE s.zip = :zip"),
     @NamedQuery(name = "Salesperson.findByCommissionrate", query = "SELECT s FROM Salesperson s WHERE s.commissionrate = :commissionrate"),
+    @NamedQuery(name = "Salesperson.findByActive", query = "SELECT s FROM Salesperson s WHERE s.active = :active"),
     @NamedQuery(name = "Salesperson.findByTotalsales", query = "SELECT s FROM Salesperson s WHERE s.totalsales = :totalsales"),
     @NamedQuery(name = "Salesperson.findByTotalcommission", query = "SELECT s FROM Salesperson s WHERE s.totalcommission = :totalcommission"),
     @NamedQuery(name = "Salesperson.findBySalespersonid", query = "SELECT s FROM Salesperson s WHERE s.salespersonid = :salespersonid")})
@@ -86,6 +87,10 @@ public class Salesperson implements Serializable {
     @NotNull
     @Column(name = "COMMISSIONRATE")
     private double commissionrate;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "ACTIVE")
+    private Boolean active;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "TOTALSALES")
     private Double totalsales;
@@ -104,7 +109,7 @@ public class Salesperson implements Serializable {
         this.salespersonid = salespersonid;
     }
 
-    public Salesperson(Integer salespersonid, String firstname, String lastname, String phone, String email, String address, String city, String state, int zip, double commissionrate) {
+    public Salesperson(Integer salespersonid, String firstname, String lastname, String phone, String email, String address, String city, String state, int zip, double commissionrate, Boolean active) {
         this.salespersonid = salespersonid;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -115,6 +120,7 @@ public class Salesperson implements Serializable {
         this.state = state;
         this.zip = zip;
         this.commissionrate = commissionrate;
+        this.active = active;
     }
 
     public String getFirstname() {
@@ -187,6 +193,14 @@ public class Salesperson implements Serializable {
 
     public void setCommissionrate(double commissionrate) {
         this.commissionrate = commissionrate;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public Double getTotalsales() {

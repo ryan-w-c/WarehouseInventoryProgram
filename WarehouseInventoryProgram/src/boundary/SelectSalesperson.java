@@ -28,7 +28,7 @@ public class SelectSalesperson extends javax.swing.JFrame {
     }
     private void Update_table (){
         SalespersonControl sp = controlfactory.getSalesperson();
-        List <Salesperson> list = sp.getSalespersonResultSet(); 
+        List <Salesperson> list = sp.getActiveSalespersonResultSet(); 
         
         DefaultTableModel model = (DefaultTableModel) SalespersonTable.getModel();
 //        List<Salesperson> list = lst;

@@ -33,6 +33,7 @@ public class EditSalesperson extends javax.swing.JFrame {
         rate.setText(Double.toString(s.getCommissionrate()));
         phoneNumber.setText(s.getPhone());
         zipCode.setText(Integer.toString(s.getZip()));
+        active.setSelected(s.getActive());
     }
 
     /**
@@ -65,6 +66,7 @@ public class EditSalesperson extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         firstName = new javax.swing.JTextField();
+        active = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -107,6 +109,8 @@ public class EditSalesperson extends javax.swing.JFrame {
         jLabel1.setText("Edit Salesperson");
 
         jLabel10.setText("Commission Rate");
+
+        active.setText("Active");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -168,7 +172,8 @@ public class EditSalesperson extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(city, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lastName, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lastName, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(active))
                         .addGap(17, 17, 17))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -204,7 +209,8 @@ public class EditSalesperson extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(rate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel10))
+                        .addComponent(jLabel10)
+                        .addComponent(active))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(phoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel9)))
@@ -234,6 +240,7 @@ public class EditSalesperson extends javax.swing.JFrame {
             s.setCity(city.getText());
             s.setState(state.getText());
             s.setZip(Integer.parseInt(zipCode.getText()));
+            s.setActive(active.isSelected());
             sp.saveSalesperson(s);
             this.setVisible(false);
             new ViewEditSalesperson().setVisible(true);
@@ -285,6 +292,7 @@ public class EditSalesperson extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox active;
     private javax.swing.JButton canelButton;
     private javax.swing.JTextField city;
     private javax.swing.JTextField email;
