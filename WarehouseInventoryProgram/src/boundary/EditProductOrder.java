@@ -11,7 +11,6 @@ import Entity.Product;
 import java.awt.event.ActionEvent;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JOptionPane;
@@ -38,6 +37,7 @@ public class EditProductOrder extends javax.swing.JFrame {
         productName.setText("Product: " + p);
         updateTable();
         TableCellListener obs = new TableCellListener(warehouseTable, action);
+        
     }
     
     private void updateTable (){
@@ -65,6 +65,7 @@ public class EditProductOrder extends javax.swing.JFrame {
     
     Action action = new AbstractAction()
     {
+        @Override
         public void actionPerformed(ActionEvent e)
         {
             TableCellListener tcl = (TableCellListener)e.getSource();
@@ -87,6 +88,8 @@ public class EditProductOrder extends javax.swing.JFrame {
                 warehouseTable.setValueAt(0, tcl.getRow(), 2);
                 JOptionPane.showMessageDialog(null, "Quantity to Add must greater than or equal to 0, removed from order", "Alert", JOptionPane.ERROR_MESSAGE);
             }
+            System.out.println("Order Size EditProductOrder in action:" + order.size());
+
         }
     };
 
@@ -171,6 +174,8 @@ public class EditProductOrder extends javax.swing.JFrame {
 
     private void addToOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addToOrderActionPerformed
         // TODO add your handling code here:
+        
+        System.out.println("Order Size EditProductOrder:" +this.order.size());
         cpBoundry.updateOrder(this.order);
         this.setVisible(false);
         cpBoundry.setVisible(true);

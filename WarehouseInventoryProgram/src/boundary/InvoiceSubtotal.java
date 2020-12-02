@@ -27,9 +27,7 @@ public class InvoiceSubtotal extends javax.swing.JFrame {
     private double subT;
     private double Total;
     private double tax;
-    private double deliveryFee;
     private double comm;
-    private double balance;
     private Salesperson sp1;
     private Customer c1;
     private Double dfee;
@@ -39,7 +37,6 @@ public class InvoiceSubtotal extends javax.swing.JFrame {
     
     public InvoiceSubtotal(Customer c1,Salesperson s1, HashMap<Product,Integer> pList,double deliveryFee) {
         initComponents();
-        this.deliveryFee = deliveryFee;
         this.sp1 = s1;
         this.c1 = c1;
         this.order = pList;
@@ -49,8 +46,9 @@ public class InvoiceSubtotal extends javax.swing.JFrame {
         this.invID =  inc.getInvoiceID();
         subT = 0;
         
+        System.out.println("Order size: " + pList.size());
         
-        jTextArea1.setText("Customer Name: " + c1.getFirstname() + " " + c1.getLastname()+
+        jTextArea1.setText("\nCustomer Name: " + c1.getFirstname() + " " + c1.getLastname()+
         "\nCustomer Phone: "+ c1.getPhone() + "\nCustomer Address:" + c1.getAddress()+ 
                 "\n----------------------------------------");  
         DefaultTableModel model = (DefaultTableModel) productTable.getModel();
@@ -80,13 +78,13 @@ public class InvoiceSubtotal extends javax.swing.JFrame {
         Total = tax+comm+dfee+ subT;
         
 
-        jTextArea3.setText("---------------------------------------\n" +
-                "Salesperson Name: "+ s1.getFirstname() + " " + s1.getLastname()+
+        jTextArea3.setText(
+                "\nSalesperson Name: "+ s1.getFirstname() + " " + s1.getLastname()+
                 "\nSalesperson Phone: "+ s1.getPhone() +
-                "\n---------------------------------------------");
+                "\n----------------------------------------");
         //FIXME
 
-        jTextArea2.setText ("Subtotal: $" + subT+ 
+        jTextArea2.setText ("\nSubtotal: $" + subT+ 
                 "\nSales Tax: $"+ tax +
                 "\nDelivery Fee: $"+ dfee +
                 "\nSales Commission: $"+ comm +
@@ -175,8 +173,8 @@ public class InvoiceSubtotal extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 13, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -189,8 +187,8 @@ public class InvoiceSubtotal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,9 +202,14 @@ public class InvoiceSubtotal extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        
         String str = java.time.LocalDate.now().toString() + java.time.LocalDate.now().toString();
         InvoiceControl in1 = controlfactory.getInvoice();
-        in1.addInvoice(sp1,c1,subT,tax,comm,dfee,Total,balance,true,str, this.orderLst, invID);
+        in1.addInvoice(sp1,c1,subT,tax,comm,dfee,Total,Total,true,str, this.orderLst, invID);
+        for(int i=0; i < orderLst.size(); i++){
+            in1.removeQuantityinDB(orderLst.get(i));
+        }
+        
         this.setVisible(false);
         new CustomerPurchase().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed

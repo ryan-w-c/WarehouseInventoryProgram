@@ -14,13 +14,16 @@ package Control;
 import Entity.Customer;
 import Entity.Invoice;
 import Entity.Orderitem;
+import Entity.OrderitemPK;
+import Entity.Product;
+import Entity.ProductPK;
 import Entity.Salesperson;
 import Main.Main;
 import java.util.Collection;
 import java.util.List;
 import javax.persistence.Query;
 
-public class InvoiceControl {
+public final class InvoiceControl {
     private int id;
     public InvoiceControl(){
     id = getNewID();
@@ -98,7 +101,29 @@ public class InvoiceControl {
             Main.em.persist( oi );
             Main.em.getTransaction( ).commit( );
             return oi;
+        }
+         
+         
+         public void removeQuantityinDB(Orderitem od){
+             
+            OrderitemPK odpk = od.getOrderitemPK();
+            String prodname  = odpk.getProductname();
+            String wn = odpk.getWarehousename();
+             
+            Main.em.getTransaction( ).begin( );
+            Query sqll = Main.em.createNativeQuery("select Sum(QUANTITY) from PRODUCT where PRODUCTNAME ="+
+                    "'"+ prodname +"'" + "and WAREHOUSENAME = "+ "'" + wn + "'");
+            List lst = sqll.getResultList();
+            Integer ans = Integer.parseInt(lst.get(0).toString()) - od.getQuantity();
+            
+            ProductPK ppk = new ProductPK(prodname,wn);
+            Product p1 = Main.em.find(Product.class, ppk);
+            p1.setQuantity(ans);
+
+            Main.em.persist( p1 );
+            Main.em.getTransaction( ).commit( );
     }
+   
     
     
     

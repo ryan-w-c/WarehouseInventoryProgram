@@ -58,9 +58,8 @@ public class Orderitem implements Serializable {
         this.quantity = quantity;
     }
 
-    public Orderitem(int invoiceid, String productname, String warehousename, int Quantity) {
+    public Orderitem(int invoiceid, String productname, String warehousename) {
         this.orderitemPK = new OrderitemPK(invoiceid, productname, warehousename);
-        this.quantity = Quantity;
     }
     
     public Orderitem(int invoiceid, String productname, String warehousename, int quantity) {

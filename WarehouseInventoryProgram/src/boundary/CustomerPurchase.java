@@ -59,6 +59,7 @@ public class CustomerPurchase extends javax.swing.JFrame {
                 this.order.put(pair.getKey(),pair.getValue());
                 it.remove(); 
             }
+            System.out.println("Customer Purchse order Size:" + this.order.size());
     }
 
     /**
