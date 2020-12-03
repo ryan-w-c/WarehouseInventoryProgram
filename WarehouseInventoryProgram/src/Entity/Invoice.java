@@ -168,9 +168,8 @@ public class Invoice implements Serializable {
   
         // SimpleDateFormat converts the 
         // string format to date object 
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/YY"); 
-  
-        // Try Block 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
+
         try { 
   
             // parse method is used to parse 
@@ -180,15 +179,10 @@ public class Invoice implements Serializable {
             Date d1 = sdf.parse(this.datetime); 
             Date d2 = sdf.parse(sdf.format(currentDate)); 
   
-            // Calucalte time difference 
-            // in milliseconds 
-            long differenceInTime 
-                = d2.getTime() - d1.getTime(); 
+            // Calucalte time difference
+            long differenceInTime = d2.getTime() - d1.getTime(); 
   
-            long differenceInDays 
-                = (differenceInTime 
-                   / (1000 * 60 * 60 * 24)) 
-                  % 365;
+            long differenceInDays = (differenceInTime / (1000 * 60 * 60 * 24)) % 365;
             
             if (differenceInDays <= 10){
                 return true;
