@@ -150,6 +150,15 @@ public class Invoice implements Serializable {
     public void setBalanceremaining(double balanceremaining) {
         this.balanceremaining = balanceremaining;
     }
+    
+    public void updateBalanceRemaining(double amount) {
+        balanceremaining -= amount;
+        if (balanceremaining <= 0) {
+            balanceremaining = 0;
+            setOpenclose(false);
+        }
+            
+    }
 
     public Boolean getOpenclose() {
         return openclose;

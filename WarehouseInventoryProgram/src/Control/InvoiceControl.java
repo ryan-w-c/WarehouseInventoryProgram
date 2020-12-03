@@ -27,9 +27,9 @@ public final class InvoiceControl {
     public InvoiceControl(){
         id = getNewID();
     }
-    public void addInvoice(Salesperson sp,Customer customer, double subTotal,
+    public void addInvoice(Salesperson sp, Customer customer, double subTotal,
         double tax, double comm, double deliveryfee,double total, 
-        boolean openClose, String time, int id1){
+        boolean openClose, String time, int id1) {
         
         Main.em.getTransaction( ).begin( );
 
@@ -49,6 +49,16 @@ public final class InvoiceControl {
         Main.em.persist( inv1 );
         Main.em.getTransaction( ).commit( );
 
+    }
+    
+    
+    public List<Invoice> getSingleInvoiceResultSet(int id){
+        Main.em.getTransaction().begin();
+        Query qu1 = Main.em.createNamedQuery("Invoice.findByInvoiceid");
+        qu1.setParameter("invoiceid", id);
+        List<Invoice> lst = qu1.getResultList();
+        Main.em.getTransaction().commit();
+        return lst;
     }
     
     public List<Invoice> getOpenInvoiceResultSet(){
@@ -119,6 +129,13 @@ public final class InvoiceControl {
 
         Main.em.persist( p1 );
         Main.em.getTransaction( ).commit( );
+    }
+    
+    public void updateInvoice(Invoice i, double amount) {
+        Main.em.getTransaction().begin();
+        i.updateBalanceRemaining(amount);
+        Main.em.persist(i);
+        Main.em.getTransaction().commit();
     }
    
     

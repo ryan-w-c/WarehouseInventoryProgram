@@ -32,7 +32,7 @@ public class OpenInvoices extends javax.swing.JFrame {
         
         DefaultTableModel model = (DefaultTableModel) openInvoiceTable.getModel();
 //        List<Salesperson> list = lst;
-        Object rowData[] = new Object[6];
+        Object rowData[] = new Object[7];
         for(int i = 0; i < list.size(); i++)
         {
             rowData[0] = list.get(i).getInvoiceid();
@@ -40,7 +40,8 @@ public class OpenInvoices extends javax.swing.JFrame {
             rowData[2] = list.get(i).getCustomerid().getPhone();
             rowData[3] = list.get(i).getTotal();
             rowData[4] = list.get(i).getTotal() - list.get(i).getBalanceremaining();
-            rowData[5] = list.get(i).getDatetime();
+            rowData[5] = list.get(i).getBalanceremaining();
+            rowData[6] = list.get(i).getDatetime();
             model.addRow(rowData);
         }
     }
@@ -52,6 +53,18 @@ public class OpenInvoices extends javax.swing.JFrame {
         } else {
             int row = openInvoiceTable.getSelectedRow();
             Object sp = openInvoiceTable.getValueAt(row, 0);
+
+            return sp;
+        }
+    }
+    
+    private Object selectBalanceRemaining(){
+        if (openInvoiceTable.getRowCount() == 0){
+            System.out.println(openInvoiceTable.getRowCount());
+            return 0;
+        } else {
+            int row = openInvoiceTable.getSelectedRow();
+            Object sp = openInvoiceTable.getValueAt(row, 5);
 
             return sp;
         }
@@ -90,11 +103,11 @@ public class OpenInvoices extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Invoice Number", "Customer Name", "Customer Phone", "Total", "Amount Paid", "Date"
+                "Invoice Number", "Customer Name", "Customer Phone", "Total", "Amount Paid", "Balance Remaining", "Date"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -153,8 +166,10 @@ public class OpenInvoices extends javax.swing.JFrame {
 
     private void editBalanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBalanceActionPerformed
         // TODO add your handling code here:
+        InvoiceControl ic = Main.Main.controlfactory.getInvoice();
         try {
-            new EditInvoiceBalance((int) selectInvoiceInTable()).setVisible(true);
+            new EditInvoiceBalance(ic.getSingleInvoiceResultSet((int) openInvoiceTable.getValueAt(openInvoiceTable.getSelectedRow(),0)).get(0)).setVisible(true);
+            // getting the invoice and passing it into the invoice balance
             this.setVisible(false);
         }
         catch (Exception ArrayIndexOutOfBoundsException){
