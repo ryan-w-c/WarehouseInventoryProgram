@@ -6,9 +6,14 @@
 package boundary;
 
 import Control.ProductControl;
+import Control.TableCellListener;
 import Entity.Product;
 import Entity.Warehouse;
+import java.awt.event.ActionEvent;
 import java.util.List;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,6 +32,7 @@ public class ViewWarehouseLowQuantity extends javax.swing.JFrame {
         w = w1;
         warehouseName.setText("Low Quantity - Warehouse: " + w.getWarehousename());
         updateTable();
+        TableCellListener obs = new TableCellListener(lowTable, action);
     }
 
     private void updateTable (){
@@ -34,7 +40,6 @@ public class ViewWarehouseLowQuantity extends javax.swing.JFrame {
         List <Product> list = pc.getLowProductResultSet(w); 
         
         DefaultTableModel model = (DefaultTableModel) lowTable.getModel();
-//        List<Salesperson> list = lst;
         Object rowData[] = new Object[2];
         for(int i = 0; i < list.size(); i++)
         {
@@ -42,10 +47,28 @@ public class ViewWarehouseLowQuantity extends javax.swing.JFrame {
             rowData[1] = list.get(i).getQuantity();
             model.addRow(rowData);
         }
-//        java.sql.ResultSet rs1 = (java.sql.ResultSet) rs;
-//        SalespersonTable.setModel(DbUtils.resultSetToTableModel(rs));
-       
+
     }
+    
+    Action action = new AbstractAction()
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            TableCellListener tcl = (TableCellListener)e.getSource();
+            if (!tcl.getNewValue().equals(tcl.getOldValue())) {
+                ProductControl pc = Main.Main.controlfactory.getProduct();
+                if (Integer.parseInt(tcl.getNewValue().toString()) < 0){
+                    lowTable.setValueAt(0, tcl.getRow(), 2);
+                    pc.updateQuantity(lowTable.getValueAt(tcl.getRow(), 0).toString(), w.getWarehousename(), 0);
+                    JOptionPane.showMessageDialog(null, "Quantity must be greater than or equal to 0", "Alert", JOptionPane.ERROR_MESSAGE);
+                }
+                else{
+                    pc.updateQuantity(lowTable.getValueAt(tcl.getRow(), 0).toString(), w.getWarehousename(), Integer.parseInt(tcl.getNewValue().toString()));
+                }
+            }
+        }
+    };
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -87,7 +110,7 @@ public class ViewWarehouseLowQuantity extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(lowTable);
 
-        backButton.setText("Back");
+        backButton.setText("Save Quantities");
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backButtonActionPerformed(evt);
@@ -99,12 +122,14 @@ public class ViewWarehouseLowQuantity extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(warehouseName)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(150, 150, 150)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(warehouseName)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(137, 137, 137)
                         .addComponent(backButton)))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
@@ -125,6 +150,12 @@ public class ViewWarehouseLowQuantity extends javax.swing.JFrame {
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
+        try {
+            lowTable.editCellAt(lowTable.getEditingRow(), 0);
+        }
+        catch (Exception e) {
+            
+        }
         this.setVisible(false);
         new ManageWarehouse(w).setVisible(true);
     }//GEN-LAST:event_backButtonActionPerformed

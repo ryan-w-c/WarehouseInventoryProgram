@@ -7,9 +7,14 @@
 package boundary;
 
 import Control.ProductControl;
+import Control.TableCellListener;
 import Entity.Product;
 import Entity.Warehouse;
+import java.awt.event.ActionEvent;
 import java.util.List;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,6 +30,7 @@ public class ViewWarehouseQuantity extends javax.swing.JFrame {
         w = w1;
         warehouseName.setText("All Quantity - Warehouse: " + w.getWarehousename());
         updateTable();
+        TableCellListener obs = new TableCellListener(allTable, action);
     }
 
     private void updateTable (){
@@ -44,6 +50,25 @@ public class ViewWarehouseQuantity extends javax.swing.JFrame {
 //        SalespersonTable.setModel(DbUtils.resultSetToTableModel(rs));
        
     }
+    
+    Action action = new AbstractAction()
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            TableCellListener tcl = (TableCellListener)e.getSource();
+            if (!tcl.getNewValue().equals(tcl.getOldValue())) {
+                ProductControl pc = Main.Main.controlfactory.getProduct();
+                if (Integer.parseInt(tcl.getNewValue().toString()) < 0){
+                    allTable.setValueAt(0, tcl.getRow(), 2);
+                    pc.updateQuantity(allTable.getValueAt(tcl.getRow(), 0).toString(), w.getWarehousename(), 0);
+                    JOptionPane.showMessageDialog(null, "Quantity must be greater than or equal to 0", "Alert", JOptionPane.ERROR_MESSAGE);
+                }
+                else{
+                    pc.updateQuantity(allTable.getValueAt(tcl.getRow(), 0).toString(), w.getWarehousename(), Integer.parseInt(tcl.getNewValue().toString()));
+                }
+            }
+        }
+    };
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -55,7 +80,7 @@ public class ViewWarehouseQuantity extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         allTable = new javax.swing.JTable();
-        backButton = new javax.swing.JButton();
+        saveButton = new javax.swing.JButton();
         warehouseName = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -85,10 +110,10 @@ public class ViewWarehouseQuantity extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(allTable);
 
-        backButton.setText("Back");
-        backButton.addActionListener(new java.awt.event.ActionListener() {
+        saveButton.setText("Save Quantities");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backButtonActionPerformed(evt);
+                saveButtonActionPerformed(evt);
             }
         });
 
@@ -107,8 +132,8 @@ public class ViewWarehouseQuantity extends javax.swing.JFrame {
                         .addGap(27, 27, 27)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(155, 155, 155)
-                        .addComponent(backButton)))
+                        .addGap(129, 129, 129)
+                        .addComponent(saveButton)))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -119,18 +144,24 @@ public class ViewWarehouseQuantity extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(backButton)
+                .addComponent(saveButton)
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
+        try {
+            allTable.editCellAt(allTable.getEditingRow(), 0);
+        }
+        catch (Exception e) {
+            
+        }
         this.setVisible(false);
         new ManageWarehouse(w).setVisible(true);
-    }//GEN-LAST:event_backButtonActionPerformed
+    }//GEN-LAST:event_saveButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -169,8 +200,8 @@ public class ViewWarehouseQuantity extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable allTable;
-    private javax.swing.JButton backButton;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton saveButton;
     private javax.swing.JLabel warehouseName;
     // End of variables declaration//GEN-END:variables
 
