@@ -23,7 +23,7 @@ public class CustomerPurchase extends javax.swing.JFrame {
     /**
      * Creates new form CustomerPurchase
      */
-    private HashMap order;
+    private HashMap<Product, Integer> order;
     private double  deliveryFee;
     private Customer customer;
     private Salesperson sp;
@@ -32,7 +32,6 @@ public class CustomerPurchase extends javax.swing.JFrame {
     public CustomerPurchase(){
         initComponents();
         order = new HashMap<Product, Integer>();
-        
     }
 
     public void setSp(Salesperson sp, String s) {
@@ -47,19 +46,27 @@ public class CustomerPurchase extends javax.swing.JFrame {
         System.out.println(this.customer);
     }
         
-    public void updateOrder(HashMap<Product, Integer> order) {  
-        Iterator it = order.entrySet().iterator();
+    public void updateOrder() {  
         DefaultTableModel model = (DefaultTableModel) productTable.getModel();
+        model.setRowCount(0);
         Object rowData[] = new Object[3];
-        while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry)it.next();
-            this.order.put(pair.getKey(),pair.getValue());
-//            rowData[0] = order.get(pair.getValue()).getProductname();
-//            rowData[1] = list.get(i).getFirstname();
-//            rowData[2] = list.get(i).getLastname();
-            it.remove(); 
-        }
-        System.out.println("Customer Purchse order Size:" + this.order.size());
+        order.entrySet().stream().map(me -> {
+            rowData[0] = me.getKey().getProductPK().getProductname();
+            
+            return me;
+        }).map(me -> {
+            rowData[1] = me.getKey().getProductPK().getWarehousename();
+            return me;
+        }).map(me -> {
+            rowData[2] = me.getValue();        
+            return me;
+        }).forEachOrdered(_item -> {
+            model.addRow(rowData);
+        });
+    }
+    
+    public HashMap getOrder() {
+        return order;
     }
 
     /**
@@ -207,6 +214,10 @@ public class CustomerPurchase extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public HashMap<Product, Integer> getProducts(){
+        return order;
+    }
+    
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);

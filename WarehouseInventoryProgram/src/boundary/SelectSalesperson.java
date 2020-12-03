@@ -94,7 +94,7 @@ public class SelectSalesperson extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(SalespersonTable);
 
-        jButton1.setText("Cancel");
+        jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -159,7 +159,7 @@ public class SelectSalesperson extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new CustomerPurchase().setVisible(true);
+        cpBoundry.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
