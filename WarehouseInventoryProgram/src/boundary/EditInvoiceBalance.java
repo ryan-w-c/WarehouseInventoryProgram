@@ -121,7 +121,7 @@ public class EditInvoiceBalance extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Enter amount: ");
+        jLabel1.setText("Enter amount paid: ");
 
         jLabel2.setText("Balance Remaining: ");
 
