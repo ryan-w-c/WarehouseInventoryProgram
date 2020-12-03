@@ -21,13 +21,11 @@ public class SelectProductForOrder extends javax.swing.JFrame {
     /**
      * Creates new form SelectProduct
      */
-    private HashMap <Product, Integer> order;
     private CustomerPurchase cpBoundry;
     public SelectProductForOrder(CustomerPurchase cp) {
         initComponents();
         updateTable();
         cpBoundry = cp;
-        order = new HashMap<>();
     }
     
     private void updateTable (){
@@ -142,7 +140,7 @@ public class SelectProductForOrder extends javax.swing.JFrame {
     private void addProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProductActionPerformed
         // TODO add your handling code here:
 //        try {x
-            new EditProductOrder(selectProductInTable().toString(), order, cpBoundry ).setVisible(true);
+            new EditProductOrder(selectProductInTable().toString(), cpBoundry).setVisible(true);
             this.setVisible(false);
 //        }
 //        catch (Exception ArrayIndexOutOfBoundsException){

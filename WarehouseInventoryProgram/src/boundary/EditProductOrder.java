@@ -29,11 +29,10 @@ public class EditProductOrder extends javax.swing.JFrame {
     private String p;
     private HashMap<Product, Integer> order;
     private CustomerPurchase cpBoundry;
-    public EditProductOrder(String p1, HashMap<Product, Integer> o, CustomerPurchase cp) {
+    public EditProductOrder(String p1, CustomerPurchase cp) {
         initComponents();
         p = p1;
         cpBoundry = cp;
-        order = o;
         productName.setText("Product: " + p);
         updateTable();
         TableCellListener obs = new TableCellListener(warehouseTable, action);
@@ -50,8 +49,8 @@ public class EditProductOrder extends javax.swing.JFrame {
         {
             rowData[0] = list.get(i).getWarehouse().getWarehousename();
             rowData[1] = list.get(i).getQuantity();
-            if (order.containsKey(list.get(i))){
-                rowData[2] = order.get(list.get(i));
+            if (cpBoundry.getOrder().containsKey(list.get(i))){
+                rowData[2] = cpBoundry.getOrder().get(list.get(i));
             }
             else {
                 rowData[2] = 0;
@@ -76,19 +75,19 @@ public class EditProductOrder extends javax.swing.JFrame {
             int inStock = Integer.parseInt(warehouseTable.getValueAt(tcl.getRow(), 1).toString());
             if (addQuantity <= inStock 
                     && addQuantity > 0) {
-                order.put(p1, Integer.parseInt(warehouseTable.getValueAt(tcl.getRow(), 2).toString()));
+                cpBoundry.getOrder().put(p1, Integer.parseInt(warehouseTable.getValueAt(tcl.getRow(), 2).toString()));
             }
             else if (addQuantity > inStock){
-                order.put(p1, inStock);
+                cpBoundry.getOrder().put(p1, inStock);
                 warehouseTable.setValueAt(inStock, tcl.getRow(), 2);
                 JOptionPane.showMessageDialog(null, "Quantity to Add must be lower than In Stock, Changed to all in stock", "Alert", JOptionPane.ERROR_MESSAGE);
             }
             else{
-                order.remove(p1);
+                cpBoundry.getOrder().remove(p1);
                 warehouseTable.setValueAt(0, tcl.getRow(), 2);
                 JOptionPane.showMessageDialog(null, "Quantity to Add must greater than or equal to 0, removed from order", "Alert", JOptionPane.ERROR_MESSAGE);
             }
-            System.out.println("Order Size EditProductOrder in action:" + order.size());
+            System.out.println("Order Size EditProductOrder in action:" + cpBoundry.getOrder().size());
 
         }
     };
@@ -180,10 +179,9 @@ public class EditProductOrder extends javax.swing.JFrame {
         catch (Exception e) {
             
         }
-//        System.out.println("Order Size EditProductOrder:" +this.order.size());
-        cpBoundry.updateOrder(this.order);
         this.setVisible(false);
         cpBoundry.setVisible(true);
+        cpBoundry.updateOrder();
     }//GEN-LAST:event_addToOrderActionPerformed
 
     /**
