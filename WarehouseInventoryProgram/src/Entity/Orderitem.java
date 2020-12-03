@@ -25,6 +25,7 @@ import javax.persistence.Table;
 @Table(name = "ORDERITEM")
 @NamedQueries({
     @NamedQuery(name = "Orderitem.findAll", query = "SELECT o FROM Orderitem o"),
+    @NamedQuery(name = "Orderitem.findByPK", query = "SELECT o FROM Orderitem o WHERE o.orderitemPK.invoiceid = :invoiceid and o.orderitemPK.productname = :productname and o.orderitemPK.warehousename = :warehousename"),
     @NamedQuery(name = "Orderitem.findByInvoiceid", query = "SELECT o FROM Orderitem o WHERE o.orderitemPK.invoiceid = :invoiceid"),
     @NamedQuery(name = "Orderitem.findByProductname", query = "SELECT o FROM Orderitem o WHERE o.orderitemPK.productname = :productname"),
     @NamedQuery(name = "Orderitem.findByWarehousename", query = "SELECT o FROM Orderitem o WHERE o.orderitemPK.warehousename = :warehousename"),

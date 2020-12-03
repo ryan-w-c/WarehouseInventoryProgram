@@ -16,6 +16,7 @@ public class ControlFactory {
     ProductControl Product;
     SalespersonControl Salesperson;
     WarehouseControl Warehouse;
+    OrderItemControl OrderItem;
     public ControlFactory (){
         Customer  = new CustomerControl();
         Invoice = new InvoiceControl();
@@ -23,6 +24,7 @@ public class ControlFactory {
         Product = new ProductControl();
         Salesperson = new SalespersonControl();
         Warehouse  = new WarehouseControl();
+        OrderItem = new OrderItemControl();
     } 
 
     public CustomerControl getCustomer() {
@@ -47,6 +49,10 @@ public class ControlFactory {
 
     public WarehouseControl getWarehouse() {
         return Warehouse;
+    }
+    
+    public OrderItemControl getOrderItem() {
+        return OrderItem;
     }
     
     

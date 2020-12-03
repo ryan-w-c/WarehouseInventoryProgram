@@ -9,6 +9,7 @@ import Control.InvoiceControl;
 import Entity.Invoice;
 import static Main.Main.controlfactory;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -44,6 +45,18 @@ public class OpenInvoices extends javax.swing.JFrame {
         }
     }
     
+    private Object selectInvoiceInTable(){
+        if (openInvoiceTable.getRowCount() == 0){
+            System.out.println(openInvoiceTable.getRowCount());
+            return 0;
+        } else {
+            int row = openInvoiceTable.getSelectedRow();
+            Object sp = openInvoiceTable.getValueAt(row, 0);
+
+            return sp;
+        }
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -55,7 +68,7 @@ public class OpenInvoices extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         openInvoiceTable = new javax.swing.JTable();
         editBalance = new javax.swing.JButton();
@@ -65,10 +78,10 @@ public class OpenInvoices extends javax.swing.JFrame {
         jLabel1.setBackground(new java.awt.Color(255, 102, 51));
         jLabel1.setText("Open Invoices ");
 
-        jButton2.setText("Back");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                backButtonActionPerformed(evt);
             }
         });
 
@@ -111,7 +124,7 @@ public class OpenInvoices extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(editBalance)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2))
+                        .addComponent(backButton))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 614, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(161, 161, 161))
         );
@@ -124,7 +137,7 @@ public class OpenInvoices extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                    .addComponent(backButton)
                     .addComponent(editBalance))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -132,16 +145,21 @@ public class OpenInvoices extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
         new Invoices().setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_backButtonActionPerformed
 
     private void editBalanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBalanceActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
-        new EditInvoiceBalance().setVisible(true);
+        try {
+            new EditInvoiceBalance((int) selectInvoiceInTable()).setVisible(true);
+            this.setVisible(false);
+        }
+        catch (Exception ArrayIndexOutOfBoundsException){
+            JOptionPane.showMessageDialog(null, "Select One OrderItem.", "Alert", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_editBalanceActionPerformed
 
     /**
@@ -180,8 +198,8 @@ public class OpenInvoices extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backButton;
     private javax.swing.JButton editBalance;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable openInvoiceTable;
