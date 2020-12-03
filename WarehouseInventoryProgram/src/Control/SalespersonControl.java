@@ -73,6 +73,14 @@ public final class SalespersonControl {
         Main.em.getTransaction().commit();
     }
     
+    public void updateSalesperson(Salesperson s, double comm, double subT) {
+        Main.em.getTransaction().begin();
+        s.updateTotalcommission(comm);
+        s.updateTotalsales(subT);
+        Main.em.persist(s);
+        Main.em.getTransaction().commit();
+    }
+    
    public Integer getNewID (){
         Main.em.getTransaction().begin();
         Query qu1 = Main.em.createNativeQuery("select max(SALESPERSONID) from SALESPERSON");

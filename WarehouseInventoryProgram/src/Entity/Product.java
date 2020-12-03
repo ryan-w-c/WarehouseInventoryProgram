@@ -88,6 +88,10 @@ public class Product implements Serializable {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+    
+    public void updateQuantity(int quantity) {
+        this.quantity -= quantity;
+    }
 
     public double getSellingprice() {
         return sellingprice;

@@ -105,4 +105,13 @@ public class ProductControl {
         Main.em.getTransaction().commit();
     }
     
+    public void updateQuantityOrder(String p, String w, Integer q) {
+        Product p1 = getProduct(p, w);
+        Main.em.getTransaction().begin();
+        p1.updateQuantity(q);
+        Main.em.persist(p1);
+        Main.em.getTransaction().commit();
+    }
+    
+    
 }

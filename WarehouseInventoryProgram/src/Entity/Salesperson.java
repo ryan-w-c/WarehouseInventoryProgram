@@ -192,7 +192,7 @@ public class Salesperson implements Serializable {
     }
 
     public void setCommissionrate(double commissionrate) {
-        this.commissionrate = commissionrate;
+        this.commissionrate += commissionrate;
     }
 
     public Boolean getActive() {
@@ -206,17 +206,25 @@ public class Salesperson implements Serializable {
     public Double getTotalsales() {
         return totalsales;
     }
-
+    
     public void setTotalsales(Double totalsales) {
         this.totalsales = totalsales;
+    }
+
+    public void updateTotalsales(Double totalsales) {
+        this.totalsales += totalsales;
     }
 
     public Double getTotalcommission() {
         return totalcommission;
     }
-
+    
     public void setTotalcommission(Double totalcommission) {
         this.totalcommission = totalcommission;
+    }
+
+    public void updateTotalcommission(Double totalcommission) {
+        this.totalcommission += totalcommission;
     }
 
     public Integer getSalespersonid() {
