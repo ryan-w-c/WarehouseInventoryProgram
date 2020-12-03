@@ -9,14 +9,11 @@ import Control.InvoiceControl;
 import Control.ProductControl;
 import Control.SalespersonControl;
 import Entity.Customer;
-import Entity.Orderitem;
 import Entity.Product;
 import Entity.Salesperson;
 import static Main.Main.controlfactory;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -207,7 +204,7 @@ public class InvoiceSubtotal extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         try {
-            String str = java.time.LocalDate.now().toString() + " " + java.time.LocalTime.now().toString();
+            String str = java.time.LocalDate.now().toString();
             InvoiceControl in1 = controlfactory.getInvoice();
             ProductControl pc = controlfactory.getProduct();
             in1.addInvoice(sp1, c1, subT, tax, comm, dfee, Total, true, str, invID);

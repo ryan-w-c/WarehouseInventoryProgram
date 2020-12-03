@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Product.findByProductname", query = "SELECT p FROM Product p WHERE p.productPK.productname = :productname"),
     @NamedQuery(name = "Product.findByPK", query = "SELECT p FROM Product p WHERE p.productPK.productname = :productname and p.productPK.warehousename = :warehousename"),
     @NamedQuery(name = "Product.findByWarehousename", query = "SELECT p FROM Product p WHERE p.productPK.warehousename = :warehousename"),
-    @NamedQuery(name = "Product.findByWarehousenameLow", query = "SELECT p FROM Product p WHERE p.productPK.warehousename = :warehousename and p.quantity < 6"),
+    @NamedQuery(name = "Product.findByWarehousenameLow", query = "SELECT p FROM Product p WHERE p.productPK.warehousename = :warehousename and p.quantity < 6 order by p.quantity"),
     @NamedQuery(name = "Product.findByQuantity", query = "SELECT p FROM Product p WHERE p.quantity = :quantity"),
     @NamedQuery(name = "Product.findBySellingprice", query = "SELECT p FROM Product p WHERE p.sellingprice = :sellingprice"),
     @NamedQuery(name = "Product.findByCostprice", query = "SELECT p FROM Product p WHERE p.costprice = :costprice")})

@@ -9,6 +9,7 @@ import Control.InvoiceControl;
 import Entity.Invoice;
 import static Main.Main.controlfactory;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -43,6 +44,30 @@ public class ClosedInvoices extends javax.swing.JFrame {
             model.addRow(rowData);
         }
     }
+    
+        private Object selectInvoiceInTable(){
+        if (closeInvoiceTable.getRowCount() == 0){
+            System.out.println(closeInvoiceTable.getRowCount());
+            return 0;
+        } else {
+            int row = closeInvoiceTable.getSelectedRow();
+            Object sp = closeInvoiceTable.getValueAt(row, 0);
+
+            return sp;
+        }
+    }
+    
+    private Object selectBalanceRemaining(){
+        if (closeInvoiceTable.getRowCount() == 0){
+            System.out.println(closeInvoiceTable.getRowCount());
+            return 0;
+        } else {
+            int row = closeInvoiceTable.getSelectedRow();
+            Object sp = closeInvoiceTable.getValueAt(row, 5);
+
+            return sp;
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -57,6 +82,7 @@ public class ClosedInvoices extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         closeInvoiceTable = new javax.swing.JTable();
+        viewInvoice = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,15 +103,29 @@ public class ClosedInvoices extends javax.swing.JFrame {
                 "Invoice Number", "Customer Name", "Customer Phone", "Total", "Date"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Double.class, java.lang.Object.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
         jScrollPane2.setViewportView(closeInvoiceTable);
+
+        viewInvoice.setText("View Invoice");
+        viewInvoice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewInvoiceActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -98,7 +138,9 @@ public class ClosedInvoices extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 563, Short.MAX_VALUE)
+                                .addGap(116, 116, 116)
+                                .addComponent(viewInvoice)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton1)))
                         .addGap(16, 16, 16))
                     .addGroup(layout.createSequentialGroup()
@@ -113,7 +155,9 @@ public class ClosedInvoices extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(viewInvoice))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -127,6 +171,19 @@ public class ClosedInvoices extends javax.swing.JFrame {
         this.setVisible(false);
         new Invoices().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void viewInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewInvoiceActionPerformed
+        // TODO add your handling code here:
+        InvoiceControl ic = Main.Main.controlfactory.getInvoice();
+        try {
+            new ViewCloseInvoice(ic.getSingleInvoiceResultSet((int) closeInvoiceTable.getValueAt(closeInvoiceTable.getSelectedRow(),0)).get(0)).setVisible(true);
+            // getting the invoice and passing it into the invoice balance
+            this.setVisible(false);
+        }
+        catch (Exception ArrayIndexOutOfBoundsException){
+            JOptionPane.showMessageDialog(null, "Select One OrderItem.", "Alert", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_viewInvoiceActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,7 +211,6 @@ public class ClosedInvoices extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(ClosedInvoices.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -168,5 +224,6 @@ public class ClosedInvoices extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton viewInvoice;
     // End of variables declaration//GEN-END:variables
 }

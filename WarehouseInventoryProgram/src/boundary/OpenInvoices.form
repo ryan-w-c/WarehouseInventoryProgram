@@ -30,15 +30,18 @@
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
                       <Component id="editBalance" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="437" max="-2" attributes="0"/>
                       <Component id="backButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="218" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane2" min="-2" pref="614" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jScrollPane2" min="-2" pref="967" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" pref="161" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -90,9 +93,9 @@
                 <Column editable="false" title="Invoice Number" type="java.lang.Object"/>
                 <Column editable="false" title="Customer Name" type="java.lang.Object"/>
                 <Column editable="false" title="Customer Phone" type="java.lang.Object"/>
-                <Column editable="false" title="Total" type="java.lang.Object"/>
-                <Column editable="false" title="Amount Paid" type="java.lang.Object"/>
-                <Column editable="false" title="Balance Remaining" type="java.lang.Object"/>
+                <Column editable="false" title="Total" type="java.lang.Double"/>
+                <Column editable="false" title="Amount Paid" type="java.lang.Double"/>
+                <Column editable="false" title="Balance Remaining" type="java.lang.Double"/>
                 <Column editable="false" title="Date" type="java.lang.Object"/>
               </Table>
             </Property>
