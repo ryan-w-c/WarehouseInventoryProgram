@@ -63,7 +63,7 @@ public final class InvoiceControl {
     
     public List<Invoice> getOpenInvoiceResultSet(){
         Main.em.getTransaction().begin();
-        Query qu1 = Main.em.createNativeQuery("SELECT * FROM INVOICE where OPENCLOSE = true order by datetime", Invoice.class);
+        Query qu1 = Main.em.createNativeQuery("SELECT * FROM INVOICE where OPENCLOSE = true order by datetime desc", Invoice.class);
         List<Invoice> lst = qu1.getResultList();
         Main.em.getTransaction().commit();
         return lst;

@@ -212,10 +212,10 @@ public class InvoiceSubtotal extends javax.swing.JFrame {
 
             Iterator iterator = order.entrySet().iterator();
             while (iterator.hasNext()) {
-                 HashMap.Entry me = (HashMap.Entry) iterator.next();
-                 Product p = (Product)me.getKey();
-                 Integer q = (Integer) me.getValue();
-              in1.addOrderItem(invID, p.getProductPK().getProductname(),
+                HashMap.Entry me = (HashMap.Entry) iterator.next();
+                Product p = (Product)me.getKey();
+                Integer q = (Integer) me.getValue();
+                in1.addOrderItem(invID, p.getProductPK().getProductname(),
                     p.getProductPK().getWarehousename(), q);
                 pc.updateQuantityOrder(p.getProductPK().getProductname(), p.getProductPK().getWarehousename(), q);
             }
@@ -226,7 +226,7 @@ public class InvoiceSubtotal extends javax.swing.JFrame {
             sc.updateSalesperson(sp1, comm, subT);
 
             this.setVisible(false);
-            new CustomerPurchase().setVisible(true);
+            new Invoices().setVisible(true);
         }
         catch (Exception e){
             this.setVisible(false);
