@@ -19,10 +19,10 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-/**
- *
- * @author zubin
- */
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+
 @Entity
 @Table(name = "INVOICE")
 @NamedQueries({
@@ -155,10 +155,54 @@ public class Invoice implements Serializable {
         balanceremaining -= amount;
         if (balanceremaining <= 0) {
             balanceremaining = 0;
-            setOpenclose(false);
-        }
             
+            if (findDifference()){
+                this.total *= .9; 
+            }
+            
+            setOpenclose(false);
+        }  
     }
+    
+    private boolean findDifference(){ 
+  
+        // SimpleDateFormat converts the 
+        // string format to date object 
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/YY"); 
+  
+        // Try Block 
+        try { 
+  
+            // parse method is used to parse 
+            // the text from a string to 
+            // produce the date 
+            Date currentDate = new Date();
+            Date d1 = sdf.parse(this.datetime); 
+            Date d2 = sdf.parse(sdf.format(currentDate)); 
+  
+            // Calucalte time difference 
+            // in milliseconds 
+            long differenceInTime 
+                = d2.getTime() - d1.getTime(); 
+  
+            long differenceInDays 
+                = (differenceInTime 
+                   / (1000 * 60 * 60 * 24)) 
+                  % 365;
+            
+            if (differenceInDays <= 10){
+                return true;
+            }
+            else{
+                return false;
+            }
+        } 
+        // Catch the Exception 
+        catch (ParseException e) { 
+            e.printStackTrace(); 
+        }
+        return false;
+    } 
 
     public Boolean getOpenclose() {
         return openclose;
