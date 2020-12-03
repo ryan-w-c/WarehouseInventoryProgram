@@ -5,17 +5,11 @@
  */
 package boundary;
 
-import Control.TableCellListener;
 import Control.OrderItemControl;
-import Control.ProductControl;
 import Entity.Orderitem;
 import Control.InvoiceControl;
 import Entity.Invoice;
-import static Main.Main.controlfactory;
-import java.awt.event.ActionEvent;
 import java.util.List;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
