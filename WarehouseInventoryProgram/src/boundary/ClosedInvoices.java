@@ -32,7 +32,7 @@ public class ClosedInvoices extends javax.swing.JFrame {
         
         DefaultTableModel model = (DefaultTableModel) closeInvoiceTable.getModel();
 //        List<Salesperson> list = lst;
-        Object rowData[] = new Object[4];
+        Object rowData[] = new Object[5];
         for(int i = 0; i < list.size(); i++)
         {
             rowData[0] = list.get(i).getInvoiceid();
