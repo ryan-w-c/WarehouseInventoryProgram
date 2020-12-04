@@ -86,7 +86,7 @@ public class ViewEditCustomer extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(customerTable);
 
-        editCustomerBtn.setText("Edit Selected Salesperon");
+        editCustomerBtn.setText("Edit Selected Customer");
         editCustomerBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editCustomerBtnActionPerformed(evt);
