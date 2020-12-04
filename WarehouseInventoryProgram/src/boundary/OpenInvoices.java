@@ -46,29 +46,29 @@ public class OpenInvoices extends javax.swing.JFrame {
         }
     }
     
-    private Object selectInvoiceInTable(){
-        if (openInvoiceTable.getRowCount() == 0){
-            System.out.println(openInvoiceTable.getRowCount());
-            return 0;
-        } else {
-            int row = openInvoiceTable.getSelectedRow();
-            Object sp = openInvoiceTable.getValueAt(row, 0);
-
-            return sp;
-        }
-    }
-    
-    private Object selectBalanceRemaining(){
-        if (openInvoiceTable.getRowCount() == 0){
-            System.out.println(openInvoiceTable.getRowCount());
-            return 0;
-        } else {
-            int row = openInvoiceTable.getSelectedRow();
-            Object sp = openInvoiceTable.getValueAt(row, 5);
-
-            return sp;
-        }
-    }
+//    private Object selectInvoiceInTable(){
+//        if (openInvoiceTable.getRowCount() == 0){
+//            System.out.println(openInvoiceTable.getRowCount());
+//            return 0;
+//        } else {
+//            int row = openInvoiceTable.getSelectedRow();
+//            Object sp = openInvoiceTable.getValueAt(row, 0);
+//
+//            return sp;
+//        }
+//    }
+//    
+//    private Object selectBalanceRemaining(){
+//        if (openInvoiceTable.getRowCount() == 0){
+//            System.out.println(openInvoiceTable.getRowCount());
+//            return 0;
+//        } else {
+//            int row = openInvoiceTable.getSelectedRow();
+//            Object sp = openInvoiceTable.getValueAt(row, 5);
+//
+//            return sp;
+//        }
+//    }
     
 
     /**
@@ -176,14 +176,14 @@ public class OpenInvoices extends javax.swing.JFrame {
     private void editBalanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBalanceActionPerformed
         // TODO add your handling code here:
         InvoiceControl ic = Main.Main.controlfactory.getInvoice();
-//        try {
+        try {
             new EditInvoiceBalance(ic.getSingleInvoiceResultSet((int) openInvoiceTable.getValueAt(openInvoiceTable.getSelectedRow(),0)).get(0)).setVisible(true);
             // getting the invoice and passing it into the invoice balance
             this.setVisible(false);
-//        }
-//        catch (Exception ArrayIndexOutOfBoundsException){
-//            JOptionPane.showMessageDialog(null, "Select One OrderItem.", "Alert", JOptionPane.ERROR_MESSAGE);
-//        }
+        }
+        catch (Exception ArrayIndexOutOfBoundsException){
+            JOptionPane.showMessageDialog(null, "Select One OrderItem.", "Alert", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_editBalanceActionPerformed
 
     /**

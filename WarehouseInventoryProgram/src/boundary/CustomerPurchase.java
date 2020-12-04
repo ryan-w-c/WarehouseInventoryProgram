@@ -9,8 +9,6 @@ import Entity.Customer;
 import Entity.Product;
 import Entity.Salesperson;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -37,13 +35,13 @@ public class CustomerPurchase extends javax.swing.JFrame {
     public void setSp(Salesperson sp, String s) {
         this.sp = sp;
         salespersonLabel.setText(s);
-        System.out.println(this.sp);
+//        System.out.println(this.sp);
     }
 
     public void setCustomer(Customer customer, String c) {
         this.customer = customer;
         customerLabel.setText(c);
-        System.out.println(this.customer);
+//        System.out.println(this.customer);
     }
         
     public void updateOrder() {  
@@ -65,10 +63,22 @@ public class CustomerPurchase extends javax.swing.JFrame {
         });
     }
     
-    public HashMap getOrder() {
+    public HashMap<Product, Integer> getOrder() {
         return order;
     }
+    
+    public Salesperson getSalesperson(){
+        return sp;
+    }
 
+    public Customer getCustomer(){
+        return customer;
+    }
+    
+    public double getDeliveryFee(){
+        return deliveryFee;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -243,7 +253,7 @@ public class CustomerPurchase extends javax.swing.JFrame {
                 throw new Exception();
             }
             deliveryFee = Double.parseDouble(delivery.getText());
-            new InvoiceSubtotal(customer, sp, this.order ,deliveryFee).setVisible(true);
+            new InvoiceSubtotal(this).setVisible(true);
             this.setVisible(false);
         }
         catch (Exception e) {

@@ -38,9 +38,8 @@ public class EditInvoiceBalance extends javax.swing.JFrame {
         Object rowData[] = new Object[3];
         for(int i = 0; i < list.size(); i++)
         {
-            System.out.println(list.get(i));
-            rowData[0] = list.get(i).getProduct().getProductPK().getProductname();
-            rowData[1] = list.get(i).getProduct().getWarehouse().getWarehousename();
+            rowData[0] = list.get(i).getOrderitemPK().getProductname();
+            rowData[1] = list.get(i).getOrderitemPK().getWarehousename();
             rowData[2] = list.get(i).getQuantity();
             model.addRow(rowData);
         }
