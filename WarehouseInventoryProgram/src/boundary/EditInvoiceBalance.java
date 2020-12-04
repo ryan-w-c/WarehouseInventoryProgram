@@ -34,13 +34,12 @@ public class EditInvoiceBalance extends javax.swing.JFrame {
     private void updateTable (){
         OrderItemControl oc = Main.Main.controlfactory.getOrderItem();
         List <Orderitem> list = oc.getAllOrderItemResultSet(i.getInvoiceid());
-        
         DefaultTableModel model = (DefaultTableModel) InvoiceBalanceTable.getModel();
         Object rowData[] = new Object[3];
         for(int i = 0; i < list.size(); i++)
         {
-            rowData[0] = list.get(i).getProduct().getProductPK().getProductname();
-            rowData[1] = list.get(i).getProduct().getWarehouse().getWarehousename();
+            rowData[0] = list.get(i).getOrderitemPK().getProductname();
+            rowData[1] = list.get(i).getOrderitemPK().getWarehousename();
             rowData[2] = list.get(i).getQuantity();
             model.addRow(rowData);
         }

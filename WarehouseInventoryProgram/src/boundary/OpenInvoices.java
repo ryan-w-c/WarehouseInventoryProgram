@@ -46,29 +46,29 @@ public class OpenInvoices extends javax.swing.JFrame {
         }
     }
     
-    private Object selectInvoiceInTable(){
-        if (openInvoiceTable.getRowCount() == 0){
-            System.out.println(openInvoiceTable.getRowCount());
-            return 0;
-        } else {
-            int row = openInvoiceTable.getSelectedRow();
-            Object sp = openInvoiceTable.getValueAt(row, 0);
-
-            return sp;
-        }
-    }
-    
-    private Object selectBalanceRemaining(){
-        if (openInvoiceTable.getRowCount() == 0){
-            System.out.println(openInvoiceTable.getRowCount());
-            return 0;
-        } else {
-            int row = openInvoiceTable.getSelectedRow();
-            Object sp = openInvoiceTable.getValueAt(row, 5);
-
-            return sp;
-        }
-    }
+//    private Object selectInvoiceInTable(){
+//        if (openInvoiceTable.getRowCount() == 0){
+//            System.out.println(openInvoiceTable.getRowCount());
+//            return 0;
+//        } else {
+//            int row = openInvoiceTable.getSelectedRow();
+//            Object sp = openInvoiceTable.getValueAt(row, 0);
+//
+//            return sp;
+//        }
+//    }
+//    
+//    private Object selectBalanceRemaining(){
+//        if (openInvoiceTable.getRowCount() == 0){
+//            System.out.println(openInvoiceTable.getRowCount());
+//            return 0;
+//        } else {
+//            int row = openInvoiceTable.getSelectedRow();
+//            Object sp = openInvoiceTable.getValueAt(row, 5);
+//
+//            return sp;
+//        }
+//    }
     
 
     /**
@@ -106,9 +106,16 @@ public class OpenInvoices extends javax.swing.JFrame {
                 "Invoice Number", "Customer Name", "Customer Phone", "Total", "Amount Paid", "Balance Remaining", "Date"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Object.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -133,13 +140,15 @@ public class OpenInvoices extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(editBalance)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(backButton))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 614, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(161, 161, 161))
+                        .addGap(437, 437, 437)
+                        .addComponent(backButton)
+                        .addGap(218, 218, 218))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 967, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

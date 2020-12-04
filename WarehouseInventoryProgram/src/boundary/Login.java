@@ -6,7 +6,6 @@
 package boundary;
 
 import Control.LoginControl;
-import Entity.Password;
 
 /**
  *
@@ -34,7 +33,6 @@ public class Login extends javax.swing.JFrame {
         Login = new javax.swing.JButton();
         loginLabel = new javax.swing.JLabel();
         success = new javax.swing.JLabel();
-        skip = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -47,21 +45,10 @@ public class Login extends javax.swing.JFrame {
 
         loginLabel.setText("Warehouse Inventory");
 
-        skip.setText("skip");
-        skip.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                skipActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(160, 160, 160)
-                .addComponent(skip)
-                .addContainerGap(168, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(success, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -73,7 +60,7 @@ public class Login extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(106, 106, 106)
                 .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(112, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(144, 144, 144)
                 .addComponent(loginLabel)
@@ -90,9 +77,7 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(Login)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(success)
-                .addGap(33, 33, 33)
-                .addComponent(skip)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
 
         pack();
@@ -108,16 +93,10 @@ public class Login extends javax.swing.JFrame {
         }
         else {
             //password incorrect
-            success.setText("Login failed - incorrect password");
+            success.setText("Login failed");
         }
                   
     }//GEN-LAST:event_LoginActionPerformed
-
-    private void skipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_skipActionPerformed
-        // TODO add your handling code here:
-        new MainMenu().setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_skipActionPerformed
 
     /**
      * @param args the command line arguments
@@ -158,7 +137,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton Login;
     private javax.swing.JLabel loginLabel;
     private javax.swing.JPasswordField password;
-    private javax.swing.JButton skip;
     private javax.swing.JLabel success;
     // End of variables declaration//GEN-END:variables
 }

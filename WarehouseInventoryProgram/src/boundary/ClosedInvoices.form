@@ -30,7 +30,9 @@
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace pref="563" max="32767" attributes="0"/>
+                              <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
+                              <Component id="viewInvoice" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -52,7 +54,10 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane2" min="-2" pref="371" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="viewInvoice" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace pref="14" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -89,7 +94,7 @@
                 <Column editable="false" title="Invoice Number" type="java.lang.Object"/>
                 <Column editable="false" title="Customer Name" type="java.lang.Object"/>
                 <Column editable="false" title="Customer Phone" type="java.lang.Object"/>
-                <Column editable="false" title="Total" type="java.lang.Object"/>
+                <Column editable="false" title="Total" type="java.lang.Double"/>
                 <Column editable="false" title="Date" type="java.lang.Object"/>
               </Table>
             </Property>
@@ -129,5 +134,13 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="viewInvoice">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="View Invoice"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewInvoiceActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>
