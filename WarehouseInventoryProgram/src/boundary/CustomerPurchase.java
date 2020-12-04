@@ -5,11 +5,18 @@
  */
 package boundary;
 
+import Control.InvoiceControl;
 import Entity.Customer;
+import Entity.Invoice;
 import Entity.Product;
 import Entity.Salesperson;
+import static Main.Main.controlfactory;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -42,9 +49,61 @@ public class CustomerPurchase extends javax.swing.JFrame {
 
     public void setCustomer(Customer customer, String c) {
         this.customer = customer;
+        if(balanceAfter30(customer)){
+            customer.setActive(false);
+            JOptionPane.showMessageDialog(null, 
+                    "ERROR: Customer has not paid invoice within 30 days"
+                            + "\nCustomer set to inactive", "Alert", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         customerLabel.setText(c);
         System.out.println(this.customer);
+        
     }
+    
+    private boolean balanceAfter30(Customer customer){
+        InvoiceControl in1 = controlfactory.getInvoice();
+        List <Invoice> list = in1.getOpenInvoiceResultSet(); 
+       
+        for(int i = 0; i < list.size(); i++){
+            if (customer.getCustomerid().equals(list.get(i).getCustomerid().getCustomerid())
+                    && findDifference(list.get(i).getDatetime())){
+                return true;
+            }
+        }        
+        return false;
+    }
+    
+    private boolean findDifference(String datetime){ 
+  
+        // SimpleDateFormat converts the 
+        // string format to date object 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
+
+        try { 
+  
+            // parse method is used to parse 
+            // the text from a string to 
+            // produce the date 
+            Date currentDate = new Date();
+            Date d1 = sdf.parse(datetime); 
+            Date d2 = sdf.parse(sdf.format(currentDate)); 
+  
+            // Calucalte time difference
+            long differenceInTime = d2.getTime() - d1.getTime(); 
+  
+            long differenceInDays = (differenceInTime / (1000 * 60 * 60 * 24)) % 365;
+            
+            
+            return differenceInDays >= 30;
+           
+        } 
+        // Catch the Exception 
+        catch (ParseException e) { 
+            e.printStackTrace(); 
+        }
+        return false;
+    } 
         
     public void updateOrder() {  
         DefaultTableModel model = (DefaultTableModel) productTable.getModel();
