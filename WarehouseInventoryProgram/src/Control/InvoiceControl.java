@@ -45,7 +45,8 @@ public final class InvoiceControl {
         inv1.setDatetime(time);
         inv1.setCustomerid(customer);  
         inv1.setSalespersonid(sp);
-
+        inv1.setLastcompound(time);
+        
         Main.em.persist( inv1 );
         Main.em.getTransaction( ).commit( );
 

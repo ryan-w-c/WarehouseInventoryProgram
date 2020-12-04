@@ -8,6 +8,10 @@ package boundary;
 import Control.InvoiceControl;
 import Entity.Invoice;
 import static Main.Main.controlfactory;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -32,9 +36,30 @@ public class OpenInvoices extends javax.swing.JFrame {
         
         DefaultTableModel model = (DefaultTableModel) openInvoiceTable.getModel();
 //        List<Salesperson> list = lst;
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Object rowData[] = new Object[7];
         for(int i = 0; i < list.size(); i++)
         {
+            long difference = findDifference(list.get(i));
+            if(difference > 30){
+                long numMonthsPast = difference / 30;
+                for(int j = 0; j < numMonthsPast; j++){
+                    list.get(i).setBalanceremaining(list.get(i).getBalanceremaining() * 1.02);
+                }
+                Calendar c = Calendar.getInstance();
+                try {
+                    Long l = numMonthsPast * 30;
+                    int daysToAdd = l.intValue();
+                    c.setTime(sdf.parse(list.get(i).getLastcompound()));
+                    c.add(Calendar.DAY_OF_MONTH, daysToAdd);
+                    list.get(i).setLastcompound(sdf.format(c.getTime()));
+                }
+                catch (ParseException e) { 
+                    e.printStackTrace(); 
+                }
+            }
+            
             rowData[0] = list.get(i).getInvoiceid();
             rowData[1] = list.get(i).getCustomerid().getFirstname();
             rowData[2] = list.get(i).getCustomerid().getPhone();
@@ -45,6 +70,36 @@ public class OpenInvoices extends javax.swing.JFrame {
             model.addRow(rowData);
         }
     }
+    
+    private long findDifference(Invoice invoice){ 
+  
+        // SimpleDateFormat converts the 
+        // string format to date object 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
+
+        try { 
+  
+            // parse method is used to parse 
+            // the text from a string to 
+            // produce the date 
+            Date currentDate = new Date();
+            Date d1 = sdf.parse(invoice.getLastcompound()); 
+            Date d2 = sdf.parse(sdf.format(currentDate)); 
+  
+            // Calucalte time difference
+            long differenceInTime = d2.getTime() - d1.getTime(); 
+  
+            long differenceInDays = (differenceInTime / (1000 * 60 * 60 * 24)) % 365;
+            
+            return differenceInDays;
+            
+        } 
+        // Catch the Exception 
+        catch (ParseException e) { 
+            e.printStackTrace(); 
+        }
+        return 0;
+    } 
     
 //    private Object selectInvoiceInTable(){
 //        if (openInvoiceTable.getRowCount() == 0){

@@ -22,6 +22,7 @@ import javax.persistence.Table;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "INVOICE")
@@ -37,6 +38,10 @@ import java.text.ParseException;
     @NamedQuery(name = "Invoice.findByOpenclose", query = "SELECT i FROM Invoice i WHERE i.openclose = :openclose"),
     @NamedQuery(name = "Invoice.findByDatetime", query = "SELECT i FROM Invoice i WHERE i.datetime = :datetime")})
 public class Invoice implements Serializable {
+
+    @Size(max = 10)
+    @Column(name = "LASTCOMPOUND")
+    private String lastcompound;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -261,6 +266,14 @@ public class Invoice implements Serializable {
     @Override
     public String toString() {
         return "Entity.Invoice[ invoiceid=" + invoiceid + " ]";
+    }
+
+    public String getLastcompound() {
+        return lastcompound;
+    }
+
+    public void setLastcompound(String lastcompound) {
+        this.lastcompound = lastcompound;
     }
     
 }

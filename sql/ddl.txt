@@ -71,6 +71,7 @@ create Table Invoice(
     BalanceRemaining float not null,
     OpenClose boolean not null,
     DateTime varchar(50) not null,
+    LastCompound varchar(10) not null,
     constraint Invoice_PK primary key(InvoiceID),
     constraint Invoice_fk_SalespersonID foreign key(SalespersonID) references Salesperson (SalespersonID),
     constraint Invoice_fk_CustomerID foreign key(CustomerID) references Customer (CustomerID)
