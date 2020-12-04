@@ -15,9 +15,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -44,7 +42,6 @@ public class CustomerPurchase extends javax.swing.JFrame {
     public void setSp(Salesperson sp, String s) {
         this.sp = sp;
         salespersonLabel.setText(s);
-//        System.out.println(this.sp);
     }
 
     public void setCustomer(Customer customer, String c) {

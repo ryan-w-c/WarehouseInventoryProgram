@@ -5,6 +5,7 @@
  */
 package Entity;
 
+import Control.CustomerControl;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -156,7 +157,7 @@ public class Invoice implements Serializable {
         this.balanceremaining = balanceremaining;
     }
     
-    public void updateBalanceRemaining(double amount) {
+    public boolean updateBalanceRemaining(double amount) {
         balanceremaining -= amount;
         if (balanceremaining <= 0) {
             balanceremaining = 0;
@@ -164,9 +165,10 @@ public class Invoice implements Serializable {
             if (findDifference()){
                 this.total *= .9; 
             }
-            
             setOpenclose(false);
+            return true;
         }  
+        return false;
     }
     
     private boolean findDifference(){ 

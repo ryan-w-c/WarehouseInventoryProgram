@@ -134,9 +134,14 @@ public final class InvoiceControl {
     
     public void updateInvoice(Invoice i, double amount) {
         Main.em.getTransaction().begin();
-        i.updateBalanceRemaining(amount);
+        boolean active = i.updateBalanceRemaining(amount);
         Main.em.persist(i);
         Main.em.getTransaction().commit();
+        if (active){
+            i.getCustomerid().setActive(true);
+            CustomerControl cc = Main.controlfactory.getCustomer();
+            cc.saveCustomer(i.getCustomerid());
+        }
     }
    
     

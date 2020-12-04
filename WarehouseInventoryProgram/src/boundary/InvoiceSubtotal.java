@@ -86,11 +86,7 @@ public class InvoiceSubtotal extends javax.swing.JFrame {
                 "\nSalesperson Phone: "+ sp1.getPhone() +
                 "\n---------------");
 
-        jTextArea2.setText ("Subtotal: $" + subT+ 
-                "\nSales Tax: $"+ tax +
-                "\nDelivery Fee: $"+ dfee +
-                "\nSales Commission: $"+ comm +
-                "\nTotal: $"+ Total );
+        jTextArea2.setText (String.format("Subtotal: $%.2f\nSales Tax: $%.2f\nDelivery Fee: $%.2f\nSales Commission: $%.2f\nTotal: $%.2f", subT, tax, dfee, comm, Total ));
         
     }
     
